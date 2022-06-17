@@ -7,3 +7,4 @@ Developers: *Mithras Chaudhary '22 (On Leave), Dhyey Mavani '25*
 In collaboration with: 
 - *Amherst College IT Department: https://www.amherst.edu/offices/it*
 - *Google Blockly: https://developers.google.com/blockly/*
+- *Data Camp*: https://app.datacamp.com/learn
