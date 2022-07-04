@@ -30,39 +30,8 @@ export default function Workspace() {
         contents: [
             {
                 kind: "category",
-                name: "Basic",
-                colour: "#ed544c",
-                contents: [
-                    {
-                        kind: "block",
-                        type: "controls_if",
-                    },
-                    {
-                        kind: "block",
-                        type: "logic_compare",
-                    },
-                    {
-                        kind: "block",
-                        type: "math_round",
-                    },
-                    {
-                        kind: "block",
-                        type: "math_number",
-                    },
-                    {
-                        kind: "block",
-                        type: "new_boundary_function",
-                    },
-                    {
-                        kind: "block",
-                        type: "library",
-                    },
-                ],
-            },
-            {
-                kind: "category",
-                name: "Data Wrangling",
-                colour: "#ed8f4c",
+                name: "Library Functionality",
+                colour: "#df456e",
                 contents: [
                     {
                         kind: "block",
@@ -72,6 +41,13 @@ export default function Workspace() {
                         kind: "block",
                         type: "req",
                     },
+                ],
+            },
+            {
+                kind: "category",
+                name: "Statistical Analysis",
+                colour: "#ed544c",
+                contents: [
                     {
                         kind: "block",
                         type: "tallydata",
@@ -108,6 +84,13 @@ export default function Workspace() {
                         kind: "block",
                         type: "cor",
                     },
+                ],
+            },
+            {
+                kind: "category",
+                name: "Data Visualization",
+                colour: "#ed8f4c",
+                contents: [
                     {
                         kind: "block",
                         type: "gf_bar",
@@ -146,10 +129,6 @@ export default function Workspace() {
                     },
                     {
                         kind: "block",
-                        type: "gf_percents",
-                    },
-                    {
-                        kind: "block",
                         type: "gf_point",
                     },
                     {
@@ -171,7 +150,18 @@ export default function Workspace() {
         const code = Blockly.JavaScript.workspaceToCode(workspace);
         setJavascriptCode(code);
     }
-   
+
+    /*
+    function myUpdateFunction(event) {
+        var code = Blockly.JavaScript.workspaceToCode(workspace);
+        document.getElementById('codeBody').value = code;
+        document.getElementById('outputCode').value = code;
+    }
+    workspace.addChangeListener(myUpdateFunction);
+    */
+
+    // reference: https://developers.google.com/blockly/guides/configure/web/code-generators#realtime_generation
+
     const [selected, setSelected] = useState(0);
     const cards = ["Basic", "Data Wrangling", "Plots", "Statistics", "Modeling"];
     const colors = ["#ed544c", "#edd84c", "#7aed4c", "#824ced", "#ed4cc2"];

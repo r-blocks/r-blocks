@@ -12,7 +12,7 @@ import "./styles/base.css";
 
 
 export default function Sidebar() {
-
+    
     return (
         <div className="compiler">
             <div style={{ flex: 2 }}>
@@ -31,9 +31,10 @@ export default function Sidebar() {
                     </div>
                     <div data-datacamp-exercise data-lang="r" data-height="500">
                     <code data-type="pre-exercise-code"># no pec</code>
-                    <code data-type="sample-code">
+                    <code id="outputCode" data-type="sample-code">
                         
                         3 + 4
+                        
                     </code>
                     
                     

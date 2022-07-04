@@ -33,7 +33,12 @@
       Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
+
+
+      ****** Ensure that Blockly is Properly Attributed Using this: https://developers.google.com/blockly/guides/app-integration/attribution ******
     -->
+  <script src="blockly_compressed.js"></script>
+  <script src="javascript_compressed.js"></script>
   <title>React App</title>
 </head>
 
@@ -42,8 +47,10 @@
   <!-- Added Javascript formatting-->
   <!-- Refer docs at https://github.com/datacamp/datacamp-light-->
   <!-- Activate the line below in order to make the DataCamp API for compiling functional-->
-  <javascript>initAddedDCLightExercises();</javascript>
-  <div id="root" style="height:100vh;"></div>
+  
+  <div id="root" style="height:100vh;">
+    <javascript>initAddedDCLightExercises();</javascript>
+  </div>
   <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
