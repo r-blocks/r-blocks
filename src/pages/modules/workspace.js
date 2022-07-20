@@ -30,8 +30,8 @@ export default function Workspace() {
         contents: [
             {
                 kind: "category",
-                name: "Library Functionality",
-                colour: "#df456e",
+                name: "General Functionality (using HELPrct)",
+                colour: "20",
                 contents: [
                     {
                         kind: "block",
@@ -39,14 +39,61 @@ export default function Workspace() {
                     },
                     {
                         kind: "block",
-                        type: "req",
+                        type: "names",
+                    },
+                    {
+                        kind: "block",
+                        type: "glimpse",
+                    },
+                    {
+                        kind: "block",
+                        type: "head",
+                    },
+                    {
+                        kind: "block",
+                        type: "tail",
+                    },
+                    {
+                        kind: "block",
+                        type: "help",
                     },
                 ],
             },
             {
                 kind: "category",
-                name: "Statistical Analysis",
-                colour: "#ed544c",
+                name: "General Functionality",
+                colour: "20",
+                contents: [
+                    {
+                        kind: "block",
+                        type: "Glib",
+                    },
+                    {
+                        kind: "block",
+                        type: "Gnames",
+                    },
+                    {
+                        kind: "block",
+                        type: "Gglimpse",
+                    },
+                    {
+                        kind: "block",
+                        type: "Ghead",
+                    },
+                    {
+                        kind: "block",
+                        type: "Gtail",
+                    },
+                    {
+                        kind: "block",
+                        type: "Ghelp",
+                    },
+                ],
+            },
+            {
+                kind: "category",
+                name: "Numerical Summaries (using HELPrct)",
+                colour: "230",
                 contents: [
                     {
                         kind: "block",
@@ -88,8 +135,51 @@ export default function Workspace() {
             },
             {
                 kind: "category",
-                name: "Data Visualization",
-                colour: "#ed8f4c",
+                name: "Numerical Summaries",
+                colour: "230",
+                contents: [
+                    {
+                        kind: "block",
+                        type: "Gtallydata",
+                    },
+                    {
+                        kind: "block",
+                        type: "Gtallydataformat",
+                    },
+                    {
+                        kind: "block",
+                        type: "Gtallysexdata",
+                    },
+                    {
+                        kind: "block",
+                        type: "Gtallysexdata2",
+                    },
+                    {
+                        kind: "block",
+                        type: "Gtallysexformatdata",
+                    },
+                    {
+                        kind: "block",
+                        type: "Gfavstatsdata",
+                    },
+                    {
+                        kind: "block",
+                        type: "Gfavstatssubstancedata",
+                    },
+                    {
+                        kind: "block",
+                        type: "Gfavstatssubstancedata2",
+                    },
+                    {
+                        kind: "block",
+                        type: "Gcor",
+                    },
+                ],
+            },
+            {
+                kind: "category",
+                name: "Data Visualization (using HELPrct)",
+                colour: "120",
                 contents: [
                     {
                         kind: "block",
@@ -142,13 +232,74 @@ export default function Workspace() {
                     
 
                 ],
+            },
+            {
+                kind: "category",
+                name: "Data Visualization",
+                colour: "120",
+                contents: [
+                    {
+                        kind: "block",
+                        type: "Ggf_bar",
+                    },
+                    {
+                        kind: "block",
+                        type: "Gpie",
+                    },
+                    {
+                        kind: "block",
+                        type: "Ggf_boxplot",
+                    },
+                    {
+                        kind: "block",
+                        type: "Ggf_boxplot_substance",
+                    },
+                    {
+                        kind: "block",
+                        type: "Ggf_histogram",
+                    },
+                    {
+                        kind: "block",
+                        type: "Ggf_histogram_substance",
+                    },
+                    {
+                        kind: "block",
+                        type: "Ggf_dens",
+                    },
+                    {
+                        kind: "block",
+                        type: "Ggf_dens_color",
+                    },
+                    {
+                        kind: "block",
+                        type: "Ggf_counts",
+                    },
+                    {
+                        kind: "block",
+                        type: "Ggf_point",
+                    },
+                    {
+                        kind: "block",
+                        type: "Ggf_qq",
+                    },
+                    {
+                        kind: "block",
+                        type: "Gmosaicplot",
+                    },
+                    
+
+                ],
             }
         ],
     };
 
     function workspaceDidChange(workspace) {
         const code = Blockly.JavaScript.workspaceToCode(workspace);
-        setJavascriptCode(code);
+        //setJavascriptCode(code);
+        //document.getElementById('codeBody').innerText = code;
+        const linked = 'https://rdrr.io/snippets/embed/?code=' + encodeURI(code)
+        //document.getElementById('URIBody').innerText = linked;
+        document.getElementById('snippet').src = linked;
     }
 
     /*
@@ -162,10 +313,8 @@ export default function Workspace() {
 
     // reference: https://developers.google.com/blockly/guides/configure/web/code-generators#realtime_generation
 
-    const [selected, setSelected] = useState(0);
-    const cards = ["Basic", "Data Wrangling", "Plots", "Statistics", "Modeling"];
-    const colors = ["#ed544c", "#edd84c", "#7aed4c", "#824ced", "#ed4cc2"];
-    // try adding js
+    
+    
     return (
         <BlocklyWorkspace
             className="blockly"
