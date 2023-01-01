@@ -7,4 +7,4 @@ Developers: *Dhyey Mavani '25, Mithras Chaudhary '22 (On Leave), *
 In collaboration with: 
 - *Amherst College IT Department: https://www.amherst.edu/offices/it*
 - *Google Blockly: https://developers.google.com/blockly/*
-- *DataCamp API: https://datacamp.com/*
+- Now: rdrr.io API for R Console | Earlier: *DataCamp API: https://datacamp.com/*
