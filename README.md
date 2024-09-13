@@ -24,4 +24,4 @@ In collaboration with:
 4. Use `cd build` command to go into the build folder through Terminal. 
 5. Use `cp -r * ~/Documents/GitHub/sliao/r-blocks` to copy your new build stuff to local GitHub associated folder of `sliao/r-blocks`
 6. Go to GitHub Desktop and switch the repository to `sliao`, then make sure that the branch is `main`, then commit and push to save code progress on `aanderson/sliao` deployment GitHub repository.
-7. Use `scp -r * RemusUsername@remus:sliao/r-blocks` (For Example if you are Dhyey you can do `scp -r * dmavani25@remus:sliao/r-blocks`) and enter your Amherst Password when asked manually or through key-chain RSA and the changes should be live on https://sliao.people.amherst.edu/r-blocks/ almost instantaneously!!
+7. Use `scp -r * RemusUsername@remus:sliao/r-blocks` (For Example if you are Dhyey you can do `scp -r * dmavani25@remus:sliao/r-blocks`) and enter your Amherst Password when asked manually or through key-chain RSA and the changes should be live on https://sliao.people.amherst.edu/r-blocks/ almost instantaneously.
