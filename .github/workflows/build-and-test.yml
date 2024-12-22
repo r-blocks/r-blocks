@@ -1,4 +1,4 @@
-name: Test
+name: Build
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
 
     strategy:
@@ -23,8 +23,16 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
         
-    - name: Install dependencies
-      run: npm install
+    - name: Clean install dependencies
+      run: |
+        rm -rf node_modules
+        rm package-lock.json
+        npm install
         
-    - name: Run tests
+    - name: Build
+      env:
+        CI: false
+      run: npm run build --if-present
+
+    - name: Run Tests
       run: npm test
