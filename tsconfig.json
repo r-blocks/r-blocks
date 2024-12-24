@@ -1,0 +1,28 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "allowJs": true,
+        "checkJs": false,  // Changed to false to be less strict
+        "jsx": "react",
+        "outDir": "./dist",
+        "strict": false,
+        "moduleResolution": "node",
+        "baseUrl": "./",
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "allowSyntheticDefaultImports": true,  // Added
+        "noEmit": true,  // Added
+        "isolatedModules": true,  // Added
+    },
+    "include": [
+        "src/**/*"
+    ],
+    "exclude": [
+        "node_modules",
+        "build",
+        "docs",
+        "**/*.spec.ts"
+    ]
+}
