@@ -1,0 +1,34 @@
+# Function: blockToDomWithXY()
+
+> **blockToDomWithXY**(`block`, `opt_noId`?): `Element` \| `DocumentFragment`
+
+Encode a block subtree as XML with XY coordinates.
+
+## Parameters
+
+### block
+
+[`Block`](../../classes/Block.md)
+
+The root block to encode.
+
+### opt_noId?
+
+`boolean`
+
+True if the encoder should skip the block ID.
+
+## Returns
+
+`Element` \| `DocumentFragment`
+
+Tree of XML elements or an empty
+document fragment if the block was an insertion marker.
+
+## Alias
+
+Blockly.Xml.blockToDomWithXY
+
+## Defined in
+
+node_modules/blockly/blockly.d.ts:17752

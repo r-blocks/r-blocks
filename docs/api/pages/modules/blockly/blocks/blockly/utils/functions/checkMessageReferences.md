@@ -1,0 +1,31 @@
+# Function: ~~checkMessageReferences()~~
+
+> **checkMessageReferences**(`message`): `boolean`
+
+Validates that any %{MSG_KEY} references in the message refer to keys of
+the Msg string table.
+
+## Parameters
+
+### message
+
+`string`
+
+Text which might contain string table references.
+
+## Returns
+
+`boolean`
+
+True if all message references have matching values.
+Otherwise, false.
+
+## Deprecated
+
+## Alias
+
+Blockly.utils.checkMessageReferences
+
+## Defined in
+
+node_modules/blockly/blockly.d.ts:10754

@@ -1,8 +1,8 @@
 [**r-blocks v0.1.0**](../../../../../README.md)
 
-***
+---
 
-[r-blocks](../../../../../modules.md) / [blockly/blocks/visualization/gf\_bar](../README.md) / default
+[r-blocks](../../../../../modules.md) / [blockly/blocks/visualization/gf_bar](../README.md) / default
 
 # Variable: default
 
@@ -10,4 +10,4 @@
 
 ## Defined in
 
-[blockly/blocks/visualization/gf\_bar.js:66](https://github.com/DhyeyMavani2003/r-blocks/blob/3c6fd2c845ebaab7af1ba61c432e0fe34ef7f334/src/pages/modules/blockly/blocks/visualization/gf_bar.js#L66)
+[blockly/blocks/visualization/gf_bar.js:66](https://github.com/DhyeyMavani2003/r-blocks/blob/3c6fd2c845ebaab7af1ba61c432e0fe34ef7f334/src/pages/modules/blockly/blocks/visualization/gf_bar.js#L66)

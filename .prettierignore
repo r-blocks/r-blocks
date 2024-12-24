@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Testing
+coverage/
+
+# Production
+build/
+dist/
+
+# Documentation
+docs/
+
+# Environment and System Files
+.DS_Store
+.env*
+
+# Logs
+*.log
+
+# Cache
+.cache/
+
+# IDE
+.vscode/
+
+# Allow formatting of these files
+!*.js
+!*.jsx
+!*.ts
+!*.tsx
+!*.css
+!*.scss
