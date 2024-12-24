@@ -15,14 +15,14 @@ const config = {
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
-  url: 'https://dhyeymavani2003.github.io/',
+  url: 'https://dhyeymavani.com/',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/rblocks/',
+  baseUrl: '/r-blocks/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'dhyeymavani2004', // Usually your GitHub org/user name.
+  organizationName: 'dhyeymavani2003', // Usually your GitHub org/user name.
   projectName: 'r-blocks', // Usually your repo name.
   deploymentBranch: 'gh-pages',
   trailingSlash: false,
