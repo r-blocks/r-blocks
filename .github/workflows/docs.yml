@@ -22,7 +22,7 @@ jobs:
           rm package-lock.json
           rm -rf docs/node_modules
           rm docs/package-lock.json
-          npm install
+          npm install --legacy-peer-deps
           cd docs && npm install
 
       - name: Generate API documentation
