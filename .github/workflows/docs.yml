@@ -18,6 +18,10 @@ jobs:
 
       - name: Install dependencies
         run: |
+          rm -rf node_modules
+          rm package-lock.json
+          rm -rf docs/node_modules
+          rm docs/package-lock.json
           npm install
           cd docs && npm install
 
