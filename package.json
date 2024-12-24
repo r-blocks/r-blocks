@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "ajv": "^8.12.0",
+    "ajv-keywords": "^5.1.0",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
     "@mui/icons-material": "^5.2.5",
@@ -22,6 +24,12 @@
     "styled-components": "^5.3.3",
     "web-vitals": "^2.1.2"
   },
+
+  "resolutions": {
+    "ajv": "^8.12.0",
+    "ajv-keywords": "^5.1.0"
+  },
+
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
