@@ -1,0 +1,39 @@
+name: Documentation
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: |
+          rm -rf node_modules
+          rm package-lock.json
+          rm -rf docs/node_modules
+          rm docs/package-lock.json
+          npm install --legacy-peer-deps
+          cd docs && npm install
+
+      - name: Generate API documentation
+        run: npm run docs:generate
+
+      - name: Build documentation
+        run: cd docs && npm run build
+
+      - name: Deploy to GitHub Pages
+        if: github.ref == 'refs/heads/main'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs/build

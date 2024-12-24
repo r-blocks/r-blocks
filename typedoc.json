@@ -1,0 +1,18 @@
+{
+    "entryPoints": [
+        "src/pages/modules/blockly/blocks/index.js",
+        "src/pages/modules/workspace.js",
+        "src/pages/modules/blockly/blocks/statistics/*.js",
+        "src/pages/modules/blockly/blocks/visualization/*.js",
+        "src/pages/modules/blockly/blocks/general/*.js",
+        "src/pages/modules/blockly/blocks/inference/*.js"
+    ],
+    "out": "docs/docs/api",
+    "exclude": ["**/node_modules/**"],
+    "theme": "markdown",
+    "plugin": ["typedoc-plugin-markdown"],
+    "excludeExternals": true,
+    "excludePrivate": true,
+    "hideGenerator": true,
+    "includeVersion": true
+}
