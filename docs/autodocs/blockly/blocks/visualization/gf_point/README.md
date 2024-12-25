@@ -1,10 +1,10 @@
 [**r-blocks v0.1.0**](../../../../README.md)
 
-***
+---
 
-[r-blocks](../../../../modules.md) / blockly/blocks/visualization/gf\_point
+[r-blocks](../../../../modules.md) / blockly/blocks/visualization/gf_point
 
-# blockly/blocks/visualization/gf\_point
+# blockly/blocks/visualization/gf_point
 
 ## Index
 

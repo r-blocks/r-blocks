@@ -1,0 +1,9 @@
+# PREVIEW_TYPE
+
+## Index
+
+### Variables
+
+- [INPUT_OUTLINE](variables/INPUT_OUTLINE.md)
+- [INSERTION_MARKER](variables/INSERTION_MARKER.md)
+- [REPLACEMENT_FADE](variables/REPLACEMENT_FADE.md)

@@ -1,3 +1,24 @@
+/**
+ * Blockly R Blocks Configuration
+ *
+ * This file serves as the main configuration for R-specific Blockly blocks,
+ * importing and organizing block definitions across multiple categories:
+ * - General utility blocks
+ * - Statistical inference blocks
+ * - Descriptive statistics blocks
+ * - Data visualization blocks
+ *
+ * Dependencies:
+ * - Blockly
+ * - blockly/javascript
+ * - ./blockly_compressed
+ *
+ * Key Features:
+ * - Imports block definitions by category
+ * - Configures R code generator
+ * - Exports Blockly configuration for R
+ */
+
 import Blockly from 'blockly';
 import 'blockly/javascript';
 import { BlocklyR } from './blockly_compressed';
@@ -29,7 +50,7 @@ import './blocks/statistics/Gtallydataformat';
 import './blocks/statistics/Gtallysexdata';
 import './blocks/statistics/Gtallysexdata2';
 import './blocks/statistics/Gtallysexformatdata';
-import './blocks/statistics/favstats'; 
+import './blocks/statistics/favstats';
 import './blocks/visualization/gf_boxplot';
 import './blocks/visualization/gf_histogram';
 import './blocks/visualization/gf_bar';

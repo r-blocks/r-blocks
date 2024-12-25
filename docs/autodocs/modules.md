@@ -1,6 +1,6 @@
 [**r-blocks v0.1.0**](README.md)
 
-***
+---
 
 # r-blocks v0.1.0
 
@@ -34,20 +34,20 @@
 - [blockly/blocks/statistics/tallysexdata](blockly/blocks/statistics/tallysexdata/README.md)
 - [blockly/blocks/statistics/tallysexdata2](blockly/blocks/statistics/tallysexdata2/README.md)
 - [blockly/blocks/statistics/tallysexformatdata](blockly/blocks/statistics/tallysexformatdata/README.md)
-- [blockly/blocks/visualization/gf\_bar](blockly/blocks/visualization/gf_bar/README.md)
-- [blockly/blocks/visualization/gf\_boxplot](blockly/blocks/visualization/gf_boxplot/README.md)
-- [blockly/blocks/visualization/gf\_counts](blockly/blocks/visualization/gf_counts/README.md)
-- [blockly/blocks/visualization/gf\_dens](blockly/blocks/visualization/gf_dens/README.md)
-- [blockly/blocks/visualization/gf\_dens\_color](blockly/blocks/visualization/gf_dens_color/README.md)
-- [blockly/blocks/visualization/gf\_histogram](blockly/blocks/visualization/gf_histogram/README.md)
-- [blockly/blocks/visualization/gf\_percents](blockly/blocks/visualization/gf_percents/README.md)
-- [blockly/blocks/visualization/gf\_point](blockly/blocks/visualization/gf_point/README.md)
-- [blockly/blocks/visualization/Ggf\_bar](blockly/blocks/visualization/Ggf_bar/README.md)
-- [blockly/blocks/visualization/Ggf\_dens](blockly/blocks/visualization/Ggf_dens/README.md)
-- [blockly/blocks/visualization/Ggf\_dens\_color](blockly/blocks/visualization/Ggf_dens_color/README.md)
-- [blockly/blocks/visualization/Ggf\_histogram](blockly/blocks/visualization/Ggf_histogram/README.md)
-- [blockly/blocks/visualization/Ggf\_histogram\_substance](blockly/blocks/visualization/Ggf_histogram_substance/README.md)
-- [blockly/blocks/visualization/Ggf\_point](blockly/blocks/visualization/Ggf_point/README.md)
+- [blockly/blocks/visualization/gf_bar](blockly/blocks/visualization/gf_bar/README.md)
+- [blockly/blocks/visualization/gf_boxplot](blockly/blocks/visualization/gf_boxplot/README.md)
+- [blockly/blocks/visualization/gf_counts](blockly/blocks/visualization/gf_counts/README.md)
+- [blockly/blocks/visualization/gf_dens](blockly/blocks/visualization/gf_dens/README.md)
+- [blockly/blocks/visualization/gf_dens_color](blockly/blocks/visualization/gf_dens_color/README.md)
+- [blockly/blocks/visualization/gf_histogram](blockly/blocks/visualization/gf_histogram/README.md)
+- [blockly/blocks/visualization/gf_percents](blockly/blocks/visualization/gf_percents/README.md)
+- [blockly/blocks/visualization/gf_point](blockly/blocks/visualization/gf_point/README.md)
+- [blockly/blocks/visualization/Ggf_bar](blockly/blocks/visualization/Ggf_bar/README.md)
+- [blockly/blocks/visualization/Ggf_dens](blockly/blocks/visualization/Ggf_dens/README.md)
+- [blockly/blocks/visualization/Ggf_dens_color](blockly/blocks/visualization/Ggf_dens_color/README.md)
+- [blockly/blocks/visualization/Ggf_histogram](blockly/blocks/visualization/Ggf_histogram/README.md)
+- [blockly/blocks/visualization/Ggf_histogram_substance](blockly/blocks/visualization/Ggf_histogram_substance/README.md)
+- [blockly/blocks/visualization/Ggf_point](blockly/blocks/visualization/Ggf_point/README.md)
 - [blockly/blocks/visualization/mosaicplot](blockly/blocks/visualization/mosaicplot/README.md)
 - [blockly/blocks/visualization/pie](blockly/blocks/visualization/pie/README.md)
 - [workspace](workspace/README.md)
