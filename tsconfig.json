@@ -3,7 +3,7 @@
         "target": "es6",
         "module": "commonjs",
         "allowJs": true,
-        "checkJs": false,  // Changed to false to be less strict
+        "checkJs": false,
         "jsx": "react",
         "outDir": "./dist",
         "strict": false,
@@ -12,9 +12,10 @@
         "esModuleInterop": true,
         "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true,
-        "allowSyntheticDefaultImports": true,  // Added
-        "noEmit": true,  // Added
-        "isolatedModules": true,  // Added
+        "allowSyntheticDefaultImports": true,
+        "noEmit": true,
+        "isolatedModules": true,
+        "sourceMap": false
     },
     "include": [
         "src/**/*"

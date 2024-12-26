@@ -1,3 +1,19 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
 :root {
   font-size: 16px;
   font-family: 'Open sans';
@@ -44,21 +60,25 @@ body::-webkit-scrollbar-thumb {
 .toolbar {
   display: flex;
   align-items: center;
-  width: 100vw;
-  height: 4rem;
+  width: 100%;
+  min-height: 4rem;
   background-color: var(--primary-m);
   border-bottom: 0.5rem solid var(--primary-p);
 }
 
 .core {
   display: flex;
+  flex: 1;
   width: 100%;
-  height: calc(100vh - 4rem);
+  min-height: 0;
+  overflow: hidden;
 }
 
 .blockly {
+  flex: 1;
   height: 100%;
   width: 100%;
+  overflow: hidden;
 }
 
 .side-list {
@@ -117,6 +137,7 @@ body::-webkit-scrollbar-thumb {
 .workspace {
   height: 100%;
   width: 100%;
+  overflow: hidden;
 }
 
 .compiler {
