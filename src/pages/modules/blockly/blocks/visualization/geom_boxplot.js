@@ -17,6 +17,10 @@ Blockly.Blocks['geom_boxplot'] = {
         ]),
         'OUTLIER'
       )
+      .appendField(', fill = ')
+      .appendField(new Blockly.FieldTextInput('blue'), 'FILL')
+      .appendField(', alpha = ')
+      .appendField(new Blockly.FieldNumber(1, 0, 1, 0.1), 'ALPHA')
       .appendField(')');
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
@@ -31,7 +35,9 @@ Blockly.JavaScript['geom_boxplot'] = function (block) {
   var x_var = block.getFieldValue('X_VAR');
   var y_var = block.getFieldValue('Y_VAR');
   var outlier = block.getFieldValue('OUTLIER');
-  var code = `geom_boxplot(aes(x=${x_var}, y=${y_var}), outlier.shape=${outlier})\n`;
+  var fill = block.getFieldValue('FILL');
+  var alpha = block.getFieldValue('ALPHA');
+  var code = `geom_boxplot(aes(x=${x_var}, y=${y_var}), outlier.shape=${outlier}, fill="${fill}", alpha=${alpha})\n`;
   return code;
 };
 
@@ -45,6 +51,10 @@ Blockly.Blocks['Ggeom_boxplot'] = {
       .appendField(new Blockly.FieldTextInput(''), 'Y_VAR')
       .appendField(', outlier.shape = ')
       .appendField(new Blockly.FieldTextInput('16'), 'OUTLIER')
+      .appendField(', fill = ')
+      .appendField(new Blockly.FieldTextInput('blue'), 'FILL')
+      .appendField(', alpha = ')
+      .appendField(new Blockly.FieldNumber(1, 0, 1, 0.1), 'ALPHA')
       .appendField(')');
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
@@ -59,7 +69,9 @@ Blockly.JavaScript['Ggeom_boxplot'] = function (block) {
   var x_var = block.getFieldValue('X_VAR');
   var y_var = block.getFieldValue('Y_VAR');
   var outlier = block.getFieldValue('OUTLIER');
-  var code = `geom_boxplot(aes(x=${x_var}, y=${y_var}), outlier.shape=${outlier})\n`;
+  var fill = block.getFieldValue('FILL');
+  var alpha = block.getFieldValue('ALPHA');
+  var code = `geom_boxplot(aes(x=${x_var}, y=${y_var}), outlier.shape=${outlier}, fill="${fill}", alpha=${alpha})\n`;
   return code;
 };
 
