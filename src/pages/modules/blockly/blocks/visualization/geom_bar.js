@@ -22,6 +22,10 @@ Blockly.Blocks['geom_bar'] = {
         ]),
         'POSITION'
       )
+      .appendField(', fill = ')
+      .appendField(new Blockly.FieldTextInput('blue'), 'FILL')
+      .appendField(', alpha = ')
+      .appendField(new Blockly.FieldNumber(1, 0, 1, 0.1), 'ALPHA')
       .appendField(')');
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
@@ -35,7 +39,9 @@ Blockly.Blocks['geom_bar'] = {
 Blockly.JavaScript['geom_bar'] = function (block) {
   var stat = block.getFieldValue('STAT');
   var position = block.getFieldValue('POSITION');
-  var code = `geom_bar(stat="${stat}", position="${position}")\n`;
+  var fill = block.getFieldValue('FILL');
+  var alpha = block.getFieldValue('ALPHA');
+  var code = `geom_bar(stat="${stat}", position="${position}", fill="${fill}", alpha=${alpha})\n`;
   return code;
 };
 
@@ -47,6 +53,10 @@ Blockly.Blocks['Ggeom_bar'] = {
       .appendField(new Blockly.FieldTextInput('count'), 'STAT')
       .appendField(', position = ')
       .appendField(new Blockly.FieldTextInput('stack'), 'POSITION')
+      .appendField(', fill = ')
+      .appendField(new Blockly.FieldTextInput('blue'), 'FILL')
+      .appendField(', alpha = ')
+      .appendField(new Blockly.FieldNumber(1, 0, 1, 0.1), 'ALPHA')
       .appendField(')');
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
@@ -60,7 +70,9 @@ Blockly.Blocks['Ggeom_bar'] = {
 Blockly.JavaScript['Ggeom_bar'] = function (block) {
   var stat = block.getFieldValue('STAT');
   var position = block.getFieldValue('POSITION');
-  var code = `geom_bar(stat="${stat}", position="${position}")\n`;
+  var fill = block.getFieldValue('FILL');
+  var alpha = block.getFieldValue('ALPHA');
+  var code = `geom_bar(stat="${stat}", position="${position}", fill="${fill}", alpha=${alpha})\n`;
   return code;
 };
 

@@ -24,6 +24,8 @@ Blockly.Blocks['geom_smooth'] = {
       .appendField(new Blockly.FieldColour('#0000FF'), 'COLOR')
       .appendField(', size = ')
       .appendField(new Blockly.FieldNumber(1, 0.1, 5), 'SIZE')
+      .appendField(', alpha = ')
+      .appendField(new Blockly.FieldNumber(1, 0, 1), 'ALPHA')
       .appendField(')');
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
@@ -41,7 +43,8 @@ Blockly.JavaScript['geom_smooth'] = function (block) {
   var se = block.getFieldValue('SE') === 'TRUE';
   var color = block.getFieldValue('COLOR');
   var size = block.getFieldValue('SIZE');
-  var code = `geom_smooth(aes(x=${x_var}, y=${y_var}), method="${method}", se=${se}, color="${color}", size=${size})\n`;
+  var alpha = block.getFieldValue('ALPHA');
+  var code = `geom_smooth(aes(x=${x_var}, y=${y_var}), method="${method}", se=${se}, color="${color}", size=${size}, alpha=${alpha})\n`;
   return code;
 };
 
@@ -61,6 +64,8 @@ Blockly.Blocks['Ggeom_smooth'] = {
       .appendField(new Blockly.FieldTextInput('blue'), 'COLOR')
       .appendField(', size = ')
       .appendField(new Blockly.FieldTextInput('1'), 'SIZE')
+      .appendField(', alpha = ')
+      .appendField(new Blockly.FieldTextInput('1'), 'ALPHA')
       .appendField(')');
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
@@ -78,7 +83,8 @@ Blockly.JavaScript['Ggeom_smooth'] = function (block) {
   var se = block.getFieldValue('SE');
   var color = block.getFieldValue('COLOR');
   var size = block.getFieldValue('SIZE');
-  var code = `geom_smooth(aes(x=${x_var}, y=${y_var}), method="${method}", se=${se}, color="${color}", size=${size})\n`;
+  var alpha = block.getFieldValue('ALPHA');
+  var code = `geom_smooth(aes(x=${x_var}, y=${y_var}), method="${method}", se=${se}, color="${color}", size=${size}, alpha=${alpha})\n`;
   return code;
 };
 
