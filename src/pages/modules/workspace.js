@@ -44,8 +44,12 @@ export default function Workspace() {
     '<xml xmlns="http://www.w3.org/1999/xhtml"><block type="text" x="70" y="30"><field name="TEXT"></field></block></xml>';
 
   /**
-   * @constant {Object} toolboxCategories - Configuration object defining the toolbox categories and blocks
+   * Updated RBlocks Workspace Component with Consistent Directory Structure
+   *
+   * The dropdown structure for both mosaic and ggplot2 blocks has been updated
+   * to have the same categories and options for consistency.
    */
+
   const toolboxCategories = {
     kind: 'categoryToolbox',
     contents: [
@@ -74,12 +78,6 @@ export default function Workspace() {
             contents: [
               { kind: 'block', type: 'tallydata' },
               { kind: 'block', type: 'tallydataformat' },
-              { kind: 'block', type: 'tallysexdata' },
-              { kind: 'block', type: 'tallysexdata2' },
-              { kind: 'block', type: 'tallysexformatdata' },
-              { kind: 'block', type: 'favstatsdata' },
-              { kind: 'block', type: 'favstatssubstancedata' },
-              { kind: 'block', type: 'favstatssubstancedata2' },
               { kind: 'block', type: 'cor' },
             ],
           },
@@ -90,25 +88,19 @@ export default function Workspace() {
             contents: [
               { kind: 'block', type: 'gf_bar' },
               { kind: 'block', type: 'gf_counts' },
-              { kind: 'block', type: 'gf_percents' },
               { kind: 'block', type: 'gf_boxplot' },
-              { kind: 'block', type: 'gf_boxplot_substance' },
               { kind: 'block', type: 'gf_histogram' },
-              { kind: 'block', type: 'gf_histogram_substance' },
               { kind: 'block', type: 'gf_dens' },
-              { kind: 'block', type: 'gf_dens_color' },
               { kind: 'block', type: 'gf_point' },
             ],
           },
           {
             kind: 'category',
-            name: 'Statistical Inference',
+            name: 'Statistical Functions',
             colour: '#039be5',
             contents: [
               { kind: 'block', type: 'proptest' },
-              { kind: 'block', type: 'proptest2' },
               { kind: 'block', type: 'ttest' },
-              { kind: 'block', type: 'ttest2' },
               { kind: 'block', type: 'xchisqtest' },
               { kind: 'block', type: 'anova' },
               { kind: 'block', type: 'slrsummary' },
@@ -136,37 +128,24 @@ export default function Workspace() {
           },
           {
             kind: 'category',
-            name: 'Plot Components',
-            colour: '120',
+            name: 'Numerical Summaries',
+            colour: '230',
             contents: [
-              { kind: 'block', type: 'Gggplot_init' },
-              { kind: 'block', type: 'Ggeom_point' },
-              { kind: 'block', type: 'Ggeom_line' },
-              { kind: 'block', type: 'Ggeom_smooth' },
-              { kind: 'block', type: 'Ggeom_bar' },
-              { kind: 'block', type: 'Ggeom_boxplot' },
-              { kind: 'block', type: 'Ggeom_histogram' },
-              { kind: 'block', type: 'Ggeom_density' },
-              { kind: 'block', type: 'Gtheme_minimal' },
-              { kind: 'block', type: 'Glabs' },
+              { kind: 'block', type: 'Gtallydata' },
+              { kind: 'block', type: 'Gtallydataformat' },
+              { kind: 'block', type: 'Gcor' },
             ],
           },
           {
             kind: 'category',
-            name: 'Advanced Visualizations',
+            name: 'Visualizations',
             colour: '120',
             contents: [
-              { kind: 'block', type: 'Gpie' },
-              { kind: 'block', type: 'Gmosaicplot' },
               { kind: 'block', type: 'Ggf_bar' },
               { kind: 'block', type: 'Ggf_counts' },
-              { kind: 'block', type: 'Ggf_percents' },
               { kind: 'block', type: 'Ggf_boxplot' },
-              { kind: 'block', type: 'Ggf_boxplot_substance' },
               { kind: 'block', type: 'Ggf_histogram' },
-              { kind: 'block', type: 'Ggf_histogram_substance' },
               { kind: 'block', type: 'Ggf_dens' },
-              { kind: 'block', type: 'Ggf_dens_color' },
               { kind: 'block', type: 'Ggf_point' },
             ],
           },
@@ -176,9 +155,7 @@ export default function Workspace() {
             colour: '#039be5',
             contents: [
               { kind: 'block', type: 'Gproptest' },
-              { kind: 'block', type: 'Gproptest2' },
               { kind: 'block', type: 'Gttest' },
-              { kind: 'block', type: 'Gttest2' },
               { kind: 'block', type: 'Gxchisqtest' },
               { kind: 'block', type: 'Ganova' },
               { kind: 'block', type: 'Gslrsummary' },
