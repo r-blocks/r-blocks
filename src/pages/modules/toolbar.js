@@ -1,60 +1,46 @@
-/**
- * Toolbar Component for RBlocks
- *
- * Navigation toolbar component that provides the main header and control buttons
- * for the RBlocks application. Currently displays the RBlocks header with placeholder
- * areas for package management, file operations, and execution controls.
- *
- * Dependencies:
- * - React
- * - Material-UI Icons
- * - ./helper/functions
- * - ./styles/base.css
- */
-
 import React from 'react';
+import { getAuth, signOut } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 
 //Style
 import './styles/base.css';
 
-/**
- * Navigation toolbar component for the RBlocks application.
- *
- * @returns {JSX.Element} A navigation bar containing the application header and control sections
- * @example
- * <Toolbar />
- */
 export default function Toolbar() {
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    const auth = getAuth();
+    try {
+      await signOut(auth);
+      navigate('/');
+    } catch (error) {
+      console.error('Error signing out:', error);
+    }
+  };
+
   return (
     <nav className="toolbar">
       <ul style={{ width: '100%', flex: 1 }}>
         <h1 className="header">RBlocks</h1>
       </ul>
       <div style={{ width: '100%', flex: 6 }}>
-        {/*
-                <button className="base-button">
-                    packages
-                </button>
-                <button className="base-button">
-                    upload
-                </button>
-                <button className="base-button">
-                    tutorials
-                </button>
-                 */}
+        {/* ...existing code... */}
       </div>
-      <div style={{ width: '100%', flex: 1 }}>
-        {/*
-                <button className="icon-button run-button">
-                    <PlayArrowIcon fontSize="large" sx={{ml: "-2px", mb: "-1px"}}/>
-                </button>
-                <button className="icon-button stop-button">
-                    <DangerousIcon fontSize="large"  sx={{ml: "-2px", mb: "-1px"}}/>
-                </button>
-                <button className="icon-button reset-button">
-                    <FiberNewIcon fontSize="large" sx={{ml: "-2px", mb: "-1px"}}/>
-                </button>
-                 */}
+      <div style={{ width: '100%', flex: 1, display: 'flex', justifyContent: 'flex-end', paddingRight: '1rem' }}>
+        <button 
+          className="small-button"
+          onClick={handleLogout}
+          style={{
+            backgroundColor: 'var(--accent-h)',
+            borderTop: '2px solid var(--accent-l)',
+            borderLeft: '2px solid var(--accent-l)',
+            borderRight: 'none',
+            borderBottom: 'none',
+            margin: 'auto 0'
+          }}
+        >
+          Logout
+        </button>
       </div>
     </nav>
   );
