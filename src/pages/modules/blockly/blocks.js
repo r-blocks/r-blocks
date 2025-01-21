@@ -34,7 +34,6 @@ import './blocks/inference/anova';
 import './blocks/inference/proptest';
 import './blocks/inference/proptest2';
 import './blocks/inference/xchisqtest';
-import './blocks/inference/regression';
 import './blocks/inference/ttest';
 import './blocks/inference/Gproptest';
 import './blocks/inference/Gproptest2';

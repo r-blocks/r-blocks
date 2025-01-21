@@ -56,7 +56,7 @@ export default function Workspace() {
       {
         kind: 'category',
         name: 'General Functions',
-        colour: '10',
+        colour: '#FF6B5B',
         contents: [
           { kind: 'block', type: 'Glib' },
           { kind: 'block', type: 'lib' },
@@ -75,25 +75,22 @@ export default function Workspace() {
       {
         kind: 'category',
         name: 'mosaic',
-        colour: '#4a148c',
+        colour: '#4A90E2',
         contents: [
           {
             kind: 'category',
             name: 'Numerical Summaries',
-            colour: '230',
+            colour: '#81B1F3',
             contents: [
-              { kind: 'block', type: 'Gtally' },
-              { kind: 'block', type: 'tally' },
-              { kind: 'block', type: 'Gfavstats' },
-              { kind: 'block', type: 'favstats' },
-              { kind: 'block', type: 'Gcorrelation' },
-              { kind: 'block', type: 'correlation' },
+              { kind: 'block', type: 'tallydata' },
+              { kind: 'block', type: 'favstatsdata' },
+              { kind: 'block', type: 'cor' },
             ],
           },
           {
             kind: 'category',
             name: 'Statistical Functions',
-            colour: '#039be5',
+            colour: '#2171D6',
             contents: [
               { kind: 'block', type: 'Gproptest' },
               { kind: 'block', type: 'proptest' },
@@ -104,17 +101,13 @@ export default function Workspace() {
               { kind: 'block', type: 'Ganova' },
               { kind: 'block', type: 'anova' },
               { kind: 'block', type: 'Gslrsummary' },
-              { kind: 'block', type: 'slrsummary' },
-              { kind: 'block', type: 'Gxchisqtest' },
               { kind: 'block', type: 'xchisqtest' },
-              { kind: 'block', type: 'Gregression' },
-              { kind: 'block', type: 'regression' },
             ],
           },
           {
             kind: 'category',
             name: 'Visualizations',
-            colour: '150',
+            colour: '#5C6BC0',
             contents: [
               { kind: 'block', type: 'Gmosaicplot' },
               { kind: 'block', type: 'mosaicplot' },
@@ -125,12 +118,12 @@ export default function Workspace() {
       {
         kind: 'category',
         name: 'ggplot2',
-        colour: '#00796b',
+        colour: '#2E7D32',
         contents: [
           {
             kind: 'category',
             name: 'Numerical Summaries',
-            colour: '230',
+            colour: '#66BB6A',
             contents: [
               { kind: 'block', type: 'Gtallydata' },
               { kind: 'block', type: 'tallydata' },
@@ -138,25 +131,8 @@ export default function Workspace() {
           },
           {
             kind: 'category',
-            name: 'Statistical Functions',
-            colour: '#039be5',
-            contents: [
-              { kind: 'block', type: 'Gproptest' },
-              { kind: 'block', type: 'proptest' },
-              { kind: 'block', type: 'Gttest' },
-              { kind: 'block', type: 'ttest' },
-              { kind: 'block', type: 'Gxchisqtest' },
-              { kind: 'block', type: 'xchisqtest' },
-              { kind: 'block', type: 'Ganova' },
-              { kind: 'block', type: 'anova' },
-              { kind: 'block', type: 'Gslrsummary' },
-              { kind: 'block', type: 'slrsummary' },
-            ],
-          },
-          {
-            kind: 'category',
             name: 'Visualizations',
-            colour: '120',
+            colour: '#43A047',
             contents: [
               { kind: 'block', type: 'Ggf_bar' },
               { kind: 'block', type: 'gf_bar' },
