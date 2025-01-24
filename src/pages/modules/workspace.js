@@ -16,7 +16,7 @@
  * - See ./blockly/blocks for block definitions
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 //Blockly
 import Blockly from 'blockly';
@@ -35,13 +35,26 @@ import './styles/base.css';
  *
  * @returns {JSX.Element} A Blockly workspace component
  */
-export default function Workspace() {
-  const [xml, setXml] = useState('');
+export default function Workspace({ initialWorkspaceXml, onXmlChange }) {
+  const [workspaceXml, setWorkspaceXml] = useState(
+    initialWorkspaceXml ||
+      '<xml xmlns="http://www.w3.org/1999/xhtml"><block type="text" x="70" y="30"><field name="TEXT"></field></block></xml>'
+  );
 
-  const [javascriptCode, setJavascriptCode] = useState('');
+  // Handle external XML updates
+  useEffect(() => {
+    if (initialWorkspaceXml) {
+      setWorkspaceXml(initialWorkspaceXml);
+    }
+  }, [initialWorkspaceXml]);
 
-  const initialXml =
-    '<xml xmlns="http://www.w3.org/1999/xhtml"><block type="text" x="70" y="30"><field name="TEXT"></field></block></xml>';
+  // Handle XML changes
+  const handleXmlChange = (newXml) => {
+    setWorkspaceXml(newXml);
+    if (onXmlChange) {
+      onXmlChange(newXml);
+    }
+  };
 
   /**
    * Updated RBlocks Workspace Component with Consistent Directory Structure
@@ -157,7 +170,7 @@ export default function Workspace() {
         ],
       },
     ],
-  };    
+  };
 
   /**
    * Handles workspace changes by converting blocks to code and updating the embedded R snippet
@@ -191,7 +204,7 @@ export default function Workspace() {
     <BlocklyWorkspace
       className="blockly"
       toolboxConfiguration={toolboxCategories}
-      initialXml={initialXml}
+      initialXml={workspaceXml}
       workspaceConfiguration={{
         grid: {
           spacing: 20,
@@ -201,7 +214,7 @@ export default function Workspace() {
         },
       }}
       onWorkspaceChange={workspaceDidChange}
-      onXmlChange={setXml}
+      onXmlChange={handleXmlChange}
     />
   );
 }

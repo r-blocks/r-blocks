@@ -5,6 +5,7 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import theme from './theme';
 import Studio from './pages/studio';
 import Auth from './pages/auth';
+import Dashboard from './pages/dashboard';
 
 function PrivateRoute({ children }) {
   const [isAuthenticated, setIsAuthenticated] = React.useState(false);
@@ -19,7 +20,7 @@ function PrivateRoute({ children }) {
   }, []);
 
   if (loading) return <div>Loading...</div>;
-  
+
   return isAuthenticated ? children : <Navigate to="/" />;
 }
 
@@ -29,13 +30,21 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Auth />} />
-          <Route 
-            path="/studio" 
+          <Route
+            path="/dashboard"
+            element={
+              <PrivateRoute>
+                <Dashboard />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/studio/:id?"
             element={
               <PrivateRoute>
                 <Studio />
               </PrivateRoute>
-            } 
+            }
           />
         </Routes>
       </BrowserRouter>
