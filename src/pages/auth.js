@@ -6,20 +6,20 @@ import './modules/styles/base.css';
 
 export default function Auth() {
   const navigate = useNavigate();
-  
+
   const signInWithGoogle = async () => {
     const auth = getAuth(app);
     const provider = new GoogleAuthProvider();
     try {
       await signInWithPopup(auth, provider);
-      navigate('/studio');
+      navigate('/dashboard');
     } catch (error) {
       console.error('Error signing in with Google:', error);
     }
   };
 
   return (
-    <div 
+    <div
       style={{
         display: 'flex',
         flexDirection: 'column',
@@ -28,11 +28,11 @@ export default function Auth() {
         height: '100vh',
         background: 'var(--primary-m)',
         paddingBottom: '20vh', // Push content up
-        transform: 'translateY(-10vh)' // Shift everything up
+        transform: 'translateY(-10vh)', // Shift everything up
       }}
     >
       <h1 className="header">RBlocks Studio</h1>
-      <button 
+      <button
         className="base-button"
         onClick={signInWithGoogle}
         style={{
@@ -41,7 +41,7 @@ export default function Auth() {
           borderTop: '2px solid var(--secondary-m)',
           borderLeft: '2px solid var(--secondary-m)',
           borderRight: 'none',
-          borderBottom: 'none'
+          borderBottom: 'none',
         }}
       >
         Sign in with Google
