@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { getAuth, signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import { getFirestore, collection, addDoc } from 'firebase/firestore';
+import { getFirestore, doc, updateDoc, collection, addDoc, getDoc } from 'firebase/firestore';
 
 //Style
 import './styles/base.css';
 
-export default function Toolbar({ blocksData }) {
+export default function Toolbar({ blocksData, studioId }) {
   const [studioName, setStudioName] = useState('Untitled Studio');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
@@ -22,20 +22,36 @@ export default function Toolbar({ blocksData }) {
   };
 
   const handleSave = async () => {
-    if (!studioName.trim()) return;
+    if (!studioName.trim() || !studioId) return;
 
     try {
       const db = getFirestore();
-      await addDoc(collection(db, 'studios'), {
+      const studioRef = doc(db, 'studios', studioId);
+      
+      await updateDoc(studioRef, {
         name: studioName,
-        userId: auth.currentUser.uid,
-        createdAt: Date.now(),
         blocksXml: blocksData,
+        lastModified: Date.now()
       });
+      
     } catch (error) {
       console.error('Error saving studio:', error);
     }
   };
+
+  useEffect(() => {
+    const loadStudioData = async () => {
+      if (studioId) {
+        const db = getFirestore();
+        const studioDoc = await getDoc(doc(db, 'studios', studioId));
+        if (studioDoc.exists()) {
+          setStudioName(studioDoc.data().name);
+        }
+      }
+    };
+
+    loadStudioData();
+  }, [studioId]);
 
   const handleNameSubmit = (e) => {
     e.preventDefault();

@@ -76,6 +76,7 @@ export default function Dashboard() {
             Create New Studio
           </button>
         </div>
+        
         <div className="studios-grid">
           {studios.map((studio) => (
             <div
@@ -83,16 +84,13 @@ export default function Dashboard() {
               className="studio-card"
               onClick={() => navigate(`/studio/${studio.id}`)}
             >
-              <div className="studio-icon-container">
-                <div className="studio-icon">🎮</div>
-                <button
-                  className="delete-studio-button"
-                  onClick={(e) => handleDeleteStudio(e, studio.id)}
-                >
-                  ×
-                </button>
-              </div>
-              <h3>{studio.name || 'Untitled Studio'}</h3>
+              <button
+                className="delete-studio-button"
+                onClick={(e) => handleDeleteStudio(e, studio.id)}
+              >
+                ×
+              </button>
+              <h3 style={{marginTop: '1rem'}}>{studio.name || 'Untitled Studio'}</h3>
               <p>Created: {new Date(studio.createdAt).toLocaleDateString()}</p>
             </div>
           ))}
