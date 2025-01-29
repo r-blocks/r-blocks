@@ -92,6 +92,10 @@ export default function Workspace({ initialWorkspaceXml, onXmlChange, onBlocksCh
   const handleWorkspaceChange = (workspaceInstance) => {
     if (!workspace) {
       setWorkspace(workspaceInstance);
+      // Add the change listener when workspace is first created
+      workspaceInstance.addChangeListener(() => {
+        workspaceDidChange(workspaceInstance);
+      });
     }
   };
 
