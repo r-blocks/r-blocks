@@ -23,21 +23,23 @@ export default function Toolbar({ blocksData, studioId }) {
 
   const handleSave = async () => {
     if (!studioName.trim() || !studioId) return;
-
+  
     try {
       const db = getFirestore();
       const studioRef = doc(db, 'studios', studioId);
-      
+  
       await updateDoc(studioRef, {
         name: studioName,
-        blocksXml: blocksData,
-        lastModified: Date.now()
+        blocksXml: blocksData, // Save blocksXml
+        lastModified: Date.now(),
       });
-      
+  
+      console.log('Studio saved successfully');
     } catch (error) {
       console.error('Error saving studio:', error);
     }
-  };
+  };  
+  
 
   useEffect(() => {
     const loadStudioData = async () => {

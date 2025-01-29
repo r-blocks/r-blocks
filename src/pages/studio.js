@@ -10,23 +10,23 @@ import Workspace from './modules/workspace';
 import Compiler from './modules/compiler';
 
 export default function Studio() {
-  const [currentBlocks, setCurrentBlocks] = useState('');
+  const [currentBlocks, setCurrentBlocks] = useState(''); // Manage workspace blocks XML
   const [studioId, setStudioId] = useState(null);
-  const { id } = useParams();
+  const { id } = useParams(); // Get studio ID from URL
   const navigate = useNavigate();
   const auth = getAuth();
-  
+
   useEffect(() => {
     const initializeStudio = async () => {
       const db = getFirestore();
-      
+
       if (!id) {
-        // Create new studio
+        // Create a new studio
         const docRef = await addDoc(collection(db, 'studios'), {
           name: 'Untitled Studio',
           userId: auth.currentUser.uid,
           createdAt: Date.now(),
-          blocksXml: '',
+          blocksXml: '', // Start with empty workspace
         });
         setStudioId(docRef.id);
         navigate(`/studio/${docRef.id}`, { replace: true });
@@ -35,7 +35,7 @@ export default function Studio() {
         const studioDoc = await getDoc(doc(db, 'studios', id));
         if (studioDoc.exists()) {
           setStudioId(id);
-          setCurrentBlocks(studioDoc.data().blocksXml || '');
+          setCurrentBlocks(studioDoc.data().blocksXml || ''); // Load saved blocksXml
         }
       }
     };
@@ -48,7 +48,10 @@ export default function Studio() {
       <Toolbar blocksData={currentBlocks} studioId={studioId} />
       <div className="core">
         <div style={{ flex: 8 }}>
-          <Workspace onBlocksChange={setCurrentBlocks} />
+          <Workspace
+            initialWorkspaceXml={currentBlocks} // Pass initial XML to workspace
+            onBlocksChange={setCurrentBlocks} // Update XML when workspace changes
+          />
         </div>
         <div style={{ flex: 4 }}>
           <Compiler />

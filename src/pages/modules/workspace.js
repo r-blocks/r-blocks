@@ -35,24 +35,67 @@ import './styles/base.css';
  *
  * @returns {JSX.Element} A Blockly workspace component
  */
-export default function Workspace({ initialWorkspaceXml, onXmlChange }) {
+export default function Workspace({ initialWorkspaceXml, onXmlChange, onBlocksChange }) {
   const [workspaceXml, setWorkspaceXml] = useState(
-    initialWorkspaceXml ||
-      '<xml xmlns="http://www.w3.org/1999/xhtml"><block type="text" x="70" y="30"><field name="TEXT"></field></block></xml>'
+    initialWorkspaceXml || 
+    '<xml xmlns="https://developers.google.com/blockly/xml"><block type="text" x="70" y="30"><field name="TEXT"></field></block></xml>'
   );
+  const [workspace, setWorkspace] = useState(null);
 
-  // Handle external XML updates
+  const workspaceConfig = {
+    grid: {
+      spacing: 20,
+      length: 3,
+      colour: '#ccc',
+      snap: true,
+    },
+    // Add move optimization options
+    moveOptions: {
+      drag: true,
+      scrollbars: true,
+      wheel: true
+    },
+    // Reduce event firing frequency
+    maxInstances: 1,
+    maxBlocks: 1000,
+    trashcan: true
+  };
+
+  // Add this effect to handle external XML updates
+  // Handle initial XML loading
   useEffect(() => {
-    if (initialWorkspaceXml) {
-      setWorkspaceXml(initialWorkspaceXml);
+    if (workspace && initialWorkspaceXml) {
+      try {
+        // Clear existing workspace
+        workspace.clear();
+        
+        // Load new XML
+        const xml = Blockly.Xml.textToDom(initialWorkspaceXml);
+        Blockly.Xml.domToWorkspace(xml, workspace);
+      } catch (e) {
+        console.error('Error loading workspace XML:', e);
+      }
     }
-  }, [initialWorkspaceXml]);
+  }, [workspace, initialWorkspaceXml]);
 
-  // Handle XML changes
+  // Debounce XML changes
   const handleXmlChange = (newXml) => {
-    setWorkspaceXml(newXml);
-    if (onXmlChange) {
-      onXmlChange(newXml);
+    // Only update if XML actually changed
+    if (newXml !== workspaceXml) {
+      setWorkspaceXml(newXml);
+      if (onXmlChange) onXmlChange(newXml);
+      if (onBlocksChange) onBlocksChange(newXml);
+    }
+  };
+
+  // Optimize workspace change handler
+  const handleWorkspaceChange = (workspaceInstance) => {
+    if (!workspace) {
+      setWorkspace(workspaceInstance);
+      // Add the change listener when workspace is first created
+      workspaceInstance.addChangeListener(() => {
+        workspaceDidChange(workspaceInstance);
+      });
     }
   };
 
@@ -178,12 +221,24 @@ export default function Workspace({ initialWorkspaceXml, onXmlChange }) {
    */
   function workspaceDidChange(workspace) {
     const code = Blockly.JavaScript.workspaceToCode(workspace);
-    //setJavascriptCode(code);
-    //document.getElementById('codeBody').innerText = code;
+    
+    // Get XML from current workspace
+    const blocksXml = Blockly.Xml.workspaceToDom(workspace);
+    const xmlText = Blockly.Xml.domToText(blocksXml);
+    
+    // Update both code and blocks
+    if (onBlocksChange) {
+      onBlocksChange(xmlText);
+    }
+    
+    // Update snippet if needed
     const linked = 'https://rdrr.io/snippets/embed/?code=' + encodeURI(code);
-    //document.getElementById('URIBody').innerText = linked;
-    document.getElementById('snippet').src = linked;
+    const snippetElement = document.getElementById('snippet');
+    if (snippetElement) {
+      snippetElement.src = linked;
+    }
   }
+  
 
   /*
     function myUpdateFunction(event) {
@@ -200,20 +255,14 @@ export default function Workspace({ initialWorkspaceXml, onXmlChange }) {
    * Renders the Blockly workspace component
    * @returns {JSX.Element} BlocklyWorkspace component with configured toolbox and handlers
    */
+
   return (
     <BlocklyWorkspace
       className="blockly"
       toolboxConfiguration={toolboxCategories}
       initialXml={workspaceXml}
-      workspaceConfiguration={{
-        grid: {
-          spacing: 20,
-          length: 3,
-          colour: '#ccc',
-          snap: true,
-        },
-      }}
-      onWorkspaceChange={workspaceDidChange}
+      workspaceConfiguration={workspaceConfig}
+      onWorkspaceChange={handleWorkspaceChange}
       onXmlChange={handleXmlChange}
     />
   );
