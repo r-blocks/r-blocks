@@ -6,20 +6,11 @@ import { getFirestore, doc, updateDoc, collection, addDoc, getDoc } from 'fireba
 //Style
 import './styles/base.css';
 
-export default function Toolbar({ blocksData, studioId }) {
+export default function Toolbar({ getCurrentXml, studioId }) {
   const [studioName, setStudioName] = useState('Untitled Studio');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
   const auth = getAuth();
-
-  const handleLogout = async () => {
-    try {
-      await signOut(auth);
-      navigate('/');
-    } catch (error) {
-      console.error('Error signing out:', error);
-    }
-  };
 
   const handleSave = async () => {
     if (!studioName.trim() || !studioId) return;
@@ -30,7 +21,7 @@ export default function Toolbar({ blocksData, studioId }) {
   
       await updateDoc(studioRef, {
         name: studioName,
-        blocksXml: blocksData, // Save blocksXml
+        blocksXml: getCurrentXml(),
         lastModified: Date.now(),
       });
   
@@ -38,8 +29,16 @@ export default function Toolbar({ blocksData, studioId }) {
     } catch (error) {
       console.error('Error saving studio:', error);
     }
-  };  
-  
+  };
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      navigate('/');
+    } catch (error) {
+      console.error('Error signing out:', error);
+    }
+  };
 
   useEffect(() => {
     const loadStudioData = async () => {

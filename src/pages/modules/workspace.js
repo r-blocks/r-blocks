@@ -35,11 +35,7 @@ import './styles/base.css';
  *
  * @returns {JSX.Element} A Blockly workspace component
  */
-export default function Workspace({ initialWorkspaceXml, onXmlChange, onBlocksChange, onWorkspaceInstance }) {
-  const [workspaceXml, setWorkspaceXml] = useState(
-    initialWorkspaceXml || 
-    '<xml xmlns="https://developers.google.com/blockly/xml"><block type="text" x="70" y="30"><field name="TEXT"></field></block></xml>'
-  );
+export default function Workspace({ initialWorkspaceXml, onWorkspaceInstance }) {
   const [workspace, setWorkspace] = useState(null);
 
   const workspaceConfig = {
@@ -78,17 +74,7 @@ export default function Workspace({ initialWorkspaceXml, onXmlChange, onBlocksCh
     }
   }, [workspace, initialWorkspaceXml]);
 
-  // Debounce XML changes
-  const handleXmlChange = (newXml) => {
-    // Only update if XML actually changed
-    if (newXml !== workspaceXml) {
-      setWorkspaceXml(newXml);
-      if (onXmlChange) onXmlChange(newXml);
-      if (onBlocksChange) onBlocksChange(newXml);
-    }
-  };
-
-  // Optimize workspace change handler
+  // Only handle workspace instance changes
   const handleWorkspaceChange = (workspaceInstance) => {
     if (!workspace) {
       setWorkspace(workspaceInstance);
@@ -214,18 +200,6 @@ export default function Workspace({ initialWorkspaceXml, onXmlChange, onBlocksCh
     ],
   };
 
-
-  /*
-    function myUpdateFunction(event) {
-        var code = Blockly.JavaScript.workspaceToCode(workspace);
-        document.getElementById('codeBody').value = code;
-        document.getElementById('outputCode').value = code;
-    }
-    workspace.addChangeListener(myUpdateFunction);
-    */
-
-  // reference: https://developers.google.com/blockly/guides/configure/web/code-generators#realtime_generation
-
   /**
    * Renders the Blockly workspace component
    * @returns {JSX.Element} BlocklyWorkspace component with configured toolbox and handlers
@@ -235,10 +209,9 @@ export default function Workspace({ initialWorkspaceXml, onXmlChange, onBlocksCh
     <BlocklyWorkspace
       className="blockly" 
       toolboxConfiguration={toolboxCategories}
-      initialXml={workspaceXml}
+      initialXml={initialWorkspaceXml}
       workspaceConfiguration={workspaceConfig}
       onWorkspaceChange={handleWorkspaceChange}
-      onXmlChange={handleXmlChange}
     />
   );
 }
