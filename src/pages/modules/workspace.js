@@ -35,7 +35,7 @@ import './styles/base.css';
  *
  * @returns {JSX.Element} A Blockly workspace component
  */
-export default function Workspace({ initialWorkspaceXml, onXmlChange, onBlocksChange }) {
+export default function Workspace({ initialWorkspaceXml, onXmlChange, onBlocksChange, onWorkspaceInstance }) {
   const [workspaceXml, setWorkspaceXml] = useState(
     initialWorkspaceXml || 
     '<xml xmlns="https://developers.google.com/blockly/xml"><block type="text" x="70" y="30"><field name="TEXT"></field></block></xml>'
@@ -92,10 +92,9 @@ export default function Workspace({ initialWorkspaceXml, onXmlChange, onBlocksCh
   const handleWorkspaceChange = (workspaceInstance) => {
     if (!workspace) {
       setWorkspace(workspaceInstance);
-      // Add the change listener when workspace is first created
-      workspaceInstance.addChangeListener(() => {
-        workspaceDidChange(workspaceInstance);
-      });
+      if (onWorkspaceInstance) {
+        onWorkspaceInstance(workspaceInstance);
+      }
     }
   };
 
@@ -215,30 +214,6 @@ export default function Workspace({ initialWorkspaceXml, onXmlChange, onBlocksCh
     ],
   };
 
-  /**
-   * Handles workspace changes by converting blocks to code and updating the embedded R snippet
-   * @param {Object} workspace - The Blockly workspace instance
-   */
-  function workspaceDidChange(workspace) {
-    const code = Blockly.JavaScript.workspaceToCode(workspace);
-    
-    // Get XML from current workspace
-    const blocksXml = Blockly.Xml.workspaceToDom(workspace);
-    const xmlText = Blockly.Xml.domToText(blocksXml);
-    
-    // Update both code and blocks
-    if (onBlocksChange) {
-      onBlocksChange(xmlText);
-    }
-    
-    // Update snippet if needed
-    const linked = 'https://rdrr.io/snippets/embed/?code=' + encodeURI(code);
-    const snippetElement = document.getElementById('snippet');
-    if (snippetElement) {
-      snippetElement.src = linked;
-    }
-  }
-  
 
   /*
     function myUpdateFunction(event) {
@@ -258,7 +233,7 @@ export default function Workspace({ initialWorkspaceXml, onXmlChange, onBlocksCh
 
   return (
     <BlocklyWorkspace
-      className="blockly"
+      className="blockly" 
       toolboxConfiguration={toolboxCategories}
       initialXml={workspaceXml}
       workspaceConfiguration={workspaceConfig}

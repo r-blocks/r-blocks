@@ -10,8 +10,9 @@ import Workspace from './modules/workspace';
 import Compiler from './modules/compiler';
 
 export default function Studio() {
-  const [currentBlocks, setCurrentBlocks] = useState(''); // Manage workspace blocks XML
+  const [currentBlocks, setCurrentBlocks] = useState('');
   const [studioId, setStudioId] = useState(null);
+  const [workspaceInstance, setWorkspaceInstance] = useState(null);
   const { id } = useParams(); // Get studio ID from URL
   const navigate = useNavigate();
   const auth = getAuth();
@@ -49,12 +50,13 @@ export default function Studio() {
       <div className="core">
         <div style={{ flex: 8 }}>
           <Workspace
-            initialWorkspaceXml={currentBlocks} // Pass initial XML to workspace
-            onBlocksChange={setCurrentBlocks} // Update XML when workspace changes
+            initialWorkspaceXml={currentBlocks}
+            onBlocksChange={setCurrentBlocks}
+            onWorkspaceInstance={setWorkspaceInstance}
           />
         </div>
         <div style={{ flex: 4 }}>
-          <Compiler />
+          <Compiler workspace={workspaceInstance} />
         </div>
       </div>
     </div>
