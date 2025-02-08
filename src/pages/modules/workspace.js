@@ -121,14 +121,14 @@ export default function Workspace({ initialWorkspaceXml, onWorkspaceInstance }) 
           {
             kind: "category",
             name: "General Functionality",
-            colour: "20",
+            colour: "#FF6B5B",
             contents: [
-              { kind: "block", type: "Glib" },
-              { kind: "block", type: "Gnames" },
-              { kind: "block", type: "Gglimpse" },
-              { kind: "block", type: "Ghead" },
-              { kind: "block", type: "Gtail" },
-              { kind: "block", type: "Ghelp" },
+              { kind: "block", type: "lib" },
+              { kind: "block", type: "names" },
+              { kind: "block", type: "glimpse" },
+              { kind: "block", type: "head" },
+              { kind: "block", type: "tail" },
+              { kind: "block", type: "help" },
             ],
           },
           {
