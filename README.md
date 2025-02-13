@@ -9,6 +9,39 @@ Technologies used:
 - *Google Blockly: https://developers.google.com/blockly/*
 - *rdrr.io API: https://rdrr.io/* for R Console
 
+## Architecture
+
+```mermaid
+flowchart TD
+    A[User Interface React + Blockly]
+    B[Workspace Component Blockly Workspace]
+    C[Custom Block Definitions blocks.js, lib.js, Gtallydata.js]
+    D[Block-to-Code Translator Generator Functions]
+    E[Compiler Component compiler.js]
+    F[Remote Execution Environment rdrr.io snippets]
+    G[Persistence Layer Firebase Firestore]
+    H[Authentication Module Firebase Auth]
+    I[Dashboard & Studio Management dashboard.js, studio.js]
+    
+    A --> B
+    B --> C
+    C --> D
+    D --> E
+    E --> G
+    E --> F
+    A --> H
+    I --> G
+    I --> A
+```
+
+The above flowchart shows the high-level architecture of R-Blocks:
+- User interface built with React and Blockly
+- Custom block definitions for R statistical operations
+- Compilation pipeline to convert blocks to R code
+- Remote execution through rdrr.io
+- Data persistence using Firebase
+- Authentication and user management
+
 ## Contributing
 
 ### Setup
