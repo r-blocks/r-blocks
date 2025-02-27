@@ -54,7 +54,7 @@ export default function Dashboard() {
   const handleLogout = async () => {
     try {
       await signOut(auth);
-      navigate('/login');
+      navigate('/');
     } catch (error) {
       console.error('Error logging out:', error);
     }
