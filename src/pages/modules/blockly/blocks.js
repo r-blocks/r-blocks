@@ -37,8 +37,10 @@ import './blocks/inference/xchisqtest';
 import './blocks/inference/ttest';
 import './blocks/inference/Gproptest';
 import './blocks/inference/Gproptest2';
+import './blocks/inference/slrsummary';
 import './blocks/inference/Gslrsummary';
 import './blocks/inference/Gxchisqtest';
+import './blocks/inference/bootstrap'
 import './blocks/statistics/correlation';
 import './blocks/statistics/tally';
 import './blocks/statistics/tallysexdata';

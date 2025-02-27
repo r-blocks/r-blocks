@@ -213,6 +213,7 @@ export default function Workspace({ initialWorkspaceXml, onWorkspaceInstance }) 
               { kind: "block", type: "xchisqtest" },
               { kind: "block", type: "anova" },
               { kind: "block", type: "slrsummary" },
+              { kind: "block", type: "bootstrap_prop" },
             ],
           },
           {
@@ -227,6 +228,7 @@ export default function Workspace({ initialWorkspaceXml, onWorkspaceInstance }) 
               { kind: "block", type: "Gxchisqtest" },
               { kind: "block", type: "Ganova" },
               { kind: "block", type: "Gslrsummary" },
+              { kind: "block", type: "Gbootstrap_prop" },
             ],
           }
         ],
