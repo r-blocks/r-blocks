@@ -9,6 +9,7 @@ import './styles/base.css';
 export default function Toolbar({ getCurrentXml, studioId }) {
   const [studioName, setStudioName] = useState('Untitled Studio');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [saveConfirmation, setSaveConfirmation] = useState(false); // Add this line
   const navigate = useNavigate();
   const auth = getAuth();
 
@@ -25,6 +26,10 @@ export default function Toolbar({ getCurrentXml, studioId }) {
         lastModified: Date.now(),
       });
   
+      // Show confirmation and auto-hide after 2 seconds
+      setSaveConfirmation(true);
+      setTimeout(() => setSaveConfirmation(false), 2000);
+      
       console.log('Studio saved successfully');
     } catch (error) {
       console.error('Error saving studio:', error);
@@ -74,7 +79,7 @@ export default function Toolbar({ getCurrentXml, studioId }) {
         <h1 className="header">RBlocks</h1>
       </ul>
       <div style={{ width: '100%', flex: 6, display: 'flex', alignItems: 'center' }}>
-        <span style={{ margin: 'auto 0.5rem' }}>{studioName}</span>
+        <span style={{ margin: 'auto 0.5rem', color: 'white' }}>{studioName}</span>
         <button className="small-button" onClick={() => setIsModalOpen(true)} style={buttonStyle}>
           Change Studio Name
         </button>
@@ -86,6 +91,15 @@ export default function Toolbar({ getCurrentXml, studioId }) {
         >
           Save
         </button>
+        {saveConfirmation && (
+          <span style={{
+            color: 'white',
+            marginLeft: '10px',
+            fontSize: '0.9em'
+          }}>
+            Saved successfully!
+          </span>
+        )}
 
         {isModalOpen && (
           <div className="modal-overlay">
