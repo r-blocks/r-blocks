@@ -213,7 +213,9 @@ export default function Workspace({ initialWorkspaceXml, onWorkspaceInstance }) 
               { kind: "block", type: "xchisqtest" },
               { kind: "block", type: "anova" },
               { kind: "block", type: "slrsummary" },
-              { kind: "block", type: "bootstrap_prop" },
+              { kind: "block", type: "bootstrap_ci_prop" },
+              { kind: "block", type: "bootstrap_test_prop" },
+              { kind: "block", type: "bootstrap_ci_mean" },
             ],
           },
           {
@@ -228,7 +230,9 @@ export default function Workspace({ initialWorkspaceXml, onWorkspaceInstance }) 
               { kind: "block", type: "Gxchisqtest" },
               { kind: "block", type: "Ganova" },
               { kind: "block", type: "Gslrsummary" },
-              { kind: "block", type: "Gbootstrap_prop" },
+              { kind: "block", type: "Gbootstrap_ci_prop" },
+              { kind: "block", type: "Gbootstrap_test_prop" },
+              { kind: "block", type: "Gbootstrap_ci_mean" },
             ],
           }
         ],

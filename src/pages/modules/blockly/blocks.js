@@ -40,7 +40,9 @@ import './blocks/inference/Gproptest2';
 import './blocks/inference/slrsummary';
 import './blocks/inference/Gslrsummary';
 import './blocks/inference/Gxchisqtest';
-import './blocks/inference/bootstrap'
+import './blocks/inference/bootstrap_ci_prop';
+import './blocks/inference/bootstrap_test_prop';
+import './blocks/inference/bootstrap_ci_mean';
 import './blocks/statistics/correlation';
 import './blocks/statistics/tally';
 import './blocks/statistics/tallysexdata';
