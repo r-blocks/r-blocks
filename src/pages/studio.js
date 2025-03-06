@@ -45,19 +45,14 @@ export default function Studio() {
   // Function to get current XML when saving
   const getCurrentXml = () => {
     if (workspaceInstance) {
-      return Blockly.Xml.domToText(
-        Blockly.Xml.workspaceToDom(workspaceInstance)
-      );
+      return Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspaceInstance));
     }
     return '';
   };
 
   return (
     <div style={{ width: '100vw', height: '100vh' }}>
-      <Toolbar 
-        getCurrentXml={getCurrentXml} 
-        studioId={studioId} 
-      />
+      <Toolbar getCurrentXml={getCurrentXml} studioId={studioId} />
       <div className="core">
         <div style={{ flex: 8 }}>
           <Workspace

@@ -20,7 +20,7 @@ export default function Compiler({ workspace }) {
       <div className="compiler-container" style={{ flex: 100 }}>
         <div style={{ flex: 1 }}></div>
 
-        <button 
+        <button
           onClick={handleConvert}
           className="convert-button"
           style={{
@@ -30,7 +30,7 @@ export default function Compiler({ workspace }) {
             color: 'white',
             border: 'none',
             borderRadius: '4px',
-            cursor: 'pointer'
+            cursor: 'pointer',
           }}
         >
           Convert to R Code

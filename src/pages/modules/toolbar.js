@@ -15,21 +15,21 @@ export default function Toolbar({ getCurrentXml, studioId }) {
 
   const handleSave = async () => {
     if (!studioName.trim() || !studioId) return;
-  
+
     try {
       const db = getFirestore();
       const studioRef = doc(db, 'studios', studioId);
-  
+
       await updateDoc(studioRef, {
         name: studioName,
         blocksXml: getCurrentXml(),
         lastModified: Date.now(),
       });
-  
+
       // Show confirmation and auto-hide after 2 seconds
       setSaveConfirmation(true);
       setTimeout(() => setSaveConfirmation(false), 2000);
-      
+
       console.log('Studio saved successfully');
     } catch (error) {
       console.error('Error saving studio:', error);
@@ -92,11 +92,13 @@ export default function Toolbar({ getCurrentXml, studioId }) {
           Save
         </button>
         {saveConfirmation && (
-          <span style={{
-            color: 'white',
-            marginLeft: '10px',
-            fontSize: '0.9em'
-          }}>
+          <span
+            style={{
+              color: 'white',
+              marginLeft: '10px',
+              fontSize: '0.9em',
+            }}
+          >
             Saved successfully!
           </span>
         )}

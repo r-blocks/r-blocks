@@ -43,6 +43,7 @@ import './blocks/inference/Gxchisqtest';
 import './blocks/inference/bootstrap_ci_prop';
 import './blocks/inference/bootstrap_test_prop';
 import './blocks/inference/bootstrap_ci_mean';
+import './blocks/inference/bootstrap_test_mean';
 import './blocks/statistics/correlation';
 import './blocks/statistics/tally';
 import './blocks/statistics/tallysexdata';
