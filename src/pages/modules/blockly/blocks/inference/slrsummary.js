@@ -21,7 +21,12 @@ Blockly.Blocks['slrsummary'] = {
 Blockly.JavaScript['slrsummary'] = function (block) {
   var dropdown_quantitative_var1_name = block.getFieldValue('quantitative_variable_1');
   var dropdown_quantitative_var2_name = block.getFieldValue('quantitative_variable_2');
-  var code = 'summary(lm(' + dropdown_quantitative_var1_name + '~' + dropdown_quantitative_var2_name + ', data = HELPrct))\n';
+  var code =
+    'summary(lm(' +
+    dropdown_quantitative_var1_name +
+    '~' +
+    dropdown_quantitative_var2_name +
+    ', data = HELPrct))\n';
   return code;
 };
 

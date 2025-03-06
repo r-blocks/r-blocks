@@ -1,23 +1,20 @@
 import Blockly from 'blockly';
-import { categorical_vars, categorical_vars_alt } from '../../constants';
+import { quantitative_vars } from '../../constants';
 
-// HELPrct-specific bootstrap test block
-Blockly.Blocks['bootstrap_test_prop'] = {
+// HELPrct-specific bootstrap test for mean block
+Blockly.Blocks['bootstrap_test_mean'] = {
   init: function () {
     this.appendDummyInput()
-      .appendField('Bootstrap Test (HELPrct):')
+      .appendField('Bootstrap Test for Mean (HELPrct):')
       .appendField('set.seed(')
       .appendField(new Blockly.FieldNumber(123, 1, 99999), 'SEED')
       .appendField(')');
     this.appendDummyInput()
       .appendField('Variable:')
-      .appendField(new Blockly.FieldDropdown(categorical_vars), 'VAR');
-    this.appendDummyInput()
-      .appendField('Success value:')
-      .appendField(new Blockly.FieldTextInput('"yes"'), 'SUCCESS');
+      .appendField(new Blockly.FieldDropdown(quantitative_vars), 'VAR');
     this.appendDummyInput()
       .appendField('Null value:')
-      .appendField(new Blockly.FieldNumber(0.5, 0, 1, 0.01), 'NULL_VALUE');
+      .appendField(new Blockly.FieldNumber(0, -999999, 999999), 'NULL_VALUE');
     this.appendDummyInput()
       .appendField('Sample size:')
       .appendField(new Blockly.FieldNumber(100, 1), 'SAMPLE_SIZE');
@@ -36,15 +33,15 @@ Blockly.Blocks['bootstrap_test_prop'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(230);
-    this.setTooltip('Bootstrap test for one proportion using HELPrct data');
+    this.setTooltip('Bootstrap test for one mean using HELPrct data');
   },
 };
 
-// Generic bootstrap test block
-Blockly.Blocks['Gbootstrap_test_prop'] = {
+// Generic bootstrap test for mean block
+Blockly.Blocks['Gbootstrap_test_mean'] = {
   init: function () {
     this.appendDummyInput()
-      .appendField('Bootstrap Test:')
+      .appendField('Bootstrap Test for Mean:')
       .appendField('set.seed(')
       .appendField(new Blockly.FieldNumber(123, 1, 99999), 'SEED')
       .appendField(')');
@@ -52,14 +49,11 @@ Blockly.Blocks['Gbootstrap_test_prop'] = {
       .appendField('Variable:')
       .appendField(new Blockly.FieldTextInput(''), 'VAR');
     this.appendDummyInput()
-      .appendField('Success value:')
-      .appendField(new Blockly.FieldTextInput('"yes"'), 'SUCCESS');
-    this.appendDummyInput()
       .appendField('Data:')
       .appendField(new Blockly.FieldTextInput(''), 'DATASET');
     this.appendDummyInput()
       .appendField('Null value:')
-      .appendField(new Blockly.FieldNumber(0.5, 0, 1, 0.01), 'NULL_VALUE');
+      .appendField(new Blockly.FieldNumber(0, -999999, 999999), 'NULL_VALUE');
     this.appendDummyInput()
       .appendField('Sample size:')
       .appendField(new Blockly.FieldNumber(100, 1), 'SAMPLE_SIZE');
@@ -78,40 +72,41 @@ Blockly.Blocks['Gbootstrap_test_prop'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(230);
-    this.setTooltip('Bootstrap test for one proportion');
+    this.setTooltip('Bootstrap test for one mean');
   },
 };
 
 // Code generator function for both blocks
-function generateBootstrapTestCode(block) {
+function generateBootstrapTestMeanCode(block) {
   const seed = block.getFieldValue('SEED');
   const variable = block.getFieldValue('VAR');
-  const success = block.getFieldValue('SUCCESS');
   const dataset =
-    block.getType() === 'bootstrap_test_prop' ? 'HELPrct' : block.getFieldValue('DATASET');
+    block.getType() === 'bootstrap_test_mean' ? 'HELPrct' : block.getFieldValue('DATASET');
   const nullValue = block.getFieldValue('NULL_VALUE');
   const sampleSize = block.getFieldValue('SAMPLE_SIZE');
   const alternative = block.getFieldValue('ALTERNATIVE');
 
-  let code = `set.seed(${seed})\n`;
-  code += `sim_null <- do(5000) * rflip(n = ${sampleSize}, prob = ${nullValue})\n`;
+  let code = `# Get the observed sample mean\nobserved_mean <- mean(~${variable}, data=${dataset})\n\n`;
+  code += `# Create shifted data for null hypothesis\n${dataset}_shifted <- mutate(${dataset}, new_${variable} = ${variable} - observed_mean + ${nullValue})\n\n`;
+  code += `set.seed(${seed})\n`;
+  code += `sim_null <- do(5000) * mean(~ new_${variable}, data = resample(${dataset}_shifted))\n\n`;
 
   switch (alternative) {
     case 'less':
-      code += `prop(~ (prop <= ${nullValue}), data = sim_null) ## P-value for less than ##\n`;
+      code += `prop(~ (mean <= observed_mean), data = sim_null) ## P-value for less than ##\n`;
       break;
     case 'greater':
-      code += `prop(~ (prop >= ${nullValue}), data = sim_null) ## P-value for greater than ##\n`;
+      code += `prop(~ (mean >= observed_mean), data = sim_null) ## P-value for greater than ##\n`;
       break;
     case 'two.sided':
-      code += `prop(~ (abs(prop-${nullValue}) >= abs(${nullValue}-${nullValue})), data = sim_null) ## P-value for not equal ##\n`;
+      code += `prop(~ (abs(mean-${nullValue}) >= abs(observed_mean-${nullValue})), data = sim_null) ## P-value for not equal ##\n`;
       break;
   }
 
   return code;
 }
 
-Blockly.JavaScript['bootstrap_test_prop'] = generateBootstrapTestCode;
-Blockly.JavaScript['Gbootstrap_test_prop'] = generateBootstrapTestCode;
+Blockly.JavaScript['bootstrap_test_mean'] = generateBootstrapTestMeanCode;
+Blockly.JavaScript['Gbootstrap_test_mean'] = generateBootstrapTestMeanCode;
 
 export default {};

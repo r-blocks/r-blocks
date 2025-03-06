@@ -76,7 +76,7 @@ export default function Dashboard() {
             Create New Studio
           </button>
         </div>
-        
+
         <div className="studios-grid">
           {studios.map((studio) => (
             <div
@@ -90,7 +90,7 @@ export default function Dashboard() {
               >
                 ×
               </button>
-              <h3 style={{marginTop: '1rem'}}>{studio.name || 'Untitled Studio'}</h3>
+              <h3 style={{ marginTop: '1rem' }}>{studio.name || 'Untitled Studio'}</h3>
               <p>Created: {new Date(studio.createdAt).toLocaleDateString()}</p>
             </div>
           ))}
