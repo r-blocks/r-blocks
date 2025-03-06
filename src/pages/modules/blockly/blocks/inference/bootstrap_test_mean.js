@@ -5,29 +5,36 @@ import { quantitative_vars } from '../../constants';
 Blockly.Blocks['bootstrap_test_mean'] = {
   init: function () {
     this.appendDummyInput()
-      .appendField('Bootstrap Test for Mean (HELPrct):')
-      .appendField('set.seed(')
+      .appendField("set.seed(")
       .appendField(new Blockly.FieldNumber(123, 1, 99999), 'SEED')
-      .appendField(')');
+      .appendField(")");
     this.appendDummyInput()
-      .appendField('Variable:')
-      .appendField(new Blockly.FieldDropdown(quantitative_vars), 'VAR');
+      .appendField("observed_mean <- mean(~")
+      .appendField(new Blockly.FieldDropdown(quantitative_vars), 'VAR')
+      .appendField(", data=HELPrct)");
     this.appendDummyInput()
-      .appendField('Null value:')
-      .appendField(new Blockly.FieldNumber(0, -999999, 999999), 'NULL_VALUE');
+      .appendField("HELPrct_shifted <- mutate(HELPrct, new_")
+      .appendField(new Blockly.FieldDropdown(quantitative_vars), 'VAR')
+      .appendField(" = ")
+      .appendField(new Blockly.FieldDropdown(quantitative_vars), 'VAR')
+      .appendField(" - observed_mean + ")
+      .appendField(new Blockly.FieldNumber(0, -999999, 999999), 'NULL_VALUE')
+      .appendField(")");
     this.appendDummyInput()
-      .appendField('Sample size:')
-      .appendField(new Blockly.FieldNumber(100, 1), 'SAMPLE_SIZE');
+      .appendField("sim_null <- do(5000) * mean(~ new_")
+      .appendField(new Blockly.FieldDropdown(quantitative_vars), 'VAR')
+      .appendField(", data = resample(HELPrct_shifted))");
     this.appendDummyInput()
-      .appendField('Alternative:')
+      .appendField("prop(~ (")
       .appendField(
         new Blockly.FieldDropdown([
-          ['less than', 'less'],
-          ['greater than', 'greater'],
-          ['not equal', 'two.sided'],
+          ['mean <= observed_mean', 'less'],
+          ['mean >= observed_mean', 'greater'],
+          ['abs(mean-NULL) >= abs(observed_mean-NULL)', 'two.sided'],
         ]),
         'ALTERNATIVE'
-      );
+      )
+      .appendField("), data = sim_null)");
 
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
@@ -41,32 +48,44 @@ Blockly.Blocks['bootstrap_test_mean'] = {
 Blockly.Blocks['Gbootstrap_test_mean'] = {
   init: function () {
     this.appendDummyInput()
-      .appendField('Bootstrap Test for Mean:')
-      .appendField('set.seed(')
+      .appendField("set.seed(")
       .appendField(new Blockly.FieldNumber(123, 1, 99999), 'SEED')
-      .appendField(')');
+      .appendField(")");
     this.appendDummyInput()
-      .appendField('Variable:')
-      .appendField(new Blockly.FieldTextInput(''), 'VAR');
+      .appendField("observed_mean <- mean(~")
+      .appendField(new Blockly.FieldTextInput(''), 'VAR')
+      .appendField(", data=")
+      .appendField(new Blockly.FieldTextInput(''), 'DATASET')
+      .appendField(")");
     this.appendDummyInput()
-      .appendField('Data:')
-      .appendField(new Blockly.FieldTextInput(''), 'DATASET');
+      .appendField("") 
+      .appendField(new Blockly.FieldTextInput(''), 'DATASET')
+      .appendField("_shifted <- mutate(")
+      .appendField(new Blockly.FieldTextInput(''), 'DATASET')
+      .appendField(", new_")
+      .appendField(new Blockly.FieldTextInput(''), 'VAR')
+      .appendField(" = ")
+      .appendField(new Blockly.FieldTextInput(''), 'VAR')
+      .appendField(" - observed_mean + ")
+      .appendField(new Blockly.FieldNumber(0, -999999, 999999), 'NULL_VALUE')
+      .appendField(")");
     this.appendDummyInput()
-      .appendField('Null value:')
-      .appendField(new Blockly.FieldNumber(0, -999999, 999999), 'NULL_VALUE');
+      .appendField("sim_null <- do(5000) * mean(~ new_")
+      .appendField(new Blockly.FieldTextInput(''), 'VAR')
+      .appendField(", data = resample(")
+      .appendField(new Blockly.FieldTextInput(''), 'DATASET')
+      .appendField("_shifted))");
     this.appendDummyInput()
-      .appendField('Sample size:')
-      .appendField(new Blockly.FieldNumber(100, 1), 'SAMPLE_SIZE');
-    this.appendDummyInput()
-      .appendField('Alternative:')
+      .appendField("prop(~ (")
       .appendField(
         new Blockly.FieldDropdown([
-          ['less than', 'less'],
-          ['greater than', 'greater'],
-          ['not equal', 'two.sided'],
+          ['mean <= observed_mean', 'less'],
+          ['mean >= observed_mean', 'greater'],
+          ['abs(mean-NULL) >= abs(observed_mean-NULL)', 'two.sided'],
         ]),
         'ALTERNATIVE'
-      );
+      )
+      .appendField("), data = sim_null)");
 
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
@@ -80,8 +99,9 @@ Blockly.Blocks['Gbootstrap_test_mean'] = {
 function generateBootstrapTestMeanCode(block) {
   const seed = block.getFieldValue('SEED');
   const variable = block.getFieldValue('VAR');
+  // Changed from block.getType() to block.type
   const dataset =
-    block.getType() === 'bootstrap_test_mean' ? 'HELPrct' : block.getFieldValue('DATASET');
+    block.type === 'bootstrap_test_mean' ? 'HELPrct' : block.getFieldValue('DATASET');
   const nullValue = block.getFieldValue('NULL_VALUE');
   const sampleSize = block.getFieldValue('SAMPLE_SIZE');
   const alternative = block.getFieldValue('ALTERNATIVE');
