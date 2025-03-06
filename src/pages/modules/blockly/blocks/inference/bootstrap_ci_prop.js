@@ -5,28 +5,27 @@ import { categorical_vars, categorical_vars_alt } from '../../constants';
 Blockly.Blocks['bootstrap_ci_prop'] = {
   init: function () {
     this.appendDummyInput()
-      .appendField('Bootstrap CI (HELPrct):')
-      .appendField('set.seed(')
+      .appendField("set.seed(")
       .appendField(new Blockly.FieldNumber(123, 1, 99999), 'SEED')
-      .appendField(')');
+      .appendField(")");
     this.appendDummyInput()
-      .appendField('Variable:')
-      .appendField(new Blockly.FieldDropdown(categorical_vars), 'VAR');
+      .appendField("prop_boot <- do(5000) * prop(~")
+      .appendField(new Blockly.FieldDropdown(categorical_vars), 'VAR')
+      .appendField(", data = resample(HELPrct), success = ")
+      .appendField(new Blockly.FieldTextInput('"yes"'), 'SUCCESS')
+      .appendField(")");
     this.appendDummyInput()
-      .appendField('Success value:')
-      .appendField(new Blockly.FieldTextInput('"yes"'), 'SUCCESS');
-    this.appendDummyInput()
-      .appendField('Alpha:')
-      .appendField(new Blockly.FieldNumber(0.05, 0.01, 0.99, 0.01), 'ALPHA');
-    this.appendDummyInput()
-      .appendField('Test type:')
+      .appendField("confint(prop_boot, level = (1 - ")
+      .appendField(new Blockly.FieldNumber(0.05, 0.01, 0.99, 0.01), 'ALPHA')
+      .appendField("), method = \"quantile\")  # ")
       .appendField(
         new Blockly.FieldDropdown([
           ['Two-sided', 'two_sided'],
           ['One-sided', 'one_sided'],
         ]),
         'TEST_TYPE'
-      );
+      )
+      .appendField(" test #");
 
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
@@ -40,31 +39,29 @@ Blockly.Blocks['bootstrap_ci_prop'] = {
 Blockly.Blocks['Gbootstrap_ci_prop'] = {
   init: function () {
     this.appendDummyInput()
-      .appendField('Bootstrap CI:')
-      .appendField('set.seed(')
+      .appendField("set.seed(")
       .appendField(new Blockly.FieldNumber(123, 1, 99999), 'SEED')
-      .appendField(')');
+      .appendField(")");
     this.appendDummyInput()
-      .appendField('Variable:')
-      .appendField(new Blockly.FieldTextInput(''), 'VAR');
+      .appendField("prop_boot <- do(5000) * prop(~")
+      .appendField(new Blockly.FieldTextInput(''), 'VAR')
+      .appendField(", data = resample(")
+      .appendField(new Blockly.FieldTextInput(''), 'DATASET')
+      .appendField("), success = ")
+      .appendField(new Blockly.FieldTextInput('"yes"'), 'SUCCESS')
+      .appendField(")");
     this.appendDummyInput()
-      .appendField('Success value:')
-      .appendField(new Blockly.FieldTextInput('"yes"'), 'SUCCESS');
-    this.appendDummyInput()
-      .appendField('Data:')
-      .appendField(new Blockly.FieldTextInput(''), 'DATASET');
-    this.appendDummyInput()
-      .appendField('Alpha:')
-      .appendField(new Blockly.FieldNumber(0.05, 0.01, 0.99, 0.01), 'ALPHA');
-    this.appendDummyInput()
-      .appendField('Test type:')
+      .appendField("confint(prop_boot, level = (1 - ")
+      .appendField(new Blockly.FieldNumber(0.05, 0.01, 0.99, 0.01), 'ALPHA')
+      .appendField("), method = \"quantile\")  # ")
       .appendField(
         new Blockly.FieldDropdown([
           ['Two-sided', 'two_sided'],
           ['One-sided', 'one_sided'],
         ]),
         'TEST_TYPE'
-      );
+      )
+      .appendField(" test #");
 
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
@@ -79,7 +76,8 @@ function generateBootstrapCode(block) {
   const seed = block.getFieldValue('SEED');
   const variable = block.getFieldValue('VAR');
   const success = block.getFieldValue('SUCCESS');
-  const dataset = block.getType() === 'bootstrap_prop' ? 'HELPrct' : block.getFieldValue('DATASET');
+  // Changed from block.getType() to block.type
+  const dataset = block.type === 'bootstrap_ci_prop' ? 'HELPrct' : block.getFieldValue('DATASET');
   const alpha = block.getFieldValue('ALPHA');
   const testType = block.getFieldValue('TEST_TYPE');
 
@@ -95,5 +93,7 @@ function generateBootstrapCode(block) {
   return code;
 }
 
-Blockly.JavaScript['bootstrap_prop'] = generateBootstrapCode;
-Blockly.JavaScript['Gbootstrap_prop'] = generateBootstrapCode;
+Blockly.JavaScript['bootstrap_ci_prop'] = generateBootstrapCode;
+Blockly.JavaScript['Gbootstrap_ci_prop'] = generateBootstrapCode;
+
+export default {};

@@ -5,25 +5,25 @@ import { quantitative_vars } from '../../constants';
 Blockly.Blocks['bootstrap_ci_mean'] = {
   init: function () {
     this.appendDummyInput()
-      .appendField('Bootstrap CI Mean (HELPrct):')
-      .appendField('set.seed(')
+      .appendField("set.seed(")
       .appendField(new Blockly.FieldNumber(123, 1, 99999), 'SEED')
-      .appendField(')');
+      .appendField(")");
     this.appendDummyInput()
-      .appendField('Variable:')
-      .appendField(new Blockly.FieldDropdown(quantitative_vars), 'VAR');
+      .appendField("mean_boot <- do(5000) * mean(~")
+      .appendField(new Blockly.FieldDropdown(quantitative_vars), 'VAR')
+      .appendField(", data = resample(HELPrct))");
     this.appendDummyInput()
-      .appendField('Alpha:')
-      .appendField(new Blockly.FieldNumber(0.05, 0.01, 0.99, 0.01), 'ALPHA');
-    this.appendDummyInput()
-      .appendField('Test type:')
+      .appendField("confint(mean_boot, level = (1 - ")
+      .appendField(new Blockly.FieldNumber(0.05, 0.01, 0.99, 0.01), 'ALPHA')
+      .appendField("), method = \"quantile\")  # ")
       .appendField(
         new Blockly.FieldDropdown([
           ['Two-sided', 'two_sided'],
           ['One-sided', 'one_sided'],
         ]),
         'TEST_TYPE'
-      );
+      )
+      .appendField(" test #");
 
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
@@ -37,28 +37,27 @@ Blockly.Blocks['bootstrap_ci_mean'] = {
 Blockly.Blocks['Gbootstrap_ci_mean'] = {
   init: function () {
     this.appendDummyInput()
-      .appendField('Bootstrap CI Mean:')
-      .appendField('set.seed(')
+      .appendField("set.seed(")
       .appendField(new Blockly.FieldNumber(123, 1, 99999), 'SEED')
-      .appendField(')');
+      .appendField(")");
     this.appendDummyInput()
-      .appendField('Variable:')
-      .appendField(new Blockly.FieldTextInput(''), 'VAR');
+      .appendField("mean_boot <- do(5000) * mean(~")
+      .appendField(new Blockly.FieldTextInput(''), 'VAR')
+      .appendField(", data = resample(")
+      .appendField(new Blockly.FieldTextInput(''), 'DATASET')
+      .appendField("))");
     this.appendDummyInput()
-      .appendField('Dataset:')
-      .appendField(new Blockly.FieldTextInput(''), 'DATASET');
-    this.appendDummyInput()
-      .appendField('Alpha:')
-      .appendField(new Blockly.FieldNumber(0.05, 0.01, 0.99, 0.01), 'ALPHA');
-    this.appendDummyInput()
-      .appendField('Test type:')
+      .appendField("confint(mean_boot, level = (1 - ")
+      .appendField(new Blockly.FieldNumber(0.05, 0.01, 0.99, 0.01), 'ALPHA')
+      .appendField("), method = \"quantile\")  # ")
       .appendField(
         new Blockly.FieldDropdown([
           ['Two-sided', 'two_sided'],
           ['One-sided', 'one_sided'],
         ]),
         'TEST_TYPE'
-      );
+      )
+      .appendField(" test #");
 
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
@@ -72,8 +71,9 @@ Blockly.Blocks['Gbootstrap_ci_mean'] = {
 function generateBootstrapMeanCode(block) {
   const seed = block.getFieldValue('SEED');
   const variable = block.getFieldValue('VAR');
+  // Changed from block.getType() to block.type
   const dataset =
-    block.getType() === 'bootstrap_ci_mean' ? 'HELPrct' : block.getFieldValue('DATASET');
+    block.type === 'bootstrap_ci_mean' ? 'HELPrct' : block.getFieldValue('DATASET');
   const alpha = block.getFieldValue('ALPHA');
   const testType = block.getFieldValue('TEST_TYPE');
 
