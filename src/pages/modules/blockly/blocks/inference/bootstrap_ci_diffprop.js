@@ -1,8 +1,8 @@
 import Blockly from 'blockly';
 import { categorical_vars, categorical_vars_alt } from '../../constants';
 
-// HELPrct-specific bootstrap CI block
-Blockly.Blocks['bootstrap_ci_prop'] = {
+// HELPrct-specific bootstrap CI for difference in two proportions block
+Blockly.Blocks['bootstrap_ci_diffprop'] = {
   init: function () {
     this.appendDummyInput()
       .appendField('set.seed(')
@@ -117,27 +117,27 @@ Blockly.Blocks['bootstrap_ci_prop'] = {
       return newVar;
     });
 
+    // Store the group field for later reference
+    var groupField = new Blockly.FieldDropdown(categorical_vars_alt);
+
     this.appendDummyInput('PROP_INPUT')
-      .appendField('observed_prop <- prop(~')
+      .appendField('prop_boot <- do(')
+      .appendField(new Blockly.FieldNumber(500, 10, 10000), 'ITERATIONS')
+      .appendField(') * diffprop(')
       .appendField(varField, 'VAR')
-      .appendField(', data=HELPrct, success=')
+      .appendField(' ~ ')
+      .appendField(groupField, 'GROUP')
+      .appendField(', data = resample(HELPrct), success = ')
       .appendField(
         new Blockly.FieldDropdown([
-          ['"alcohol"', '"alcohol"'],
-          ['"cocaine"', '"cocaine"'],
-          ['"heroin"', '"heroin"'],
+          ['"yes"', '"yes"'],
+          ['"no"', '"no"'],
         ]),
         'SUCCESS'
       )
       .appendField(')');
     this.appendDummyInput()
-      .appendField('boot <- do(')
-      .appendField(new Blockly.FieldNumber(500, 10, 10000), 'ITERATIONS')
-      .appendField(') * {resample(HELPrct) %$% prop(~')
-      .appendField(new Blockly.FieldTextInput(''), 'NEW_VAR')
-      .appendField(', success=observed_prop[["success"]])}');
-    this.appendDummyInput()
-      .appendField('confint(boot, level = ')
+      .appendField('confint(prop_boot, level = ')
       .appendField(new Blockly.FieldNumber(0.95, 0, 1, 0.01), 'CONF_LEVEL')
       .appendField(', method = "quantile")');
 
@@ -145,49 +145,36 @@ Blockly.Blocks['bootstrap_ci_prop'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(230);
-    this.setTooltip('Bootstrap confidence interval for one proportion using HELPrct data');
+    this.setTooltip(
+      'Bootstrap confidence interval for difference in two proportions using HELPrct data'
+    );
 
-    // Explicitly ensure the SUCCESS field is "alcohol" initially since substance is the default
-    this.setFieldValue('"alcohol"', 'SUCCESS');
-
-    // Automatically update the NEW_VAR field when VAR changes
-    this.setOnChange(function (changeEvent) {
-      if (
-        changeEvent.name === 'VAR' ||
-        (changeEvent.element === 'field' && changeEvent.name === 'VAR')
-      ) {
-        const varValue = this.getFieldValue('VAR');
-        this.setFieldValue(varValue, 'NEW_VAR');
-      }
-    });
+    // Explicitly ensure the SUCCESS field has correct default value
+    this.setFieldValue('"yes"', 'SUCCESS');
   },
 };
 
-// Generic bootstrap CI block
-Blockly.Blocks['Gbootstrap_ci_prop'] = {
+// Generic bootstrap CI for difference in two proportions block
+Blockly.Blocks['Gbootstrap_ci_diffprop'] = {
   init: function () {
     this.appendDummyInput()
       .appendField('set.seed(')
       .appendField(new Blockly.FieldNumber(123, 1, 99999), 'SEED')
       .appendField(')');
     this.appendDummyInput()
-      .appendField('observed_prop <- prop(~')
+      .appendField('prop_boot <- do(')
+      .appendField(new Blockly.FieldNumber(500, 10, 10000), 'ITERATIONS')
+      .appendField(') * diffprop(')
       .appendField(new Blockly.FieldTextInput(''), 'VAR')
-      .appendField(', data=')
+      .appendField(' ~ ')
+      .appendField(new Blockly.FieldTextInput(''), 'GROUP')
+      .appendField(', data = resample(')
       .appendField(new Blockly.FieldTextInput(''), 'DATASET')
-      .appendField(', success=')
+      .appendField('), success = ')
       .appendField(new Blockly.FieldTextInput('"yes"'), 'SUCCESS')
       .appendField(')');
     this.appendDummyInput()
-      .appendField('boot <- do(')
-      .appendField(new Blockly.FieldNumber(500, 10, 10000), 'ITERATIONS')
-      .appendField(') * {resample(')
-      .appendField(new Blockly.FieldTextInput(''), 'RESAMPLE_DATASET')
-      .appendField(') %$% prop(~')
-      .appendField(new Blockly.FieldTextInput(''), 'NEW_VAR')
-      .appendField(', success=observed_prop[["success"]])}');
-    this.appendDummyInput()
-      .appendField('confint(boot, level = ')
+      .appendField('confint(prop_boot, level = ')
       .appendField(new Blockly.FieldNumber(0.95, 0, 1, 0.01), 'CONF_LEVEL')
       .appendField(', method = "quantile")');
 
@@ -195,53 +182,38 @@ Blockly.Blocks['Gbootstrap_ci_prop'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(230);
-    this.setTooltip('Bootstrap confidence interval for one proportion');
-
-    // Automatically update fields when dataset changes
-    this.setOnChange(function (changeEvent) {
-      if (
-        changeEvent.name === 'DATASET' ||
-        (changeEvent.element === 'field' && changeEvent.name === 'DATASET')
-      ) {
-        const datasetValue = this.getFieldValue('DATASET');
-        this.setFieldValue(datasetValue, 'RESAMPLE_DATASET');
-      }
-      if (
-        changeEvent.name === 'VAR' ||
-        (changeEvent.element === 'field' && changeEvent.name === 'VAR')
-      ) {
-        const varValue = this.getFieldValue('VAR');
-        this.setFieldValue(varValue, 'NEW_VAR');
-      }
-    });
+    this.setTooltip('Bootstrap confidence interval for difference in two proportions');
   },
 };
 
 // Code generator function for both blocks
-function generateBootstrapCICode(block) {
+function generateBootstrapCIDiffPropCode(block) {
   const seed = block.getFieldValue('SEED');
   const variable = block.getFieldValue('VAR');
+  const group = block.getFieldValue('GROUP');
   const success = block.getFieldValue('SUCCESS');
-  // Changed from block.getType() to block.type
-  const dataset = block.type === 'bootstrap_ci_prop' ? 'HELPrct' : block.getFieldValue('DATASET');
   const iterations = block.getFieldValue('ITERATIONS');
   const confLevel = block.getFieldValue('CONF_LEVEL');
 
-  // Changed from block.getType() to block.type
-  const resampleDataset =
-    block.type === 'bootstrap_ci_prop' ? 'HELPrct' : block.getFieldValue('RESAMPLE_DATASET');
-  const newVar = block.getFieldValue('NEW_VAR');
+  let code = '';
 
-  let code = `# Bootstrap confidence interval for proportion\n`;
-  code += `set.seed(${seed})\n`;
-  code += `observed_prop <- prop(~${variable}, data=${dataset}, success=${success})\n`;
-  code += `boot <- do(${iterations}) * {resample(${resampleDataset}) %$% prop(~${newVar}, success=observed_prop[["success"]])}\n`;
-  code += `confint(boot, level = ${confLevel}, method = "quantile")\n`;
+  if (block.type === 'bootstrap_ci_diffprop') {
+    code = `# Bootstrap confidence interval for difference in two proportions\n`;
+    code += `set.seed(${seed})\n`;
+    code += `prop_boot <- do(${iterations}) * diffprop(${variable} ~ ${group}, data = resample(HELPrct), success = ${success})\n`;
+    code += `confint(prop_boot, level = ${confLevel}, method = "quantile")\n`;
+  } else {
+    const dataset = block.getFieldValue('DATASET');
+    code = `# Bootstrap confidence interval for difference in two proportions\n`;
+    code += `set.seed(${seed})\n`;
+    code += `prop_boot <- do(${iterations}) * diffprop(${variable} ~ ${group}, data = resample(${dataset}), success = ${success})\n`;
+    code += `confint(prop_boot, level = ${confLevel}, method = "quantile")\n`;
+  }
 
   return code;
 }
 
-Blockly.JavaScript['bootstrap_ci_prop'] = generateBootstrapCICode;
-Blockly.JavaScript['Gbootstrap_ci_prop'] = generateBootstrapCICode;
+Blockly.JavaScript['bootstrap_ci_diffprop'] = generateBootstrapCIDiffPropCode;
+Blockly.JavaScript['Gbootstrap_ci_diffprop'] = generateBootstrapCIDiffPropCode;
 
 export default {};

@@ -18,20 +18,18 @@ jobs:
           node-version: 20
           cache: npm
 
-      - name: Install dependencies
+      - name: Clean install dependencies
         run: |
           rm -rf node_modules
-          rm package-lock.json
-          rm -rf docs/node_modules
-          rm docs/package-lock.json
+          rm -f package-lock.json
           npm install --legacy-peer-deps
-          cd docs && npm install
+          npm rebuild
 
       - name: Generate API documentation
         run: npm run docs:generate
 
       - name: Build documentation
-        run: cd docs && npm run build
+        run: cd docs && npm install && npm run build
 
       - name: Deploy to GitHub Pages
         if: github.ref == 'refs/heads/main'
