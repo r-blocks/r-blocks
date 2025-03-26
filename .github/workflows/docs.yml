@@ -21,7 +21,7 @@ jobs:
       - name: Clean install dependencies
         run: |
           rm -rf node_modules
-          rm package-lock.json
+          rm -f package-lock.json
           npm install --legacy-peer-deps
           npm rebuild
 
@@ -29,7 +29,7 @@ jobs:
         run: npm run docs:generate
 
       - name: Build documentation
-        run: cd docs && npm run build
+        run: cd docs && npm install && npm run build
 
       - name: Deploy to GitHub Pages
         if: github.ref == 'refs/heads/main'
