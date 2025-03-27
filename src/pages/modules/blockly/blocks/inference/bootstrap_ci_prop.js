@@ -133,7 +133,7 @@ Blockly.Blocks['bootstrap_ci_prop'] = {
     this.appendDummyInput()
       .appendField('boot <- do(')
       .appendField(new Blockly.FieldNumber(500, 10, 10000), 'ITERATIONS')
-      .appendField(') * {resample(HELPrct) %$% prop(~')
+      .appendField(') * {resample(HELPrct) * prop(~')
       .appendField(new Blockly.FieldTextInput(''), 'NEW_VAR')
       .appendField(', success=observed_prop[["success"]])}');
     this.appendDummyInput()
@@ -202,7 +202,7 @@ Blockly.Blocks['Gbootstrap_ci_prop'] = {
         ['mosaicData::Whickham', 'mosaicData::Whickham'],
         ['mosaicData::Births', 'mosaicData::Births']
       ]), 'RESAMPLE_DATASET')
-      .appendField(') %$% prop(~')
+      .appendField(') * prop(~')
       .appendField(new Blockly.FieldTextInput(''), 'NEW_VAR')
       .appendField(', success=observed_prop[["success"]])}');
     this.appendDummyInput()
@@ -248,8 +248,8 @@ Blockly.JavaScript['bootstrap_ci_prop'] = function(block) {
 
   let code = `set.seed(${seed})\n`;
   code += `observed_prop <- prop(~${variable}, data=HELPrct, success=${success})\n`;
-  code += `boot <- do(${iterations}) * {resample(HELPrct) %$% prop(~${newVar}, success=observed_prop[["success"]])}\n`;
-  code += `confint(boot, level = ${confLevel}, method = "quantile")\n`;
+  code += `boot <- do(${iterations}) * {resample(HELPrct) * prop(~${newVar}, success=observed_prop[["success"]])}\n`;
+  code += `confint(boot, level = ${confLevel}, method = "quantile")\n`
   
   return code;
 };
@@ -265,9 +265,9 @@ Blockly.JavaScript['Gbootstrap_ci_prop'] = function(block) {
   const newVar = block.getFieldValue('NEW_VAR');
 
   let code = `set.seed(${seed})\n`;
-  code += `observed_prop <- prop(~${variable}, data=${dataset}, success=${success})\n`;
-  code += `boot <- do(${iterations}) * {resample(${resampleDataset}) %$% prop(~${newVar}, success=observed_prop[["success"]])}\n`;
-  code += `confint(boot, level = ${confLevel}, method = "quantile")\n`;
+  code += `observed_prop <- prop(~${variable}, data=HELPrct, success=${success})\n`;
+  code += `boot <- do(${iterations}) * {resample(HELPrct) * prop(~${newVar}, success=observed_prop[["success"]])}\n`;
+  code += `confint(boot, level = ${confLevel}, method = "quantile")\n`
   
   return code;
 };

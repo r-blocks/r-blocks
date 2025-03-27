@@ -129,17 +129,17 @@ Blockly.Blocks['bootstrap_test_prop'] = {
         ]),
         'SUCCESS'
       )
-      .appendField(')');
+      .appendField(' )');
     this.appendDummyInput()
       .appendField('sim_null <- do(')
       .appendField(new Blockly.FieldNumber(500, 10, 10000), 'ITERATIONS')
-      .appendField(') * rflip(n = ')
+      .appendField(') * rflip(n=')
       .appendField(new Blockly.FieldNumber(100, 1), 'SAMPLE_SIZE')
-      .appendField(', prob = ')
+      .appendField(', prob=')
       .appendField(new Blockly.FieldNumber(0.5, 0, 1, 0.01), 'NULL_VALUE')
       .appendField(')');
     this.appendDummyInput()
-      .appendField('prop(~ (')
+      .appendField('prop(~(')
       .appendField(
         new Blockly.FieldDropdown([
           ['prop <= observed_prop', 'less'],
@@ -194,13 +194,13 @@ Blockly.Blocks['Gbootstrap_test_prop'] = {
     this.appendDummyInput()
       .appendField('sim_null <- do(')
       .appendField(new Blockly.FieldNumber(500, 10, 10000), 'ITERATIONS')
-      .appendField(') * rflip(n = ')
+      .appendField(') * rflip(n=')
       .appendField(new Blockly.FieldNumber(100, 1), 'SAMPLE_SIZE')
-      .appendField(', prob = ')
+      .appendField(', prob=')
       .appendField(new Blockly.FieldNumber(0.5, 0, 1, 0.01), 'NULL_VALUE')
       .appendField(')');
     this.appendDummyInput()
-      .appendField('prop(~ (')
+      .appendField('prop(~(')
       .appendField(
         new Blockly.FieldDropdown([
           ['prop <= observed_prop', 'less'],
@@ -209,7 +209,7 @@ Blockly.Blocks['Gbootstrap_test_prop'] = {
         ]),
         'ALTERNATIVE'
       )
-      .appendField('), data = sim_null)');
+      .appendField('), data=sim_null)');
 
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
