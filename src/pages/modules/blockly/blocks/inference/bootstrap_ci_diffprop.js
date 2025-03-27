@@ -144,10 +144,11 @@ Blockly.Blocks['bootstrap_ci_diffprop'] = {
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(230);
+    this.setColour('230'); // Updated to match other inference blocks
     this.setTooltip(
       'Bootstrap confidence interval for difference in two proportions using HELPrct data'
     );
+    this.setHelpUrl('https://www.rdocumentation.org/packages/mosaic/topics/resample');
 
     // Explicitly ensure the SUCCESS field has correct default value
     this.setFieldValue('"yes"', 'SUCCESS');
@@ -165,13 +166,27 @@ Blockly.Blocks['Gbootstrap_ci_diffprop'] = {
       .appendField('prop_boot <- do(')
       .appendField(new Blockly.FieldNumber(500, 10, 10000), 'ITERATIONS')
       .appendField(') * diffprop(')
-      .appendField(new Blockly.FieldTextInput(''), 'VAR')
+      .appendField(new Blockly.FieldDropdown(categorical_vars), 'VAR')
       .appendField(' ~ ')
-      .appendField(new Blockly.FieldTextInput(''), 'GROUP')
+      .appendField(new Blockly.FieldDropdown(categorical_vars_alt), 'GROUP')
       .appendField(', data = resample(')
-      .appendField(new Blockly.FieldTextInput(''), 'DATASET')
+      .appendField(new Blockly.FieldDropdown([
+        ['HELPrct', 'HELPrct'],
+        ['mosaicData::Whickham', 'mosaicData::Whickham'],
+        ['mosaicData::Births', 'mosaicData::Births']
+      ]), 'DATASET')
       .appendField('), success = ')
-      .appendField(new Blockly.FieldTextInput('"yes"'), 'SUCCESS')
+      .appendField(new Blockly.FieldDropdown([
+        ['"yes"', '"yes"'],
+        ['"no"', '"no"'],
+        ['"alcohol"', '"alcohol"'],
+        ['"cocaine"', '"cocaine"'],
+        ['"heroin"', '"heroin"'],
+        ['"male"', '"male"'],
+        ['"female"', '"female"'],
+        ['"homeless"', '"homeless"'],
+        ['"housed"', '"housed"'],
+      ]), 'SUCCESS')
       .appendField(')');
     this.appendDummyInput()
       .appendField('confint(prop_boot, level = ')
@@ -181,13 +196,14 @@ Blockly.Blocks['Gbootstrap_ci_diffprop'] = {
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(230);
-    this.setTooltip('Bootstrap confidence interval for difference in two proportions');
+    this.setColour('230'); // Updated to match other inference blocks
+    this.setTooltip('Bootstrap confidence interval for difference in two proportions using selected dataset');
+    this.setHelpUrl('https://www.rdocumentation.org/packages/mosaic/topics/resample');
   },
 };
 
-// Code generator function for both blocks
-function generateBootstrapCIDiffPropCode(block) {
+// Direct generator implementations instead of shared function
+Blockly.JavaScript['bootstrap_ci_diffprop'] = function(block) {
   const seed = block.getFieldValue('SEED');
   const variable = block.getFieldValue('VAR');
   const group = block.getFieldValue('GROUP');
@@ -195,25 +211,29 @@ function generateBootstrapCIDiffPropCode(block) {
   const iterations = block.getFieldValue('ITERATIONS');
   const confLevel = block.getFieldValue('CONF_LEVEL');
 
-  let code = '';
-
-  if (block.type === 'bootstrap_ci_diffprop') {
-    code = `# Bootstrap confidence interval for difference in two proportions\n`;
-    code += `set.seed(${seed})\n`;
-    code += `prop_boot <- do(${iterations}) * diffprop(${variable} ~ ${group}, data = resample(HELPrct), success = ${success})\n`;
-    code += `confint(prop_boot, level = ${confLevel}, method = "quantile")\n`;
-  } else {
-    const dataset = block.getFieldValue('DATASET');
-    code = `# Bootstrap confidence interval for difference in two proportions\n`;
-    code += `set.seed(${seed})\n`;
-    code += `prop_boot <- do(${iterations}) * diffprop(${variable} ~ ${group}, data = resample(${dataset}), success = ${success})\n`;
-    code += `confint(prop_boot, level = ${confLevel}, method = "quantile")\n`;
-  }
-
+  let code = `set.seed(${seed})\n`;
+  code += `prop_boot <- do(${iterations}) * diffprop(${variable} ~ ${group}, data = resample(HELPrct), success = ${success})\n`;
+  code += `confint(prop_boot, level = ${confLevel}, method = "quantile")\n`;
+  
   return code;
-}
+};
 
-Blockly.JavaScript['bootstrap_ci_diffprop'] = generateBootstrapCIDiffPropCode;
-Blockly.JavaScript['Gbootstrap_ci_diffprop'] = generateBootstrapCIDiffPropCode;
+Blockly.JavaScript['Gbootstrap_ci_diffprop'] = function(block) {
+  const seed = block.getFieldValue('SEED');
+  const variable = block.getFieldValue('VAR');
+  const group = block.getFieldValue('GROUP');
+  const dataset = block.getFieldValue('DATASET');
+  const success = block.getFieldValue('SUCCESS');
+  const iterations = block.getFieldValue('ITERATIONS');
+  const confLevel = block.getFieldValue('CONF_LEVEL');
+
+  let code = `set.seed(${seed})\n`;
+  code += `prop_boot <- do(${iterations}) * diffprop(${variable} ~ ${group}, data = resample(${dataset}), success = ${success})\n`;
+  code += `confint(prop_boot, level = ${confLevel}, method = "quantile")\n`;
+  
+  return code;
+};
+
+console.log("Bootstrap CI Diff Prop block registered:", !!Blockly.JavaScript['bootstrap_ci_diffprop']);
 
 export default {};

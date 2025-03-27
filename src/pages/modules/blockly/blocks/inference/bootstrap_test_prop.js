@@ -153,8 +153,9 @@ Blockly.Blocks['bootstrap_test_prop'] = {
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(230);
+    this.setColour('230');  // Match color with other inference blocks
     this.setTooltip('Bootstrap test for one proportion using HELPrct data');
+    this.setHelpUrl('https://www.rdocumentation.org/packages/mosaic/topics/rflip');
 
     // Explicitly ensure the SUCCESS field is "alcohol" initially since substance is the default
     this.setFieldValue('"alcohol"', 'SUCCESS');
@@ -170,11 +171,25 @@ Blockly.Blocks['Gbootstrap_test_prop'] = {
       .appendField(')');
     this.appendDummyInput()
       .appendField('observed_prop <- prop(~')
-      .appendField(new Blockly.FieldTextInput(''), 'VAR')
+      .appendField(new Blockly.FieldDropdown(categorical_vars), 'VAR')
       .appendField(', data=')
-      .appendField(new Blockly.FieldTextInput(''), 'DATASET')
+      .appendField(new Blockly.FieldDropdown([
+        ['HELPrct', 'HELPrct'],
+        ['mosaicData::Whickham', 'mosaicData::Whickham'],
+        ['mosaicData::Births', 'mosaicData::Births']
+      ]), 'DATASET')
       .appendField(', success=')
-      .appendField(new Blockly.FieldTextInput('"yes"'), 'SUCCESS')
+      .appendField(new Blockly.FieldDropdown([
+        ['"yes"', '"yes"'],
+        ['"no"', '"no"'],
+        ['"alcohol"', '"alcohol"'],
+        ['"cocaine"', '"cocaine"'],
+        ['"heroin"', '"heroin"'],
+        ['"male"', '"male"'],
+        ['"female"', '"female"'],
+        ['"homeless"', '"homeless"'],
+        ['"housed"', '"housed"'],
+      ]), 'SUCCESS')
       .appendField(')');
     this.appendDummyInput()
       .appendField('sim_null <- do(')
@@ -199,18 +214,46 @@ Blockly.Blocks['Gbootstrap_test_prop'] = {
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(230);
-    this.setTooltip('Bootstrap test for one proportion');
+    this.setColour('230');  // Match color with other inference blocks
+    this.setTooltip('Bootstrap test for one proportion using selected dataset');
+    this.setHelpUrl('https://www.rdocumentation.org/packages/mosaic/topics/rflip');
   },
 };
 
-// Code generator function for both blocks
-function generateBootstrapTestCode(block) {
+// Separate generator functions for each block
+Blockly.JavaScript['bootstrap_test_prop'] = function(block) {
   const seed = block.getFieldValue('SEED');
   const variable = block.getFieldValue('VAR');
   const success = block.getFieldValue('SUCCESS');
-  // Changed from block.getType() to block.type
-  const dataset = block.type === 'bootstrap_test_prop' ? 'HELPrct' : block.getFieldValue('DATASET');
+  const nullValue = block.getFieldValue('NULL_VALUE');
+  const sampleSize = block.getFieldValue('SAMPLE_SIZE');
+  const alternative = block.getFieldValue('ALTERNATIVE');
+  const iterations = block.getFieldValue('ITERATIONS');
+
+  let code = `set.seed(${seed})\n`;
+  code += `observed_prop <- prop(~${variable}, data=HELPrct, success=${success})\n`;
+  code += `sim_null <- do(${iterations}) * rflip(n = ${sampleSize}, prob = ${nullValue})\n`;
+
+  switch (alternative) {
+    case 'less':
+      code += `prop(~ (prop <= observed_prop), data = sim_null)\n`;
+      break;
+    case 'greater':
+      code += `prop(~ (prop >= observed_prop), data = sim_null)\n`;
+      break;
+    case 'two.sided':
+      code += `prop(~ (abs(prop-${nullValue}) >= abs(observed_prop-${nullValue})), data = sim_null)\n`;
+      break;
+  }
+
+  return code;
+};
+
+Blockly.JavaScript['Gbootstrap_test_prop'] = function(block) {
+  const seed = block.getFieldValue('SEED');
+  const variable = block.getFieldValue('VAR');
+  const dataset = block.getFieldValue('DATASET');
+  const success = block.getFieldValue('SUCCESS');
   const nullValue = block.getFieldValue('NULL_VALUE');
   const sampleSize = block.getFieldValue('SAMPLE_SIZE');
   const alternative = block.getFieldValue('ALTERNATIVE');
@@ -222,20 +265,19 @@ function generateBootstrapTestCode(block) {
 
   switch (alternative) {
     case 'less':
-      code += `prop(~ (prop <= observed_prop), data = sim_null) ## P-value for less than ##\n`;
+      code += `prop(~ (prop <= observed_prop), data = sim_null)\n`;
       break;
     case 'greater':
-      code += `prop(~ (prop >= observed_prop), data = sim_null) ## P-value for greater than ##\n`;
+      code += `prop(~ (prop >= observed_prop), data = sim_null)\n`;
       break;
     case 'two.sided':
-      code += `prop(~ (abs(prop-${nullValue}) >= abs(observed_prop-${nullValue})), data = sim_null) ## P-value for not equal ##\n`;
+      code += `prop(~ (abs(prop-${nullValue}) >= abs(observed_prop-${nullValue})), data = sim_null)\n`;
       break;
   }
 
   return code;
-}
+};
 
-Blockly.JavaScript['bootstrap_test_prop'] = generateBootstrapTestCode;
-Blockly.JavaScript['Gbootstrap_test_prop'] = generateBootstrapTestCode;
+console.log("Bootstrap Test Prop block registered:", !!Blockly.JavaScript['bootstrap_test_prop']);
 
 export default {};

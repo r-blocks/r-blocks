@@ -35,8 +35,9 @@ Blockly.Blocks['bootstrap_test_paired'] = {
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(230);
+    this.setColour('230');  // Match color with other inference blocks
     this.setTooltip('Bootstrap test for paired mean difference using HELPrct data');
+    this.setHelpUrl('https://www.rdocumentation.org/packages/mosaic/topics/resample');
   },
 };
 
@@ -49,29 +50,53 @@ Blockly.Blocks['Gbootstrap_test_paired'] = {
       .appendField(')');
     this.appendDummyInput()
       .appendField('')
-      .appendField(new Blockly.FieldTextInput(''), 'DATASET')
+      .appendField(new Blockly.FieldDropdown([
+        ['HELPrct', 'HELPrct'],
+        ['mosaicData::Whickham', 'mosaicData::Whickham'],
+        ['mosaicData::Births', 'mosaicData::Births']
+      ]), 'DATASET')
       .appendField(' <- mutate(')
-      .appendField(new Blockly.FieldTextInput(''), 'ORIG_DATASET')
+      .appendField(new Blockly.FieldDropdown([
+        ['HELPrct', 'HELPrct'],
+        ['mosaicData::Whickham', 'mosaicData::Whickham'],
+        ['mosaicData::Births', 'mosaicData::Births']
+      ]), 'ORIG_DATASET')
       .appendField(', pair.diff = ')
-      .appendField(new Blockly.FieldTextInput(''), 'POST_VAR')
+      .appendField(new Blockly.FieldDropdown(quantitative_vars), 'POST_VAR')
       .appendField(' - ')
-      .appendField(new Blockly.FieldTextInput(''), 'PRE_VAR')
+      .appendField(new Blockly.FieldDropdown(quantitative_vars), 'PRE_VAR')
       .appendField(')');
     this.appendDummyInput()
       .appendField('bar_d <- mean(~ pair.diff, data = ')
-      .appendField(new Blockly.FieldTextInput(''), 'MEAN_DATASET')
+      .appendField(new Blockly.FieldDropdown([
+        ['HELPrct', 'HELPrct'],
+        ['mosaicData::Whickham', 'mosaicData::Whickham'],
+        ['mosaicData::Births', 'mosaicData::Births']
+      ]), 'MEAN_DATASET')
       .appendField(')');
     this.appendDummyInput()
       .appendField('')
-      .appendField(new Blockly.FieldTextInput(''), 'DATASET2')
+      .appendField(new Blockly.FieldDropdown([
+        ['HELPrct', 'HELPrct'],
+        ['mosaicData::Whickham', 'mosaicData::Whickham'],
+        ['mosaicData::Births', 'mosaicData::Births']
+      ]), 'DATASET2')
       .appendField(' <- mutate(')
-      .appendField(new Blockly.FieldTextInput(''), 'DATASET3')
+      .appendField(new Blockly.FieldDropdown([
+        ['HELPrct', 'HELPrct'],
+        ['mosaicData::Whickham', 'mosaicData::Whickham'],
+        ['mosaicData::Births', 'mosaicData::Births']
+      ]), 'DATASET3')
       .appendField(', new_diff = pair.diff - bar_d)');
     this.appendDummyInput()
       .appendField('sim_null <- do(')
       .appendField(new Blockly.FieldNumber(500, 10, 10000), 'ITERATIONS')
       .appendField(') * mean(~ new_diff, data = resample(')
-      .appendField(new Blockly.FieldTextInput(''), 'RESAMPLE_DATASET')
+      .appendField(new Blockly.FieldDropdown([
+        ['HELPrct', 'HELPrct'],
+        ['mosaicData::Whickham', 'mosaicData::Whickham'],
+        ['mosaicData::Births', 'mosaicData::Births']
+      ]), 'RESAMPLE_DATASET')
       .appendField('))');
     this.appendDummyInput()
       .appendField('prop(~ (')
@@ -88,8 +113,9 @@ Blockly.Blocks['Gbootstrap_test_paired'] = {
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(230);
-    this.setTooltip('Bootstrap test for paired mean difference');
+    this.setColour('230');  // Match color with other inference blocks
+    this.setTooltip('Bootstrap test for paired mean difference using selected dataset');
+    this.setHelpUrl('https://www.rdocumentation.org/packages/mosaic/topics/resample');
 
     // Automatically update fields when dataset changes
     this.setOnChange(function (changeEvent) {
@@ -114,70 +140,69 @@ Blockly.Blocks['Gbootstrap_test_paired'] = {
   },
 };
 
-// Code generator function for both blocks
-function generateBootstrapTestPairedCode(block) {
+// Separate generator functions for each block
+Blockly.JavaScript['bootstrap_test_paired'] = function(block) {
   const seed = block.getFieldValue('SEED');
+  const preVar = block.getFieldValue('PRE_VAR');
+  const postVar = block.getFieldValue('POST_VAR');
   const iterations = block.getFieldValue('ITERATIONS');
   const alternative = block.getFieldValue('ALTERNATIVE');
 
-  let code = '';
+  let code = `set.seed(${seed})\n`;
+  code += `HELPrct <- mutate(HELPrct, pair.diff = ${postVar} - ${preVar})\n`;
+  code += `bar_d <- mean(~ pair.diff, data = HELPrct)\n`;
+  code += `HELPrct <- mutate(HELPrct, new_diff = pair.diff - bar_d)\n`;
+  code += `sim_null <- do(${iterations}) * mean(~ new_diff, data = resample(HELPrct))\n`;
 
-  if (block.type === 'bootstrap_test_paired') {
-    const preVar = block.getFieldValue('PRE_VAR');
-    const postVar = block.getFieldValue('POST_VAR');
-
-    code = `# Bootstrap test for paired mean difference\n`;
-    code += `HELPrct <- mutate(HELPrct, pair.diff = ${postVar} - ${preVar})\n`;
-    code += `bar_d <- mean(~ pair.diff, data = HELPrct)\n`;
-    code += `HELPrct <- mutate(HELPrct, new_diff = pair.diff - bar_d)\n`;
-    code += `set.seed(${seed})\n`;
-    code += `sim_null <- do(${iterations}) * mean(~ new_diff, data = resample(HELPrct))\n\n`;
-
-    switch (alternative) {
-      case 'less':
-        code += `prop(~ (mean <= bar_d), data = sim_null) ## P-value for less than ##\n`;
-        break;
-      case 'greater':
-        code += `prop(~ (mean >= bar_d), data = sim_null) ## P-value for greater than ##\n`;
-        break;
-      case 'two.sided':
-        code += `prop(~ (abs(mean) >= abs(bar_d)), data = sim_null) ## P-value for not equal ##\n`;
-        break;
-    }
-  } else {
-    const dataset = block.getFieldValue('DATASET');
-    const origDataset = block.getFieldValue('ORIG_DATASET');
-    const preVar = block.getFieldValue('PRE_VAR');
-    const postVar = block.getFieldValue('POST_VAR');
-    const meanDataset = block.getFieldValue('MEAN_DATASET');
-    const dataset2 = block.getFieldValue('DATASET2');
-    const dataset3 = block.getFieldValue('DATASET3');
-    const resampleDataset = block.getFieldValue('RESAMPLE_DATASET');
-
-    code = `# Bootstrap test for paired mean difference\n`;
-    code += `${dataset} <- mutate(${origDataset}, pair.diff = ${postVar} - ${preVar})\n`;
-    code += `bar_d <- mean(~ pair.diff, data = ${meanDataset})\n`;
-    code += `${dataset2} <- mutate(${dataset3}, new_diff = pair.diff - bar_d)\n`;
-    code += `set.seed(${seed})\n`;
-    code += `sim_null <- do(${iterations}) * mean(~ new_diff, data = resample(${resampleDataset}))\n\n`;
-
-    switch (alternative) {
-      case 'less':
-        code += `prop(~ (mean <= bar_d), data = sim_null) ## P-value for less than ##\n`;
-        break;
-      case 'greater':
-        code += `prop(~ (mean >= bar_d), data = sim_null) ## P-value for greater than ##\n`;
-        break;
-      case 'two.sided':
-        code += `prop(~ (abs(mean) >= abs(bar_d)), data = sim_null) ## P-value for not equal ##\n`;
-        break;
-    }
+  switch (alternative) {
+    case 'less':
+      code += `prop(~ (mean <= bar_d), data = sim_null)\n`;
+      break;
+    case 'greater':
+      code += `prop(~ (mean >= bar_d), data = sim_null)\n`;
+      break;
+    case 'two.sided':
+      code += `prop(~ (abs(mean) >= abs(bar_d)), data = sim_null)\n`;
+      break;
   }
-
+  
   return code;
-}
+};
 
-Blockly.JavaScript['bootstrap_test_paired'] = generateBootstrapTestPairedCode;
-Blockly.JavaScript['Gbootstrap_test_paired'] = generateBootstrapTestPairedCode;
+Blockly.JavaScript['Gbootstrap_test_paired'] = function(block) {
+  const seed = block.getFieldValue('SEED');
+  const dataset = block.getFieldValue('DATASET');
+  const origDataset = block.getFieldValue('ORIG_DATASET');
+  const preVar = block.getFieldValue('PRE_VAR');
+  const postVar = block.getFieldValue('POST_VAR');
+  const meanDataset = block.getFieldValue('MEAN_DATASET');
+  const dataset2 = block.getFieldValue('DATASET2');
+  const dataset3 = block.getFieldValue('DATASET3');
+  const resampleDataset = block.getFieldValue('RESAMPLE_DATASET');
+  const iterations = block.getFieldValue('ITERATIONS');
+  const alternative = block.getFieldValue('ALTERNATIVE');
+
+  let code = `set.seed(${seed})\n`;
+  code += `${dataset} <- mutate(${origDataset}, pair.diff = ${postVar} - ${preVar})\n`;
+  code += `bar_d <- mean(~ pair.diff, data = ${meanDataset})\n`;
+  code += `${dataset2} <- mutate(${dataset3}, new_diff = pair.diff - bar_d)\n`;
+  code += `sim_null <- do(${iterations}) * mean(~ new_diff, data = resample(${resampleDataset}))\n`;
+
+  switch (alternative) {
+    case 'less':
+      code += `prop(~ (mean <= bar_d), data = sim_null)\n`;
+      break;
+    case 'greater':
+      code += `prop(~ (mean >= bar_d), data = sim_null)\n`;
+      break;
+    case 'two.sided':
+      code += `prop(~ (abs(mean) >= abs(bar_d)), data = sim_null)\n`;
+      break;
+  }
+  
+  return code;
+};
+
+console.log("Bootstrap Test Paired block registered:", !!Blockly.JavaScript['bootstrap_test_paired']);
 
 export default {};
