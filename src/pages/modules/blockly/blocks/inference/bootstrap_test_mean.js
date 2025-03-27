@@ -56,31 +56,19 @@ Blockly.Blocks['Gbootstrap_test_mean'] = {
       .appendField(')');
     this.appendDummyInput()
       .appendField('observed_mean <- mean(~')
-      .appendField(new Blockly.FieldDropdown(quantitative_vars), 'VAR')
+      .appendField(new Blockly.FieldTextInput(''), 'VAR')
       .appendField(', data=')
-      .appendField(new Blockly.FieldDropdown([
-        ['HELPrct', 'HELPrct'],
-        ['mosaicData::Whickham', 'mosaicData::Whickham'],
-        ['mosaicData::Births', 'mosaicData::Births']
-      ]), 'DATASET')
+      .appendField(new Blockly.FieldTextInput(''), 'DATASET')
       .appendField(')');
     this.appendDummyInput()
       .appendField('')
-      .appendField(new Blockly.FieldDropdown([
-        ['HELPrct', 'HELPrct'],
-        ['mosaicData::Whickham', 'mosaicData::Whickham'],
-        ['mosaicData::Births', 'mosaicData::Births']
-      ]), 'SHIFTED_DATASET')
+      .appendField(new Blockly.FieldTextInput(''), 'SHIFTED_DATASET')
       .appendField('_shifted <- mutate(')
-      .appendField(new Blockly.FieldDropdown([
-        ['HELPrct', 'HELPrct'],
-        ['mosaicData::Whickham', 'mosaicData::Whickham'],
-        ['mosaicData::Births', 'mosaicData::Births']
-      ]), 'ORIG_DATASET')
+      .appendField(new Blockly.FieldTextInput(''), 'ORIG_DATASET')
       .appendField(', new_')
-      .appendField(new Blockly.FieldDropdown(quantitative_vars), 'VAR2')
+      .appendField(new Blockly.FieldTextInput(''), 'VAR2')
       .appendField(' = ')
-      .appendField(new Blockly.FieldDropdown(quantitative_vars), 'VAR3')
+      .appendField(new Blockly.FieldTextInput(''), 'VAR3')
       .appendField(' - observed_mean + ')
       .appendField(new Blockly.FieldNumber(0, -999999, 999999), 'NULL_VALUE')
       .appendField(')');
@@ -88,13 +76,9 @@ Blockly.Blocks['Gbootstrap_test_mean'] = {
       .appendField('sim_null <- do(')
       .appendField(new Blockly.FieldNumber(500, 10, 10000), 'ITERATIONS')
       .appendField(') * mean(~ new_')
-      .appendField(new Blockly.FieldDropdown(quantitative_vars), 'VAR4')
+      .appendField(new Blockly.FieldTextInput(''), 'VAR4')
       .appendField(', data = resample(')
-      .appendField(new Blockly.FieldDropdown([
-        ['HELPrct', 'HELPrct'],
-        ['mosaicData::Whickham', 'mosaicData::Whickham'],
-        ['mosaicData::Births', 'mosaicData::Births']
-      ]), 'RESAMPLE_DATASET')
+      .appendField(new Blockly.FieldTextInput(''), 'RESAMPLE_DATASET')
       .appendField('_shifted))');
     this.appendDummyInput()
       .appendField('prop(~ (')

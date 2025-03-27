@@ -117,29 +117,32 @@ Blockly.Blocks['bootstrap_test_prop'] = {
       return newVar;
     });
 
-    this.appendDummyInput('PROP_INPUT')
-      .appendField('observed_prop <- prop(~')
-      .appendField(varField, 'VAR')
-      .appendField(', data=HELPrct, success=')
-      .appendField(
-        new Blockly.FieldDropdown([
-          ['"alcohol"', '"alcohol"'],
-          ['"cocaine"', '"cocaine"'],
-          ['"heroin"', '"heroin"'],
-        ]),
-        'SUCCESS'
-      )
-      .appendField(')');
+    // Create the PROP_INPUT with a different structure
+    var propInput = this.appendDummyInput('PROP_INPUT');
+    propInput.appendField('observed_prop <- prop(~');
+    propInput.appendField(varField, 'VAR');
+    propInput.appendField(', data=HELPrct, success=');
+    propInput.appendField(
+      new Blockly.FieldDropdown([
+        ['"alcohol"', '"alcohol"'],
+        ['"cocaine"', '"cocaine"'],
+        ['"heroin"', '"heroin"'],
+      ]),
+      'SUCCESS'
+    );
+    propInput.appendField(')');
+
     this.appendDummyInput()
       .appendField('sim_null <- do(')
       .appendField(new Blockly.FieldNumber(500, 10, 10000), 'ITERATIONS')
-      .appendField(') * rflip(n = ')
+      .appendField(') * rflip(n=')
       .appendField(new Blockly.FieldNumber(100, 1), 'SAMPLE_SIZE')
-      .appendField(', prob = ')
+      .appendField(', prob=')
       .appendField(new Blockly.FieldNumber(0.5, 0, 1, 0.01), 'NULL_VALUE')
       .appendField(')');
+
     this.appendDummyInput()
-      .appendField('prop(~ (')
+      .appendField('prop(~(')
       .appendField(
         new Blockly.FieldDropdown([
           ['prop <= observed_prop', 'less'],
@@ -171,36 +174,22 @@ Blockly.Blocks['Gbootstrap_test_prop'] = {
       .appendField(')');
     this.appendDummyInput()
       .appendField('observed_prop <- prop(~')
-      .appendField(new Blockly.FieldDropdown(categorical_vars), 'VAR')
+      .appendField(new Blockly.FieldTextInput(''), 'VAR')
       .appendField(', data=')
-      .appendField(new Blockly.FieldDropdown([
-        ['HELPrct', 'HELPrct'],
-        ['mosaicData::Whickham', 'mosaicData::Whickham'],
-        ['mosaicData::Births', 'mosaicData::Births']
-      ]), 'DATASET')
+      .appendField(new Blockly.FieldTextInput(''), 'DATASET')
       .appendField(', success=')
-      .appendField(new Blockly.FieldDropdown([
-        ['"yes"', '"yes"'],
-        ['"no"', '"no"'],
-        ['"alcohol"', '"alcohol"'],
-        ['"cocaine"', '"cocaine"'],
-        ['"heroin"', '"heroin"'],
-        ['"male"', '"male"'],
-        ['"female"', '"female"'],
-        ['"homeless"', '"homeless"'],
-        ['"housed"', '"housed"'],
-      ]), 'SUCCESS')
+      .appendField(new Blockly.FieldTextInput(''), 'SUCCESS')
       .appendField(')');
     this.appendDummyInput()
       .appendField('sim_null <- do(')
       .appendField(new Blockly.FieldNumber(500, 10, 10000), 'ITERATIONS')
-      .appendField(') * rflip(n = ')
+      .appendField(') * rflip(n=')
       .appendField(new Blockly.FieldNumber(100, 1), 'SAMPLE_SIZE')
-      .appendField(', prob = ')
+      .appendField(', prob=')
       .appendField(new Blockly.FieldNumber(0.5, 0, 1, 0.01), 'NULL_VALUE')
       .appendField(')');
     this.appendDummyInput()
-      .appendField('prop(~ (')
+      .appendField('prop(~(')
       .appendField(
         new Blockly.FieldDropdown([
           ['prop <= observed_prop', 'less'],
@@ -209,7 +198,7 @@ Blockly.Blocks['Gbootstrap_test_prop'] = {
         ]),
         'ALTERNATIVE'
       )
-      .appendField('), data = sim_null)');
+      .appendField('), data=sim_null)');
 
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
