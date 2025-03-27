@@ -47,13 +47,9 @@ Blockly.Blocks['Gbootstrap_ci_mean'] = {
       .appendField('mean_boot <- do(')
       .appendField(new Blockly.FieldNumber(500, 10, 10000), 'ITERATIONS')
       .appendField(') * mean(~')
-      .appendField(new Blockly.FieldDropdown(quantitative_vars), 'VAR')
+      .appendField(new Blockly.FieldTextInput(''), 'VAR')
       .appendField(', data = resample(')
-      .appendField(new Blockly.FieldDropdown([
-        ['HELPrct', 'HELPrct'],
-        ['mosaicData::Whickham', 'mosaicData::Whickham'],
-        ['mosaicData::Births', 'mosaicData::Births']
-      ]), 'DATASET')
+      .appendField(new Blockly.FieldTextInput(''), 'DATASET')
       .appendField('))');
     this.appendDummyInput()
       .appendField('confint(mean_boot, level = (1 - ')

@@ -166,32 +166,18 @@ Blockly.Blocks['Gbootstrap_ci_diffprop'] = {
       .appendField('prop_boot <- do(')
       .appendField(new Blockly.FieldNumber(500, 10, 10000), 'ITERATIONS')
       .appendField(') * diffprop(')
-      .appendField(new Blockly.FieldDropdown(categorical_vars), 'VAR')
+      .appendField(new Blockly.FieldTextInput(''), 'VAR')
       .appendField(' ~ ')
-      .appendField(new Blockly.FieldDropdown(categorical_vars_alt), 'GROUP')
-      .appendField(', data = resample(')
-      .appendField(new Blockly.FieldDropdown([
-        ['HELPrct', 'HELPrct'],
-        ['mosaicData::Whickham', 'mosaicData::Whickham'],
-        ['mosaicData::Births', 'mosaicData::Births']
-      ]), 'DATASET')
-      .appendField('), success = ')
-      .appendField(new Blockly.FieldDropdown([
-        ['"yes"', '"yes"'],
-        ['"no"', '"no"'],
-        ['"alcohol"', '"alcohol"'],
-        ['"cocaine"', '"cocaine"'],
-        ['"heroin"', '"heroin"'],
-        ['"male"', '"male"'],
-        ['"female"', '"female"'],
-        ['"homeless"', '"homeless"'],
-        ['"housed"', '"housed"'],
-      ]), 'SUCCESS')
+      .appendField(new Blockly.FieldTextInput(''), 'GROUP')
+      .appendField(', data=resample(')
+      .appendField(new Blockly.FieldTextInput(''), 'DATASET')
+      .appendField('), success=')
+      .appendField(new Blockly.FieldTextInput(''), 'SUCCESS')
       .appendField(')');
     this.appendDummyInput()
-      .appendField('confint(prop_boot, level = ')
+      .appendField('confint(prop_boot, level=')
       .appendField(new Blockly.FieldNumber(0.95, 0, 1, 0.01), 'CONF_LEVEL')
-      .appendField(', method = "quantile")');
+      .appendField(', method="quantile")');
 
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);

@@ -41,15 +41,11 @@ Blockly.Blocks['Gbootstrap_ci_diffmean'] = {
       .appendField('mean_boot <- do(')
       .appendField(new Blockly.FieldNumber(500, 10, 10000), 'ITERATIONS')
       .appendField(') * diffmean(')
-      .appendField(new Blockly.FieldDropdown(quantitative_vars), 'VAR')
+      .appendField(new Blockly.FieldTextInput(''), 'VAR')
       .appendField(' ~ ')
-      .appendField(new Blockly.FieldDropdown(categorical_vars_alt), 'GROUP')
+      .appendField(new Blockly.FieldTextInput(''), 'GROUP')
       .appendField(', data = resample(')
-      .appendField(new Blockly.FieldDropdown([
-        ['HELPrct', 'HELPrct'],
-        ['mosaicData::Whickham', 'mosaicData::Whickham'],
-        ['mosaicData::Births', 'mosaicData::Births']
-      ]), 'DATASET')
+      .appendField(new Blockly.FieldTextInput(''), 'DATASET')
       .appendField('))');
     this.appendDummyInput()
       .appendField('confint(mean_boot, level = ')

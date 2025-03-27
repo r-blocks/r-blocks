@@ -41,31 +41,19 @@ Blockly.Blocks['Gbootstrap_ci_paired'] = {
       .appendField(')');
     this.appendDummyInput()
       .appendField('')
-      .appendField(new Blockly.FieldDropdown([
-        ['HELPrct', 'HELPrct'],
-        ['mosaicData::Whickham', 'mosaicData::Whickham'],
-        ['mosaicData::Births', 'mosaicData::Births']
-      ]), 'DATASET')
+      .appendField(new Blockly.FieldTextInput(''), 'DATASET')
       .appendField(' <- mutate(')
-      .appendField(new Blockly.FieldDropdown([
-        ['HELPrct', 'HELPrct'],
-        ['mosaicData::Whickham', 'mosaicData::Whickham'],
-        ['mosaicData::Births', 'mosaicData::Births']
-      ]), 'ORIG_DATASET')
+      .appendField(new Blockly.FieldTextInput(''), 'ORIG_DATASET')
       .appendField(', pair.diff = ')
-      .appendField(new Blockly.FieldDropdown(quantitative_vars), 'POST_VAR')
+      .appendField(new Blockly.FieldTextInput(''), 'POST_VAR')
       .appendField(' - ')
-      .appendField(new Blockly.FieldDropdown(quantitative_vars), 'PRE_VAR')
+      .appendField(new Blockly.FieldTextInput(''), 'PRE_VAR')
       .appendField(')');
     this.appendDummyInput()
       .appendField('mean_boot <- do(')
       .appendField(new Blockly.FieldNumber(500, 10, 10000), 'ITERATIONS')
       .appendField(') * mean(~ pair.diff, data = resample(')
-      .appendField(new Blockly.FieldDropdown([
-        ['HELPrct', 'HELPrct'],
-        ['mosaicData::Whickham', 'mosaicData::Whickham'],
-        ['mosaicData::Births', 'mosaicData::Births']
-      ]), 'RESAMPLE_DATASET')
+      .appendField(new Blockly.FieldTextInput(''), 'RESAMPLE_DATASET')
       .appendField('))');
     this.appendDummyInput()
       .appendField('confint(mean_boot, level = ')
