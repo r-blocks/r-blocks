@@ -25,17 +25,18 @@ Blockly.Blocks['bootstrap_ci_mean'] = {
         ]),
         'TEST_TYPE'
       )
-      .appendField(' test #');
+      .appendField(' test');
 
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(230);
+    this.setColour('230');  // Match color with other inference blocks
     this.setTooltip('Bootstrap confidence interval for one mean using HELPrct data');
+    this.setHelpUrl('https://www.rdocumentation.org/packages/mosaic/topics/resample');
   },
 };
 
-// Generic version
+// Generic version definition with proper implementation
 Blockly.Blocks['Gbootstrap_ci_mean'] = {
   init: function () {
     this.appendDummyInput()
@@ -44,11 +45,15 @@ Blockly.Blocks['Gbootstrap_ci_mean'] = {
       .appendField(')');
     this.appendDummyInput()
       .appendField('mean_boot <- do(')
-      .appendField(new Blockly.FieldNumber(5000, 100, 10000), 'ITERATIONS')
+      .appendField(new Blockly.FieldNumber(500, 10, 10000), 'ITERATIONS')
       .appendField(') * mean(~')
-      .appendField(new Blockly.FieldTextInput(''), 'VAR')
+      .appendField(new Blockly.FieldDropdown(quantitative_vars), 'VAR')
       .appendField(', data = resample(')
-      .appendField(new Blockly.FieldTextInput(''), 'DATASET')
+      .appendField(new Blockly.FieldDropdown([
+        ['HELPrct', 'HELPrct'],
+        ['mosaicData::Whickham', 'mosaicData::Whickham'],
+        ['mosaicData::Births', 'mosaicData::Births']
+      ]), 'DATASET')
       .appendField('))');
     this.appendDummyInput()
       .appendField('confint(mean_boot, level = (1 - ')
@@ -61,39 +66,57 @@ Blockly.Blocks['Gbootstrap_ci_mean'] = {
         ]),
         'TEST_TYPE'
       )
-      .appendField(' test #');
+      .appendField(' test');
 
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(230);
-    this.setTooltip('Bootstrap confidence interval for one mean');
-  },
+    this.setColour('230');
+    this.setTooltip('Bootstrap confidence interval for one mean using selected dataset');
+    this.setHelpUrl('https://www.rdocumentation.org/packages/mosaic/topics/resample');
+  }
 };
 
-// Code generator function for both blocks
-function generateBootstrapMeanCode(block) {
+// Generator implementations stay the same
+Blockly.JavaScript['bootstrap_ci_mean'] = function(block) {
   const seed = block.getFieldValue('SEED');
   const variable = block.getFieldValue('VAR');
-  // Changed from block.getType() to block.type
-  const dataset = block.type === 'bootstrap_ci_mean' ? 'HELPrct' : block.getFieldValue('DATASET');
+  const iterations = block.getFieldValue('ITERATIONS');
   const alpha = block.getFieldValue('ALPHA');
   const testType = block.getFieldValue('TEST_TYPE');
-  const iterations = block.getFieldValue('ITERATIONS');
+  
+  let code = `set.seed(${seed})\n`;
+  code += `mean_boot <- do(${iterations}) * mean(~${variable}, data = resample(HELPrct))\n`;
+  
+  if (testType === 'two_sided') {
+    code += `confint(mean_boot, level = (1 - ${alpha}), method = "quantile")\n`;
+  } else {
+    code += `confint(mean_boot, level = (1 - 2*${alpha}), method = "quantile")\n`;
+  }
+  
+  return code;
+};
 
+Blockly.JavaScript['Gbootstrap_ci_mean'] = function(block) {
+  const seed = block.getFieldValue('SEED');
+  const variable = block.getFieldValue('VAR');
+  const dataset = block.getFieldValue('DATASET');
+  const iterations = block.getFieldValue('ITERATIONS');
+  const alpha = block.getFieldValue('ALPHA');
+  const testType = block.getFieldValue('TEST_TYPE');
+  
   let code = `set.seed(${seed})\n`;
   code += `mean_boot <- do(${iterations}) * mean(~${variable}, data = resample(${dataset}))\n`;
-
+  
   if (testType === 'two_sided') {
-    code += `confint(mean_boot, level = (1 - ${alpha}), method = "quantile") ## two-sided test at ${alpha} ##\n`;
+    code += `confint(mean_boot, level = (1 - ${alpha}), method = "quantile")\n`;
   } else {
-    code += `confint(mean_boot, level = (1 - 2*${alpha}), method = "quantile") ## one-sided test at ${alpha} ##\n`;
+    code += `confint(mean_boot, level = (1 - 2*${alpha}), method = "quantile")\n`;
   }
-
+  
   return code;
-}
+};
 
-Blockly.JavaScript['bootstrap_ci_mean'] = generateBootstrapMeanCode;
-Blockly.JavaScript['Gbootstrap_ci_mean'] = generateBootstrapMeanCode;
+console.log("Bootstrap CI Mean block registered:", !!Blockly.JavaScript['bootstrap_ci_mean']);
 
 export default {};

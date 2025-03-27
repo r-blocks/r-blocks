@@ -144,8 +144,9 @@ Blockly.Blocks['bootstrap_ci_prop'] = {
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(230);
+    this.setColour('230');  // Match color with other inference blocks
     this.setTooltip('Bootstrap confidence interval for one proportion using HELPrct data');
+    this.setHelpUrl('https://www.rdocumentation.org/packages/mosaic/topics/resample');
 
     // Explicitly ensure the SUCCESS field is "alcohol" initially since substance is the default
     this.setFieldValue('"alcohol"', 'SUCCESS');
@@ -172,17 +173,35 @@ Blockly.Blocks['Gbootstrap_ci_prop'] = {
       .appendField(')');
     this.appendDummyInput()
       .appendField('observed_prop <- prop(~')
-      .appendField(new Blockly.FieldTextInput(''), 'VAR')
+      .appendField(new Blockly.FieldDropdown(categorical_vars), 'VAR')
       .appendField(', data=')
-      .appendField(new Blockly.FieldTextInput(''), 'DATASET')
+      .appendField(new Blockly.FieldDropdown([
+        ['HELPrct', 'HELPrct'],
+        ['mosaicData::Whickham', 'mosaicData::Whickham'],
+        ['mosaicData::Births', 'mosaicData::Births']
+      ]), 'DATASET')
       .appendField(', success=')
-      .appendField(new Blockly.FieldTextInput('"yes"'), 'SUCCESS')
+      .appendField(new Blockly.FieldDropdown([
+        ['"yes"', '"yes"'],
+        ['"no"', '"no"'],
+        ['"alcohol"', '"alcohol"'],
+        ['"cocaine"', '"cocaine"'],
+        ['"heroin"', '"heroin"'],
+        ['"male"', '"male"'],
+        ['"female"', '"female"'],
+        ['"homeless"', '"homeless"'],
+        ['"housed"', '"housed"'],
+      ]), 'SUCCESS')
       .appendField(')');
     this.appendDummyInput()
       .appendField('boot <- do(')
       .appendField(new Blockly.FieldNumber(500, 10, 10000), 'ITERATIONS')
       .appendField(') * {resample(')
-      .appendField(new Blockly.FieldTextInput(''), 'RESAMPLE_DATASET')
+      .appendField(new Blockly.FieldDropdown([
+        ['HELPrct', 'HELPrct'],
+        ['mosaicData::Whickham', 'mosaicData::Whickham'],
+        ['mosaicData::Births', 'mosaicData::Births']
+      ]), 'RESAMPLE_DATASET')
       .appendField(') %$% prop(~')
       .appendField(new Blockly.FieldTextInput(''), 'NEW_VAR')
       .appendField(', success=observed_prop[["success"]])}');
@@ -194,8 +213,9 @@ Blockly.Blocks['Gbootstrap_ci_prop'] = {
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(230);
-    this.setTooltip('Bootstrap confidence interval for one proportion');
+    this.setColour('230');  // Match color with other inference blocks
+    this.setTooltip('Bootstrap confidence interval for one proportion using selected dataset');
+    this.setHelpUrl('https://www.rdocumentation.org/packages/mosaic/topics/resample');
 
     // Automatically update fields when dataset changes
     this.setOnChange(function (changeEvent) {
@@ -217,31 +237,41 @@ Blockly.Blocks['Gbootstrap_ci_prop'] = {
   },
 };
 
-// Code generator function for both blocks
-function generateBootstrapCICode(block) {
+// Separate generator functions for each block
+Blockly.JavaScript['bootstrap_ci_prop'] = function(block) {
   const seed = block.getFieldValue('SEED');
   const variable = block.getFieldValue('VAR');
   const success = block.getFieldValue('SUCCESS');
-  // Changed from block.getType() to block.type
-  const dataset = block.type === 'bootstrap_ci_prop' ? 'HELPrct' : block.getFieldValue('DATASET');
   const iterations = block.getFieldValue('ITERATIONS');
   const confLevel = block.getFieldValue('CONF_LEVEL');
-
-  // Changed from block.getType() to block.type
-  const resampleDataset =
-    block.type === 'bootstrap_ci_prop' ? 'HELPrct' : block.getFieldValue('RESAMPLE_DATASET');
   const newVar = block.getFieldValue('NEW_VAR');
 
-  let code = `# Bootstrap confidence interval for proportion\n`;
-  code += `set.seed(${seed})\n`;
+  let code = `set.seed(${seed})\n`;
+  code += `observed_prop <- prop(~${variable}, data=HELPrct, success=${success})\n`;
+  code += `boot <- do(${iterations}) * {resample(HELPrct) %$% prop(~${newVar}, success=observed_prop[["success"]])}\n`;
+  code += `confint(boot, level = ${confLevel}, method = "quantile")\n`;
+  
+  return code;
+};
+
+Blockly.JavaScript['Gbootstrap_ci_prop'] = function(block) {
+  const seed = block.getFieldValue('SEED');
+  const variable = block.getFieldValue('VAR');
+  const dataset = block.getFieldValue('DATASET');
+  const success = block.getFieldValue('SUCCESS');
+  const resampleDataset = block.getFieldValue('RESAMPLE_DATASET');
+  const iterations = block.getFieldValue('ITERATIONS');
+  const confLevel = block.getFieldValue('CONF_LEVEL');
+  const newVar = block.getFieldValue('NEW_VAR');
+
+  let code = `set.seed(${seed})\n`;
   code += `observed_prop <- prop(~${variable}, data=${dataset}, success=${success})\n`;
   code += `boot <- do(${iterations}) * {resample(${resampleDataset}) %$% prop(~${newVar}, success=observed_prop[["success"]])}\n`;
   code += `confint(boot, level = ${confLevel}, method = "quantile")\n`;
-
+  
   return code;
-}
+};
 
-Blockly.JavaScript['bootstrap_ci_prop'] = generateBootstrapCICode;
-Blockly.JavaScript['Gbootstrap_ci_prop'] = generateBootstrapCICode;
+console.log("Bootstrap CI Prop block registered:", !!Blockly.JavaScript['bootstrap_ci_prop']);
 
 export default {};

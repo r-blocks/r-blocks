@@ -24,10 +24,11 @@ Blockly.Blocks['bootstrap_ci_lm'] = {
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(230);
+    this.setColour('230');  // Match color with other inference blocks
     this.setTooltip(
       'Bootstrap confidence interval for slope coefficient in SLR using HELPrct data'
     );
+    this.setHelpUrl('https://www.rdocumentation.org/packages/mosaic/topics/resample');
   },
 };
 
@@ -42,11 +43,15 @@ Blockly.Blocks['Gbootstrap_ci_lm'] = {
       .appendField('lm_boot <- do(')
       .appendField(new Blockly.FieldNumber(500, 10, 10000), 'ITERATIONS')
       .appendField(') * lm(')
-      .appendField(new Blockly.FieldTextInput(''), 'VAR1')
+      .appendField(new Blockly.FieldDropdown(quantitative_vars), 'VAR1')
       .appendField(' ~ ')
-      .appendField(new Blockly.FieldTextInput(''), 'VAR2')
+      .appendField(new Blockly.FieldDropdown(quantitative_vars_alt), 'VAR2')
       .appendField(', data = resample(')
-      .appendField(new Blockly.FieldTextInput(''), 'DATASET')
+      .appendField(new Blockly.FieldDropdown([
+        ['HELPrct', 'HELPrct'],
+        ['mosaicData::Whickham', 'mosaicData::Whickham'],
+        ['mosaicData::Births', 'mosaicData::Births']
+      ]), 'DATASET')
       .appendField('))');
     this.appendDummyInput()
       .appendField('confint(lm_boot, level = ')
@@ -56,38 +61,42 @@ Blockly.Blocks['Gbootstrap_ci_lm'] = {
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(230);
-    this.setTooltip('Bootstrap confidence interval for slope coefficient in SLR');
+    this.setColour('230');  // Match color with other inference blocks
+    this.setTooltip('Bootstrap confidence interval for slope coefficient in SLR using selected dataset');
+    this.setHelpUrl('https://www.rdocumentation.org/packages/mosaic/topics/resample');
   },
 };
 
-// Code generator function for both blocks
-function generateBootstrapCILmCode(block) {
+// Direct generator implementations instead of shared function
+Blockly.JavaScript['bootstrap_ci_lm'] = function(block) {
   const seed = block.getFieldValue('SEED');
   const var1 = block.getFieldValue('VAR1');
   const var2 = block.getFieldValue('VAR2');
   const iterations = block.getFieldValue('ITERATIONS');
   const confLevel = block.getFieldValue('CONF_LEVEL');
 
-  let code = '';
-
-  if (block.type === 'bootstrap_ci_lm') {
-    code = `# Bootstrap confidence interval for slope coefficient in SLR\n`;
-    code += `set.seed(${seed})\n`;
-    code += `lm_boot <- do(${iterations}) * lm(${var1} ~ ${var2}, data = resample(HELPrct))\n`;
-    code += `confint(lm_boot, level = ${confLevel}, method = "quantile")\n`;
-  } else {
-    const dataset = block.getFieldValue('DATASET');
-    code = `# Bootstrap confidence interval for slope coefficient in SLR\n`;
-    code += `set.seed(${seed})\n`;
-    code += `lm_boot <- do(${iterations}) * lm(${var1} ~ ${var2}, data = resample(${dataset}))\n`;
-    code += `confint(lm_boot, level = ${confLevel}, method = "quantile")\n`;
-  }
-
+  let code = `set.seed(${seed})\n`;
+  code += `lm_boot <- do(${iterations}) * lm(${var1} ~ ${var2}, data = resample(HELPrct))\n`;
+  code += `confint(lm_boot, level = ${confLevel}, method = "quantile")\n`;
+  
   return code;
-}
+};
 
-Blockly.JavaScript['bootstrap_ci_lm'] = generateBootstrapCILmCode;
-Blockly.JavaScript['Gbootstrap_ci_lm'] = generateBootstrapCILmCode;
+Blockly.JavaScript['Gbootstrap_ci_lm'] = function(block) {
+  const seed = block.getFieldValue('SEED');
+  const var1 = block.getFieldValue('VAR1');
+  const var2 = block.getFieldValue('VAR2');
+  const dataset = block.getFieldValue('DATASET');
+  const iterations = block.getFieldValue('ITERATIONS');
+  const confLevel = block.getFieldValue('CONF_LEVEL');
+
+  let code = `set.seed(${seed})\n`;
+  code += `lm_boot <- do(${iterations}) * lm(${var1} ~ ${var2}, data = resample(${dataset}))\n`;
+  code += `confint(lm_boot, level = ${confLevel}, method = "quantile")\n`;
+  
+  return code;
+};
+
+console.log("Bootstrap CI LM block registered:", !!Blockly.JavaScript['bootstrap_ci_lm']);
 
 export default {};
