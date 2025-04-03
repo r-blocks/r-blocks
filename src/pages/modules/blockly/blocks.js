@@ -50,7 +50,6 @@ import './blocks/inference/bootstrap_ci_diffprop';
 import './blocks/inference/bootstrap_ci_diffmean';
 import './blocks/inference/bootstrap_ci_cor';
 import './blocks/inference/bootstrap_ci_lm';
-import './blocks/inference/bootstrap_ci_mlr';
 import './blocks/statistics/correlation';
 import './blocks/statistics/tally';
 import './blocks/statistics/tallysexdata';

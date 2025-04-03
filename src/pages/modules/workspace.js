@@ -213,20 +213,6 @@ export default function Workspace({ initialWorkspaceXml, onWorkspaceInstance }) 
               { kind: 'block', type: 'xchisqtest' },
               { kind: 'block', type: 'anova' },
               { kind: 'block', type: 'slrsummary' },
-              // Univariate Bootstrap Methods
-              { kind: 'block', type: 'bootstrap_ci_prop' },
-              { kind: 'block', type: 'bootstrap_test_prop' },
-              { kind: 'block', type: 'bootstrap_ci_mean' },
-              { kind: 'block', type: 'bootstrap_test_mean' },
-              { kind: 'block', type: 'bootstrap_ci_paired' },
-              { kind: 'block', type: 'bootstrap_test_paired' },
-              // Bivariate Bootstrap Methods
-              { kind: 'block', type: 'bootstrap_ci_diffprop' },
-              { kind: 'block', type: 'bootstrap_ci_diffmean' },
-              { kind: 'block', type: 'bootstrap_ci_cor' },
-              { kind: 'block', type: 'bootstrap_ci_lm' },
-              // Multivariate Bootstrap Methods
-              { kind: 'block', type: 'bootstrap_ci_mlr' },
             ],
           },
           {
@@ -241,20 +227,44 @@ export default function Workspace({ initialWorkspaceXml, onWorkspaceInstance }) 
               { kind: 'block', type: 'Gxchisqtest' },
               { kind: 'block', type: 'Ganova' },
               { kind: 'block', type: 'Gslrsummary' },
+            ],
+          },
+          {
+            kind: 'category',
+            name: 'Bootstrap Methods (using HELPrct)',
+            colour: '#039be5',
+              contents: [
               // Univariate Bootstrap Methods
-              { kind: 'block', type: 'Gbootstrap_ci_prop' },
-              { kind: 'block', type: 'Gbootstrap_test_prop' },
-              { kind: 'block', type: 'Gbootstrap_ci_mean' },
-              { kind: 'block', type: 'Gbootstrap_test_mean' },
-              { kind: 'block', type: 'Gbootstrap_ci_paired' },
-              { kind: 'block', type: 'Gbootstrap_test_paired' },
+              { kind: 'block', type: 'bootstrap_ci_prop' },
+              { kind: 'block', type: 'bootstrap_test_prop' },
+              { kind: 'block', type: 'bootstrap_ci_mean' },
+              { kind: 'block', type: 'bootstrap_test_mean' },
+              { kind: 'block', type: 'bootstrap_ci_paired' },
+              { kind: 'block', type: 'bootstrap_test_paired' },
               // Bivariate Bootstrap Methods
-              { kind: 'block', type: 'Gbootstrap_ci_diffprop' },
-              { kind: 'block', type: 'Gbootstrap_ci_diffmean' },
-              { kind: 'block', type: 'Gbootstrap_ci_cor' },
-              { kind: 'block', type: 'Gbootstrap_ci_lm' },
-              // Multivariate Bootstrap Methods
-              { kind: 'block', type: 'Gbootstrap_ci_mlr' },
+              { kind: 'block', type: 'bootstrap_ci_diffprop' },
+              { kind: 'block', type: 'bootstrap_ci_diffmean' },
+              { kind: 'block', type: 'bootstrap_ci_cor' },
+              { kind: 'block', type: 'bootstrap_ci_lm' },
+            ],
+          },
+          {
+            kind: 'category',
+            name: 'Bootstrap Methods',
+            colour: '#039be5',
+              contents: [
+                // Univariate Bootstrap Methods
+                { kind: 'block', type: 'Gbootstrap_ci_prop' },
+                { kind: 'block', type: 'Gbootstrap_test_prop' },
+                { kind: 'block', type: 'Gbootstrap_ci_mean' },
+                { kind: 'block', type: 'Gbootstrap_test_mean' },
+                { kind: 'block', type: 'Gbootstrap_ci_paired' },
+                { kind: 'block', type: 'Gbootstrap_test_paired' },
+                // Bivariate Bootstrap Methods
+                { kind: 'block', type: 'Gbootstrap_ci_diffprop' },
+                { kind: 'block', type: 'Gbootstrap_ci_diffmean' },
+                { kind: 'block', type: 'Gbootstrap_ci_cor' },
+                { kind: 'block', type: 'Gbootstrap_ci_lm' },
             ],
           },
         ],

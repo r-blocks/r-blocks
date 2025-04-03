@@ -41,15 +41,11 @@ Blockly.Blocks['Gbootstrap_ci_cor'] = {
       .appendField('cor_boot <- do(')
       .appendField(new Blockly.FieldNumber(500, 10, 10000), 'ITERATIONS')
       .appendField(') * cor(')
-      .appendField(new Blockly.FieldDropdown(quantitative_vars), 'VAR1')
+      .appendField(new Blockly.FieldTextInput(''), 'VAR1')
       .appendField(' ~ ')
-      .appendField(new Blockly.FieldDropdown(quantitative_vars_alt), 'VAR2')
+      .appendField(new Blockly.FieldTextInput(''), 'VAR2')
       .appendField(', data = resample(')
-      .appendField(new Blockly.FieldDropdown([
-        ['HELPrct', 'HELPrct'],
-        ['mosaicData::Whickham', 'mosaicData::Whickham'],
-        ['mosaicData::Births', 'mosaicData::Births']
-      ]), 'DATASET')
+      .appendField(new Blockly.FieldTextInput(''), 'DATASET')
       .appendField('))');
     this.appendDummyInput()
       .appendField('confint(cor_boot, level = ')

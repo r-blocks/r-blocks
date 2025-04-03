@@ -191,11 +191,7 @@ Blockly.Blocks['Gbootstrap_test_prop'] = {
     this.appendDummyInput()
       .appendField('prop(~(')
       .appendField(
-        new Blockly.FieldDropdown([
-          ['prop <= observed_prop', 'less'],
-          ['prop >= observed_prop', 'greater'],
-          ['abs(prop-NULL) >= abs(observed_prop-NULL)', 'two.sided'],
-        ]),
+        new Blockly.FieldTextInput(''),
         'ALTERNATIVE'
       )
       .appendField('), data=sim_null)');
