@@ -56,10 +56,7 @@ Blockly.Blocks['Gbootstrap_ci_mean'] = {
       .appendField(new Blockly.FieldNumber(0.05, 0.01, 0.99, 0.01), 'ALPHA')
       .appendField('), method = "quantile")  # ')
       .appendField(
-        new Blockly.FieldDropdown([
-          ['Two-sided', 'two_sided'],
-          ['One-sided', 'one_sided'],
-        ]),
+        new Blockly.FieldTextInput(''),
         'TEST_TYPE'
       )
       .appendField(' test');

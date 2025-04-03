@@ -77,11 +77,7 @@ Blockly.Blocks['Gbootstrap_test_paired'] = {
     this.appendDummyInput()
       .appendField('prop(~ (')
       .appendField(
-        new Blockly.FieldDropdown([
-          ['mean <= bar_d', 'less'],
-          ['mean >= bar_d', 'greater'],
-          ['abs(mean) >= abs(bar_d)', 'two.sided'],
-        ]),
+        new Blockly.FieldTextInput(''),
         'ALTERNATIVE'
       )
       .appendField('), data = sim_null)');
@@ -92,27 +88,6 @@ Blockly.Blocks['Gbootstrap_test_paired'] = {
     this.setColour('230');  // Match color with other inference blocks
     this.setTooltip('Bootstrap test for paired mean difference using selected dataset');
     this.setHelpUrl('https://www.rdocumentation.org/packages/mosaic/topics/resample');
-
-    // Automatically update fields when dataset changes
-    this.setOnChange(function (changeEvent) {
-      if (
-        changeEvent.name === 'DATASET' ||
-        (changeEvent.element === 'field' && changeEvent.name === 'DATASET')
-      ) {
-        const datasetValue = this.getFieldValue('DATASET');
-        this.setFieldValue(datasetValue, 'MEAN_DATASET');
-        this.setFieldValue(datasetValue, 'DATASET2');
-        this.setFieldValue(datasetValue, 'DATASET3');
-        this.setFieldValue(datasetValue, 'RESAMPLE_DATASET');
-      }
-      if (
-        changeEvent.name === 'ORIG_DATASET' ||
-        (changeEvent.element === 'field' && changeEvent.name === 'ORIG_DATASET')
-      ) {
-        const datasetValue = this.getFieldValue('ORIG_DATASET');
-        this.setFieldValue(datasetValue, 'DATASET');
-      }
-    });
   },
 };
 
