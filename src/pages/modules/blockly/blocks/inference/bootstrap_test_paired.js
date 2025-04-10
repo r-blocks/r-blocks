@@ -18,8 +18,10 @@ Blockly.Blocks['bootstrap_test_paired'] = {
     this.appendDummyInput().appendField('HELPrct <- mutate(HELPrct, new_diff = pair.diff - bar_d)');
     this.appendDummyInput()
       .appendField('sim_null <- do(')
-      .appendField(new Blockly.FieldNumber(500, 10, 10000), 'ITERATIONS')
-      .appendField(') * mean(~ new_diff, data = resample(HELPrct))');
+      .appendField(new Blockly.FieldNumber(5000, 10, 10000), 'ITERATIONS')
+      .appendField(') *');
+    this.appendDummyInput()
+      .appendField('    mean(~ new_diff, data = resample(HELPrct))');
     this.appendDummyInput()
       .appendField('prop(~ (')
       .appendField(
@@ -70,7 +72,7 @@ Blockly.Blocks['Gbootstrap_test_paired'] = {
       .appendField(', new_diff = pair.diff - bar_d)');
     this.appendDummyInput()
       .appendField('sim_null <- do(')
-      .appendField(new Blockly.FieldNumber(500, 10, 10000), 'ITERATIONS')
+      .appendField(new Blockly.FieldNumber(5000, 10, 10000), 'ITERATIONS')
       .appendField(') * mean(~ new_diff, data = resample(')
       .appendField(new Blockly.FieldTextInput(''), 'RESAMPLE_DATASET')
       .appendField('))');

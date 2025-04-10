@@ -10,7 +10,7 @@ Blockly.Blocks['bootstrap_ci_mean'] = {
       .appendField(')');
     this.appendDummyInput()
       .appendField('mean_boot <- do(')
-      .appendField(new Blockly.FieldNumber(500, 10, 10000), 'ITERATIONS')
+      .appendField(new Blockly.FieldNumber(5000, 10, 10000), 'ITERATIONS')
       .appendField(') * mean(~')
       .appendField(new Blockly.FieldDropdown(quantitative_vars), 'VAR')
       .appendField(', data = resample(HELPrct))');

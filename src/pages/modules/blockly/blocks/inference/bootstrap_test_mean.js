@@ -20,7 +20,7 @@ Blockly.Blocks['bootstrap_test_mean'] = {
       .appendField(' - observed_mean)');
     this.appendDummyInput()
       .appendField('sim_null <- do(')
-      .appendField(new Blockly.FieldNumber(500, 10, 10000), 'ITERATIONS')
+      .appendField(new Blockly.FieldNumber(5000, 10, 10000), 'ITERATIONS')
       .appendField(') * mean(~ new_')
       .appendField(new Blockly.FieldDropdown(quantitative_vars), 'VAR4')
       .appendField(', data = resample(HELPrct_shifted))');
@@ -83,7 +83,7 @@ Blockly.Blocks['Gbootstrap_test_mean'] = {
       .appendField(' - observed_mean)');
     this.appendDummyInput()
       .appendField('sim_null <- do(')
-      .appendField(new Blockly.FieldNumber(500, 10, 10000), 'ITERATIONS')
+      .appendField(new Blockly.FieldNumber(5000, 10, 10000), 'ITERATIONS')
       .appendField(') * mean(~ new_')
       .appendField(new Blockly.FieldTextInput(''), 'VAR4')
       .appendField(', data = resample(')

@@ -24,6 +24,7 @@ Blockly.Blocks['bootstrap_test_prop'] = {
             ]),
             'SUCCESS'
           );
+          this.getInput('PROP_INPUT').appendField(')'); 
         } else if (newVar === 'anysub') {
           this.getInput('PROP_INPUT').removeField('SUCCESS');
           this.getInput('PROP_INPUT').appendField(
@@ -35,6 +36,7 @@ Blockly.Blocks['bootstrap_test_prop'] = {
           );
           // Set default for anysub
           this.setFieldValue('"yes"', 'SUCCESS');
+          this.getInput('PROP_INPUT').appendField(')'); 
         } else if (newVar === 'sex') {
           this.getInput('PROP_INPUT').removeField('SUCCESS');
           this.getInput('PROP_INPUT').appendField(
@@ -46,6 +48,7 @@ Blockly.Blocks['bootstrap_test_prop'] = {
           );
           // Set default for sex
           this.setFieldValue('"male"', 'SUCCESS');
+          this.getInput('PROP_INPUT').appendField(')'); 
         } else if (newVar === 'homeless') {
           this.getInput('PROP_INPUT').removeField('SUCCESS');
           this.getInput('PROP_INPUT').appendField(
@@ -57,6 +60,7 @@ Blockly.Blocks['bootstrap_test_prop'] = {
           );
           // Set default for homeless
           this.setFieldValue('"homeless"', 'SUCCESS');
+          this.getInput('PROP_INPUT').appendField(')'); 
         } else if (newVar === 'link') {
           this.getInput('PROP_INPUT').removeField('SUCCESS');
           this.getInput('PROP_INPUT').appendField(
@@ -68,6 +72,7 @@ Blockly.Blocks['bootstrap_test_prop'] = {
           );
           // Set default for link
           this.setFieldValue('"yes"', 'SUCCESS');
+          this.getInput('PROP_INPUT').appendField(')'); 
         } else if (newVar === 'racegrp') {
           this.getInput('PROP_INPUT').removeField('SUCCESS');
           this.getInput('PROP_INPUT').appendField(
@@ -81,6 +86,7 @@ Blockly.Blocks['bootstrap_test_prop'] = {
           );
           // Set default for racegrp
           this.setFieldValue('"black"', 'SUCCESS');
+          this.getInput('PROP_INPUT').appendField(')'); 
         } else if (newVar === 'satreat') {
           this.getInput('PROP_INPUT').removeField('SUCCESS');
           this.getInput('PROP_INPUT').appendField(
@@ -92,6 +98,7 @@ Blockly.Blocks['bootstrap_test_prop'] = {
           );
           // Set default for satreat
           this.setFieldValue('"yes"', 'SUCCESS');
+          this.getInput('PROP_INPUT').appendField(')'); 
         } else if (newVar === 'treat') {
           this.getInput('PROP_INPUT').removeField('SUCCESS');
           this.getInput('PROP_INPUT').appendField(
@@ -103,6 +110,7 @@ Blockly.Blocks['bootstrap_test_prop'] = {
           );
           // Set default for treat
           this.setFieldValue('"yes"', 'SUCCESS');
+          this.getInput('PROP_INPUT').appendField(')'); 
         } else {
           this.getInput('PROP_INPUT').removeField('SUCCESS');
           this.getInput('PROP_INPUT').appendField(
@@ -112,6 +120,7 @@ Blockly.Blocks['bootstrap_test_prop'] = {
             ]),
             'SUCCESS'
           );
+          this.getInput('PROP_INPUT').appendField(')'); 
         }
       }
       return newVar;
@@ -130,11 +139,10 @@ Blockly.Blocks['bootstrap_test_prop'] = {
       ]),
       'SUCCESS'
     );
-    propInput.appendField(')');
 
     this.appendDummyInput()
       .appendField('sim_null <- do(')
-      .appendField(new Blockly.FieldNumber(500, 10, 10000), 'ITERATIONS')
+      .appendField(new Blockly.FieldNumber(5000, 10, 10000), 'ITERATIONS')
       .appendField(') * rflip(n=')
       .appendField(new Blockly.FieldNumber(100, 1), 'SAMPLE_SIZE')
       .appendField(', prob=')
@@ -182,7 +190,7 @@ Blockly.Blocks['Gbootstrap_test_prop'] = {
       .appendField(')');
     this.appendDummyInput()
       .appendField('sim_null <- do(')
-      .appendField(new Blockly.FieldNumber(500, 10, 10000), 'ITERATIONS')
+      .appendField(new Blockly.FieldNumber(5000, 10, 10000), 'ITERATIONS')
       .appendField(') * rflip(n=')
       .appendField(new Blockly.FieldNumber(100, 1), 'SAMPLE_SIZE')
       .appendField(', prob=')

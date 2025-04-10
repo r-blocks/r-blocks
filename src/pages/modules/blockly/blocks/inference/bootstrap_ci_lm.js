@@ -10,7 +10,7 @@ Blockly.Blocks['bootstrap_ci_lm'] = {
       .appendField(')');
     this.appendDummyInput()
       .appendField('lm_boot <- do(')
-      .appendField(new Blockly.FieldNumber(500, 10, 10000), 'ITERATIONS')
+      .appendField(new Blockly.FieldNumber(5000, 10, 10000), 'ITERATIONS')
       .appendField(') * lm(')
       .appendField(new Blockly.FieldDropdown(quantitative_vars), 'VAR1')
       .appendField(' ~ ')
@@ -41,7 +41,7 @@ Blockly.Blocks['Gbootstrap_ci_lm'] = {
       .appendField(')');
     this.appendDummyInput()
       .appendField('lm_boot <- do(')
-      .appendField(new Blockly.FieldNumber(500, 10, 10000), 'ITERATIONS')
+      .appendField(new Blockly.FieldNumber(5000, 10, 10000), 'ITERATIONS')
       .appendField(') * lm(')
       .appendField(new Blockly.FieldTextInput(''), 'VAR1')
       .appendField(' ~ ')
