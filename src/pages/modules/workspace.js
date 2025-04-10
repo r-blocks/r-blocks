@@ -37,7 +37,7 @@ import './styles/base.css';
  */
 export default function Workspace({ initialWorkspaceXml, onWorkspaceInstance }) {
   const [workspace, setWorkspace] = useState(null);
-
+  const [isHelpModalOpen, setIsHelpModalOpen] = useState(false);
   const workspaceConfig = {
     grid: {
       spacing: 20,
@@ -319,12 +319,93 @@ export default function Workspace({ initialWorkspaceXml, onWorkspaceInstance }) 
    */
 
   return (
-    <BlocklyWorkspace
-      className="blockly"
-      toolboxConfiguration={toolboxCategories}
-      initialXml={initialWorkspaceXml}
-      workspaceConfiguration={workspaceConfig}
-      onWorkspaceChange={handleWorkspaceChange}
-    />
+    <div className="workspace-container" style={{ position: 'relative', width: '100%', height: '100%' }}>
+      {/* Help Button */}
+      <div style={{
+        position: 'absolute',
+        top: '10px',
+        right: '10px',
+        zIndex: 100,
+      }}>
+        <button 
+          className="help-button"
+          onClick={() => setIsHelpModalOpen(true)}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            padding: '8px 12px',
+            backgroundColor: 'var(--accent-h)',
+            border: 'none',
+            borderRadius: '4px',
+            color: 'white',
+            cursor: 'pointer',
+            boxShadow: '0 2px 5px rgba(0,0,0,0.2)'
+          }}
+        >
+          <span style={{ marginRight: '5px' }}>Getting Started</span>
+        </button>
+      </div>
+      
+      {/* Blockly Workspace */}
+      <BlocklyWorkspace
+        className="blockly"
+        toolboxConfiguration={toolboxCategories}
+        initialXml={initialWorkspaceXml}
+        workspaceConfiguration={workspaceConfig}
+        onWorkspaceChange={handleWorkspaceChange}
+      />
+
+      {/* Getting Started Modal */}
+      {isHelpModalOpen && (
+        <div className="modal-overlay">
+          <div className="modal-content" style={{ maxWidth: '700px', maxHeight: '80vh', overflow: 'auto' }}>
+            <div className="modal-buttons">
+              <button 
+                type="button" 
+                className="base-button" 
+                onClick={() => setIsHelpModalOpen(false)}
+              >
+                Close
+              </button>
+            </div>
+
+            <h2>Working with RBlocks</h2>
+            
+            <div style={{ textAlign: 'left', marginBottom: '20px' }}>
+              <h3>Block Categories</h3>
+              <p>The blocks are organized into several categories:</p>
+              <ul>
+                <li><strong>General Functions:</strong> Basic R functions for data exploration.</li>
+                <li><strong>mosaic:</strong> Functions from the mosaic package, categorized as:
+                  <ul>
+                    <li><strong>Numerical Summaries:</strong> Calculate statistics from data.</li>
+                    <li><strong>Data Visualization:</strong> Create plots and charts.</li>
+                    <li><strong>Statistical Inference:</strong> Tests like t-tests, ANOVA, etc.</li>
+                    <li><strong>Bootstrap Methods:</strong> Resampling techniques for confidence intervals and hypothesis tests.</li>
+                  </ul>
+                </li>
+                <li><strong>ggplot2:</strong> Advanced data visualization blocks.</li>
+              </ul>
+              
+              <h3>Working with Blocks</h3>
+              <ol>
+                <li>Drag blocks from the toolbox on the left into your workspace.</li>
+                <li>Blocks connect vertically - the output flows from top to bottom.</li>
+                <li>HelpRCT blocks have dropdown menus for selecting variables.</li>
+              </ol>
+
+              <h3>Tips for Success</h3>
+              <ul>
+                <li>Hover over blocks to see tooltips explaining their function.</li>
+                <li>Check the output panel after running your code.</li>
+                <li>When using paired data blocks, make sure to select appropriate variables for comparison.</li>
+                <li>For bootstrap methods, 5000 iterations is typically sufficient for stable results.</li>
+                <li>Save your work regularly using the Save button in the toolbar.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
   );
 }
