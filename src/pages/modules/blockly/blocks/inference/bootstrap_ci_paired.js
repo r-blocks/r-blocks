@@ -16,13 +16,14 @@ Blockly.Blocks['bootstrap_ci_paired'] = {
       .appendField(')');
     this.appendDummyInput()
       .appendField('mean_boot <- do(')
-      .appendField(new Blockly.FieldNumber(500, 10, 10000), 'ITERATIONS')
-      .appendField(') * mean(~ pair.diff, data = resample(HELPrct))');
+      .appendField(new Blockly.FieldNumber(5000, 10, 10000), 'ITERATIONS')
+      .appendField(') *');
+    this.appendDummyInput()
+      .appendField('    mean(~ pair.diff, data = resample(HELPrct))');
     this.appendDummyInput()
       .appendField('confint(mean_boot, level = ')
       .appendField(new Blockly.FieldNumber(0.95, 0, 1, 0.01), 'CONF_LEVEL')
       .appendField(', method = "quantile")');
-
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -51,7 +52,7 @@ Blockly.Blocks['Gbootstrap_ci_paired'] = {
       .appendField(')');
     this.appendDummyInput()
       .appendField('mean_boot <- do(')
-      .appendField(new Blockly.FieldNumber(500, 10, 10000), 'ITERATIONS')
+      .appendField(new Blockly.FieldNumber(5000, 10, 10000), 'ITERATIONS')
       .appendField(') * mean(~ pair.diff, data = resample(')
       .appendField(new Blockly.FieldTextInput(''), 'RESAMPLE_DATASET')
       .appendField('))');

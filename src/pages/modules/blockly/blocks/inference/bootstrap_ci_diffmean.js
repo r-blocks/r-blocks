@@ -10,7 +10,7 @@ Blockly.Blocks['bootstrap_ci_diffmean'] = {
       .appendField(')');
     this.appendDummyInput()
       .appendField('mean_boot <- do(')
-      .appendField(new Blockly.FieldNumber(500, 10, 10000), 'ITERATIONS')
+      .appendField(new Blockly.FieldNumber(5000, 10, 10000), 'ITERATIONS')
       .appendField(') * diffmean(')
       .appendField(new Blockly.FieldDropdown(quantitative_vars), 'VAR')
       .appendField(' ~ ')
@@ -39,7 +39,7 @@ Blockly.Blocks['Gbootstrap_ci_diffmean'] = {
       .appendField(')');
     this.appendDummyInput()
       .appendField('mean_boot <- do(')
-      .appendField(new Blockly.FieldNumber(500, 10, 10000), 'ITERATIONS')
+      .appendField(new Blockly.FieldNumber(5000, 10, 10000), 'ITERATIONS')
       .appendField(') * diffmean(')
       .appendField(new Blockly.FieldTextInput(''), 'VAR')
       .appendField(' ~ ')

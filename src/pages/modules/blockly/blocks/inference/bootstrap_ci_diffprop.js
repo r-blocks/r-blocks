@@ -24,6 +24,7 @@ Blockly.Blocks['bootstrap_ci_diffprop'] = {
             ]),
             'SUCCESS'
           );
+          this.getInput('PROP_INPUT').appendField(')'); 
         } else if (newVar === 'anysub') {
           this.getInput('PROP_INPUT').removeField('SUCCESS');
           this.getInput('PROP_INPUT').appendField(
@@ -35,6 +36,7 @@ Blockly.Blocks['bootstrap_ci_diffprop'] = {
           );
           // Set default for anysub
           this.setFieldValue('"yes"', 'SUCCESS');
+          this.getInput('PROP_INPUT').appendField(')'); 
         } else if (newVar === 'sex') {
           this.getInput('PROP_INPUT').removeField('SUCCESS');
           this.getInput('PROP_INPUT').appendField(
@@ -46,6 +48,7 @@ Blockly.Blocks['bootstrap_ci_diffprop'] = {
           );
           // Set default for sex
           this.setFieldValue('"male"', 'SUCCESS');
+          this.getInput('PROP_INPUT').appendField(')'); 
         } else if (newVar === 'homeless') {
           this.getInput('PROP_INPUT').removeField('SUCCESS');
           this.getInput('PROP_INPUT').appendField(
@@ -57,6 +60,7 @@ Blockly.Blocks['bootstrap_ci_diffprop'] = {
           );
           // Set default for homeless
           this.setFieldValue('"homeless"', 'SUCCESS');
+          this.getInput('PROP_INPUT').appendField(')'); 
         } else if (newVar === 'link') {
           this.getInput('PROP_INPUT').removeField('SUCCESS');
           this.getInput('PROP_INPUT').appendField(
@@ -68,6 +72,7 @@ Blockly.Blocks['bootstrap_ci_diffprop'] = {
           );
           // Set default for link
           this.setFieldValue('"yes"', 'SUCCESS');
+          this.getInput('PROP_INPUT').appendField(')'); 
         } else if (newVar === 'racegrp') {
           this.getInput('PROP_INPUT').removeField('SUCCESS');
           this.getInput('PROP_INPUT').appendField(
@@ -81,6 +86,7 @@ Blockly.Blocks['bootstrap_ci_diffprop'] = {
           );
           // Set default for racegrp
           this.setFieldValue('"black"', 'SUCCESS');
+          this.getInput('PROP_INPUT').appendField(')'); 
         } else if (newVar === 'satreat') {
           this.getInput('PROP_INPUT').removeField('SUCCESS');
           this.getInput('PROP_INPUT').appendField(
@@ -92,6 +98,7 @@ Blockly.Blocks['bootstrap_ci_diffprop'] = {
           );
           // Set default for satreat
           this.setFieldValue('"yes"', 'SUCCESS');
+          this.getInput('PROP_INPUT').appendField(')'); 
         } else if (newVar === 'treat') {
           this.getInput('PROP_INPUT').removeField('SUCCESS');
           this.getInput('PROP_INPUT').appendField(
@@ -103,6 +110,7 @@ Blockly.Blocks['bootstrap_ci_diffprop'] = {
           );
           // Set default for treat
           this.setFieldValue('"yes"', 'SUCCESS');
+          this.getInput('PROP_INPUT').appendField(')'); 
         } else {
           this.getInput('PROP_INPUT').removeField('SUCCESS');
           this.getInput('PROP_INPUT').appendField(
@@ -112,6 +120,7 @@ Blockly.Blocks['bootstrap_ci_diffprop'] = {
             ]),
             'SUCCESS'
           );
+          this.getInput('PROP_INPUT').appendField(')'); 
         }
       }
       return newVar;
@@ -122,7 +131,7 @@ Blockly.Blocks['bootstrap_ci_diffprop'] = {
 
     this.appendDummyInput('PROP_INPUT')
       .appendField('prop_boot <- do(')
-      .appendField(new Blockly.FieldNumber(500, 10, 10000), 'ITERATIONS')
+      .appendField(new Blockly.FieldNumber(5000, 10, 10000), 'ITERATIONS')
       .appendField(') * diffprop(')
       .appendField(varField, 'VAR')
       .appendField(' ~ ')
@@ -135,7 +144,6 @@ Blockly.Blocks['bootstrap_ci_diffprop'] = {
         ]),
         'SUCCESS'
       )
-      .appendField(')');
     this.appendDummyInput()
       .appendField('confint(prop_boot, level = ')
       .appendField(new Blockly.FieldNumber(0.95, 0, 1, 0.01), 'CONF_LEVEL')
@@ -164,7 +172,7 @@ Blockly.Blocks['Gbootstrap_ci_diffprop'] = {
       .appendField(')');
     this.appendDummyInput()
       .appendField('prop_boot <- do(')
-      .appendField(new Blockly.FieldNumber(500, 10, 10000), 'ITERATIONS')
+      .appendField(new Blockly.FieldNumber(5000, 10, 10000), 'ITERATIONS')
       .appendField(') * diffprop(')
       .appendField(new Blockly.FieldTextInput(''), 'VAR')
       .appendField(' ~ ')

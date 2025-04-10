@@ -39,7 +39,7 @@ Blockly.Blocks['Gbootstrap_ci_cor'] = {
       .appendField(')');
     this.appendDummyInput()
       .appendField('cor_boot <- do(')
-      .appendField(new Blockly.FieldNumber(500, 10, 10000), 'ITERATIONS')
+      .appendField(new Blockly.FieldNumber(5000, 10, 10000), 'ITERATIONS')
       .appendField(') * cor(')
       .appendField(new Blockly.FieldTextInput(''), 'VAR1')
       .appendField(' ~ ')
