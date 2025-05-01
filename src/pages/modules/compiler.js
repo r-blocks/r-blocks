@@ -6,7 +6,7 @@ export default function Compiler({ workspace }) {
   const handleConvert = () => {
     if (workspace) {
       const code = Blockly.JavaScript.workspaceToCode(workspace);
-      const linked = 'https://rdrr.io/snippets/embed/?code=' + encodeURI(code);
+      const linked = 'https://rdrr.io/snippets/embed/?code=' + encodeURIComponent(code);
       const snippetElement = document.getElementById('snippet');
       if (snippetElement) {
         snippetElement.src = linked;
