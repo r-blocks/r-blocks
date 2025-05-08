@@ -36,21 +36,43 @@ export default function Auth() {
         overflow: 'hidden'
       }}
     >
-      <h1 className="header">RBlocks Studio</h1>
-      <button
-        className="base-button"
-        onClick={signInWithGoogle}
-        style={{
-          marginTop: '1rem',
-          backgroundColor: 'var(--secondary-h)',
-          borderTop: '2px solid var(--secondary-m)',
-          borderLeft: '2px solid var(--secondary-m)',
-          borderRight: 'none',
-          borderBottom: 'none',
-        }}
-      >
-        Sign in with Google
-      </button>
+      <div style={{ 
+        display: 'flex', 
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '60%' 
+      }}>
+        <h1 style={{ 
+          color: 'var(--secondary-l)',
+          fontSize: '4rem',
+          fontFamily: 'Roboto Mono',
+          fontWeight: 700,
+          marginBottom: '2rem',
+          textAlign: 'center'
+        }}>RBlocks Studio</h1>
+        <button
+          className="base-button"
+          onClick={signInWithGoogle}
+          style={{
+            marginTop: '2rem',
+            backgroundColor: 'var(--secondary-h)',
+            borderTop: '2px solid var(--secondary-m)',
+            borderLeft: '2px solid var(--secondary-m)',
+            borderRight: 'none',
+            borderBottom: 'none',
+            fontSize: '1.2rem',
+            width: '16rem',
+            height: '4rem',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            padding: 0
+          }}
+        >
+          Sign in with Google
+        </button>
+      </div>
     </div>
   );
 }
