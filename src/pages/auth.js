@@ -25,10 +25,15 @@ export default function Auth() {
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        height: '100vh',
+        height: '100%',
+        width: '100%',
         background: 'var(--primary-m)',
-        paddingBottom: '20vh', // Push content up
-        transform: 'translateY(-10vh)', // Shift everything up
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        bottom: 0,
+        right: 0,
+        overflow: 'hidden'
       }}
     >
       <h1 className="header">RBlocks Studio</h1>
@@ -36,7 +41,7 @@ export default function Auth() {
         className="base-button"
         onClick={signInWithGoogle}
         style={{
-          marginTop: '1rem', // Reduced from 2rem
+          marginTop: '1rem',
           backgroundColor: 'var(--secondary-h)',
           borderTop: '2px solid var(--secondary-m)',
           borderLeft: '2px solid var(--secondary-m)',

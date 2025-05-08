@@ -34,24 +34,27 @@
     <link href="/static/css/main.4425ef3f.css" rel="stylesheet" />
     <script defer="defer" src="/r-blocks/static/js/main.3de9ec7d.js"></script>
     <link href="/r-blocks/static/css/main.4425ef3f.css" rel="stylesheet" />
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+      }
+      #root {
+        height: 100% !important;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+      }
+    </style>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <header>
-      <div style="float: right">
-        <a
-          id="Home"
-          href="/"
-          style="
-            font-size: 1.5em;
-            color: #fff;
-            text-decoration: none;
-            border-bottom: 1px solid #fff;
-          "
-          >Home</a
-        >
-      </div>
-    </header>
-    <div id="root" style="height: 100vh"></div>
+    <div id="root"></div>
   </body>
 </html>
