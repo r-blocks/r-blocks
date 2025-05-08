@@ -9,7 +9,7 @@ import './styles/base.css';
 export default function Toolbar({ getCurrentXml, studioId }) {
   const [studioName, setStudioName] = useState('Untitled Studio');
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [saveConfirmation, setSaveConfirmation] = useState(false); // Add this line
+  const [saveConfirmation, setSaveConfirmation] = useState(false);
   const navigate = useNavigate();
   const auth = getAuth();
 
@@ -26,7 +26,6 @@ export default function Toolbar({ getCurrentXml, studioId }) {
         lastModified: Date.now(),
       });
 
-      // Show confirmation and auto-hide after 2 seconds
       setSaveConfirmation(true);
       setTimeout(() => setSaveConfirmation(false), 2000);
 
@@ -74,19 +73,19 @@ export default function Toolbar({ getCurrentXml, studioId }) {
   };
 
   return (
-    <nav className="toolbar">
-      <ul style={{ width: '100%', flex: 1 }}>
-        <h1 className="header">RBlocks</h1>
-      </ul>
+    <nav className="toolbar" style={{ padding: '0 1.5rem' }}>
+      <div style={{ width: '100%', flex: 1, paddingLeft: '1rem' }}>
+        <h1 className="header" style={{ fontSize: '2.5rem', margin: '0.5rem 0' }}>RBlocks</h1>
+      </div>
       <div style={{ width: '100%', flex: 6, display: 'flex', alignItems: 'center' }}>
-        <span style={{ margin: 'auto 0.5rem', color: 'white' }}>{studioName}</span>
-        <button className="small-button" onClick={() => setIsModalOpen(true)} style={buttonStyle}>
+        <span style={{ margin: 'auto 1rem', color: 'white', fontSize: '1.2rem' }}>{studioName}</span>
+        <button className="small-button" onClick={() => setIsModalOpen(true)} style={{ ...buttonStyle, margin: '0 0.8rem' }}>
           Change Studio Name
         </button>
         <button
           className="small-button"
           onClick={handleSave}
-          style={buttonStyle}
+          style={{ ...buttonStyle, margin: '0 0.8rem' }}
           disabled={!studioName.trim()}
         >
           Save
@@ -95,8 +94,8 @@ export default function Toolbar({ getCurrentXml, studioId }) {
           <span
             style={{
               color: 'white',
-              marginLeft: '10px',
-              fontSize: '0.9em',
+              marginLeft: '15px',
+              fontSize: '1rem',
             }}
           >
             Saved successfully!
@@ -105,7 +104,18 @@ export default function Toolbar({ getCurrentXml, studioId }) {
 
         {isModalOpen && (
           <div className="modal-overlay">
-            <div className="modal-content">
+            <div className="modal-content" style={{
+              padding: '2rem',
+              borderRadius: '8px',
+              maxWidth: '450px'
+            }}>
+              <h3 style={{ 
+                fontSize: '1.6rem', 
+                color: 'var(--primary-h)',
+                marginTop: 0,
+                marginBottom: '1.5rem',
+                textAlign: 'center'
+              }}>Rename Studio</h3>
               <form onSubmit={handleNameSubmit}>
                 <input
                   type="text"
@@ -113,17 +123,56 @@ export default function Toolbar({ getCurrentXml, studioId }) {
                   onChange={(e) => setStudioName(e.target.value)}
                   placeholder="Enter studio name"
                   autoFocus
+                  style={{
+                    width: '100%',
+                    padding: '0.8rem 1rem',
+                    fontSize: '1.2rem',
+                    borderRadius: '4px',
+                    border: '1px solid #ccc',
+                    marginBottom: '1.5rem'
+                  }}
                 />
-                <div className="modal-buttons">
-                  <button type="submit" className="small-button">
-                    Confirm
-                  </button>
-                  <button
-                    type="button"
-                    className="small-button"
+                <div className="modal-buttons" style={{ 
+                  display: 'flex', 
+                  justifyContent: 'flex-end',
+                  gap: '1rem' 
+                }}>
+                  <button 
+                    type="button" 
+                    className="small-button" 
                     onClick={() => setIsModalOpen(false)}
+                    style={{
+                      margin: 0,
+                      fontSize: '1rem',
+                      padding: '0.5rem 1rem',
+                      backgroundColor: 'var(--primary-m)',
+                      borderTop: '2px solid var(--primary-l)',
+                      borderLeft: '2px solid var(--primary-l)',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      height: 'auto'
+                    }}
                   >
                     Cancel
+                  </button>
+                  <button 
+                    type="submit" 
+                    className="small-button"
+                    style={{
+                      margin: 0,
+                      fontSize: '1rem',
+                      padding: '0.5rem 1rem',
+                      backgroundColor: 'var(--accent-h)',
+                      borderTop: '2px solid var(--accent-l)',
+                      borderLeft: '2px solid var(--accent-l)',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      height: 'auto'
+                    }}
+                  >
+                    Confirm
                   </button>
                 </div>
               </form>
@@ -137,13 +186,13 @@ export default function Toolbar({ getCurrentXml, studioId }) {
           flex: 3,
           display: 'flex',
           justifyContent: 'flex-end',
-          paddingRight: '1rem',
+          paddingRight: '1.5rem',
         }}
       >
-        <button className="small-button" onClick={() => navigate('/dashboard')} style={buttonStyle}>
+        <button className="small-button" onClick={() => navigate('/dashboard')} style={{ ...buttonStyle, margin: '0 0.8rem' }}>
           Exit
         </button>
-        <button className="small-button" onClick={handleLogout} style={buttonStyle}>
+        <button className="small-button" onClick={handleLogout} style={{ ...buttonStyle, margin: '0 0.8rem' }}>
           Logout
         </button>
       </div>

@@ -404,50 +404,73 @@ export default function Workspace({ initialWorkspaceXml, onWorkspaceInstance }) 
       {/* Getting Started Modal */}
       {isHelpModalOpen && (
         <div className="modal-overlay">
-          <div className="modal-content" style={{ maxWidth: '700px', maxHeight: '80vh', overflow: 'auto' }}>
-            <div className="modal-buttons">
+          <div className="modal-content" style={{ 
+            maxWidth: '700px', 
+            maxHeight: '80vh', 
+            overflow: 'auto',
+            padding: '2rem',
+            borderRadius: '8px'
+          }}>
+            <h2 style={{ 
+              fontSize: '2rem', 
+              color: 'var(--primary-h)',
+              marginTop: 0,
+              marginBottom: '1.5rem'
+            }}>Working with RBlocks</h2>
+            
+            <div style={{ textAlign: 'left', marginBottom: '1.5rem', fontSize: '1.1rem', lineHeight: '1.6' }}>
+              <h3 style={{ fontSize: '1.5rem', color: 'var(--primary-l)', marginTop: '1.5rem', marginBottom: '0.8rem' }}>Block Categories</h3>
+              <p style={{ marginBottom: '1rem' }}>The blocks are organized into several categories:</p>
+              <ul style={{ paddingLeft: '1.5rem' }}>
+                <li style={{ marginBottom: '0.5rem' }}><strong>General Functions:</strong> Basic R functions for data exploration.</li>
+                <li style={{ marginBottom: '0.5rem' }}><strong>mosaic:</strong> Functions from the mosaic package, categorized as:
+                  <ul style={{ paddingLeft: '1.5rem', marginTop: '0.5rem' }}>
+                    <li style={{ marginBottom: '0.5rem' }}><strong>Numerical Summaries:</strong> Calculate statistics from data.</li>
+                    <li style={{ marginBottom: '0.5rem' }}><strong>Data Visualization:</strong> Create plots and charts.</li>
+                    <li style={{ marginBottom: '0.5rem' }}><strong>Statistical Inference:</strong> Tests like t-tests, ANOVA, etc.</li>
+                    <li style={{ marginBottom: '0.5rem' }}><strong>Bootstrap Methods:</strong> Resampling techniques for confidence intervals and hypothesis tests.</li>
+                  </ul>
+                </li>
+                <li style={{ marginBottom: '0.5rem' }}><strong>ggplot2:</strong> Advanced data visualization blocks.</li>
+              </ul>
+              
+              <h3 style={{ fontSize: '1.5rem', color: 'var(--primary-l)', marginTop: '1.5rem', marginBottom: '0.8rem' }}>Working with Blocks</h3>
+              <ol style={{ paddingLeft: '1.5rem' }}>
+                <li style={{ marginBottom: '0.5rem' }}>Drag blocks from the toolbox on the left into your workspace.</li>
+                <li style={{ marginBottom: '0.5rem' }}>Blocks connect vertically - the output flows from top to bottom.</li>
+                <li style={{ marginBottom: '0.5rem' }}>HelpRCT blocks have dropdown menus for selecting variables.</li>
+              </ol>
+
+              <h3 style={{ fontSize: '1.5rem', color: 'var(--primary-l)', marginTop: '1.5rem', marginBottom: '0.8rem' }}>Tips for Success</h3>
+              <ul style={{ paddingLeft: '1.5rem' }}>
+                <li style={{ marginBottom: '0.5rem' }}>Hover over blocks to see tooltips explaining their function.</li>
+                <li style={{ marginBottom: '0.5rem' }}>Check the output panel after running your code.</li>
+                <li style={{ marginBottom: '0.5rem' }}>When using paired data blocks, make sure to select appropriate variables for comparison.</li>
+                <li style={{ marginBottom: '0.5rem' }}>For bootstrap methods, 5000 iterations is typically sufficient for stable results.</li>
+                <li style={{ marginBottom: '0.5rem' }}>Save your work regularly using the Save button in the toolbar.</li>
+              </ul>
+            </div>
+            
+            <div className="modal-buttons" style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '1.5rem' }}>
               <button 
                 type="button" 
                 className="base-button" 
                 onClick={() => setIsHelpModalOpen(false)}
+                style={{
+                  margin: '0',
+                  fontSize: '1.1rem',
+                  height: '3rem',
+                  width: '10rem',
+                  backgroundColor: 'var(--secondary-h)',
+                  borderTop: '2px solid var(--secondary-m)',
+                  borderLeft: '2px solid var(--secondary-m)',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center'
+                }}
               >
                 Close
               </button>
-            </div>
-
-            <h2>Working with RBlocks</h2>
-            
-            <div style={{ textAlign: 'left', marginBottom: '20px' }}>
-              <h3>Block Categories</h3>
-              <p>The blocks are organized into several categories:</p>
-              <ul>
-                <li><strong>General Functions:</strong> Basic R functions for data exploration.</li>
-                <li><strong>mosaic:</strong> Functions from the mosaic package, categorized as:
-                  <ul>
-                    <li><strong>Numerical Summaries:</strong> Calculate statistics from data.</li>
-                    <li><strong>Data Visualization:</strong> Create plots and charts.</li>
-                    <li><strong>Statistical Inference:</strong> Tests like t-tests, ANOVA, etc.</li>
-                    <li><strong>Bootstrap Methods:</strong> Resampling techniques for confidence intervals and hypothesis tests.</li>
-                  </ul>
-                </li>
-                <li><strong>ggplot2:</strong> Advanced data visualization blocks.</li>
-              </ul>
-              
-              <h3>Working with Blocks</h3>
-              <ol>
-                <li>Drag blocks from the toolbox on the left into your workspace.</li>
-                <li>Blocks connect vertically - the output flows from top to bottom.</li>
-                <li>HelpRCT blocks have dropdown menus for selecting variables.</li>
-              </ol>
-
-              <h3>Tips for Success</h3>
-              <ul>
-                <li>Hover over blocks to see tooltips explaining their function.</li>
-                <li>Check the output panel after running your code.</li>
-                <li>When using paired data blocks, make sure to select appropriate variables for comparison.</li>
-                <li>For bootstrap methods, 5000 iterations is typically sufficient for stable results.</li>
-                <li>Save your work regularly using the Save button in the toolbar.</li>
-              </ul>
             </div>
           </div>
         </div>
