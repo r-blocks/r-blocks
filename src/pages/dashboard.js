@@ -62,7 +62,17 @@ export default function Dashboard() {
   };
 
   return (
-    <div style={{ width: '100vw', height: '100vh' }}>
+    <div style={{ 
+      width: '100%', 
+      height: '100%', 
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      bottom: 0,
+      right: 0,
+      display: 'flex',
+      flexDirection: 'column'
+    }}>
       <div className="toolbar">
         <h1 className="header">RBlocks</h1>
         <div style={{ flex: 1 }}></div>
@@ -70,19 +80,36 @@ export default function Dashboard() {
           Logout
         </button>
       </div>
-      <div className="dashboard-content">
-        <div className="dashboard-header">
-          <h2>My Studios</h2>
-
-          <button className="base-button" onClick={() => setIsHelpModalOpen(true)}>
-              Getting Started
-          </button>
-          <button className="base-button" onClick={createNewStudio}>
-            Create New Studio
-          </button>
+      <div style={{ 
+        flex: 1, 
+        overflowY: 'auto',
+        height: 'calc(100% - 4.5rem)', /* Subtract toolbar height */
+        background: 'var(--text-extra)',
+        paddingTop: 0
+      }}>
+        <div style={{ 
+          display: 'flex', 
+          justifyContent: 'space-between', 
+          alignItems: 'center',
+          position: 'sticky',
+          top: 0,
+          backgroundColor: 'var(--text-extra)',
+          padding: '1rem 2rem',
+          borderBottom: '1px solid var(--primary-p)',
+          zIndex: 10
+        }}>
+          <h2 style={{ margin: 0 }}>My Studios</h2>
+          <div>
+            <button className="base-button" onClick={() => setIsHelpModalOpen(true)}>
+                Getting Started
+            </button>
+            <button className="base-button" onClick={createNewStudio}>
+              Create New Studio
+            </button>
+          </div>
         </div>
 
-        <div className="studios-grid">
+        <div className="studios-grid" style={{ padding: '1.5rem 2rem' }}>
           {studios.map((studio) => (
             <div
               key={studio.id}

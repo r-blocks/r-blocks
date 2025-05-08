@@ -51,16 +51,27 @@ export default function Studio() {
   };
 
   return (
-    <div style={{ width: '100vw', height: '100vh' }}>
+    <div style={{ 
+      width: '100%', 
+      height: '100%',
+      display: 'flex',
+      flexDirection: 'column',
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      bottom: 0,
+      right: 0,
+      overflow: 'hidden'
+    }}>
       <Toolbar getCurrentXml={getCurrentXml} studioId={studioId} />
-      <div className="core">
-        <div style={{ flex: 8 }}>
+      <div className="core" style={{ display: 'flex', flex: 1, height: 'calc(100% - 4.5rem)' }}>
+        <div style={{ flex: 8, height: '100%' }}>
           <Workspace
             initialWorkspaceXml={initialBlocks}
             onWorkspaceInstance={setWorkspaceInstance}
           />
         </div>
-        <div style={{ flex: 4 }}>
+        <div style={{ flex: 4, height: '100%', display: 'flex', flexDirection: 'column' }}>
           <Compiler workspace={workspaceInstance} />
         </div>
       </div>
