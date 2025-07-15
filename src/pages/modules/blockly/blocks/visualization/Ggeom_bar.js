@@ -11,7 +11,7 @@ Blockly.Blocks['Ggeom_bar'] = {
       .appendField('), stat = "count", fill =')
       .appendField(new Blockly.FieldTextInput('steelblue'), 'fill')
       .appendField(', data = HELPrct)');
-    
+
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -27,12 +27,17 @@ Blockly.Blocks['Ggeom_bar'] = {
 Blockly.JavaScript['Ggeom_bar'] = function (block) {
   var x_axis = block.getFieldValue('x_axis');
   var fill = block.getFieldValue('fill');
-  
+
   // Add quotes to string values if they don't have them
   fill = fill.startsWith('"') ? fill : '"' + fill + '"';
-  
-  var code = 'geom_bar(mapping = aes(x = ' + x_axis + '), stat = "count", fill = ' + fill + ', data = HELPrct)\n';
-  
+
+  var code =
+    'geom_bar(mapping = aes(x = ' +
+    x_axis +
+    '), stat = "count", fill = ' +
+    fill +
+    ', data = HELPrct)\n';
+
   return code;
 };
 

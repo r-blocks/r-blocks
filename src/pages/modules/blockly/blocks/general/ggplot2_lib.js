@@ -13,7 +13,7 @@ Blockly.Blocks['ggplot2_lib'] = {
           ['dplyr', 'dplyr'],
           ['tidyr', 'tidyr'],
           ['scales', 'scales'],
-          ['gridExtra', 'gridExtra']
+          ['gridExtra', 'gridExtra'],
         ]),
         'library_name'
       )

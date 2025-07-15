@@ -15,7 +15,7 @@ Blockly.Blocks['Ggeom_line'] = {
       .appendField(', color =')
       .appendField(new Blockly.FieldTextInput('blue'), 'color')
       .appendField(', data = HELPrct)');
-    
+
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -33,13 +33,22 @@ Blockly.JavaScript['Ggeom_line'] = function (block) {
   var y_axis = block.getFieldValue('y_axis');
   var line_type = block.getFieldValue('line_type');
   var color = block.getFieldValue('color');
-  
+
   // Add quotes to string values if they don't have them
   line_type = line_type.startsWith('"') ? line_type : '"' + line_type + '"';
   color = color.startsWith('"') ? color : '"' + color + '"';
-  
-  var code = 'geom_line(mapping = aes(x = ' + x_axis + ', y = ' + y_axis + '), linetype = ' + line_type + ', color = ' + color + ', data = HELPrct)\n';
-  
+
+  var code =
+    'geom_line(mapping = aes(x = ' +
+    x_axis +
+    ', y = ' +
+    y_axis +
+    '), linetype = ' +
+    line_type +
+    ', color = ' +
+    color +
+    ', data = HELPrct)\n';
+
   return code;
 };
 

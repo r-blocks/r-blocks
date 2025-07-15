@@ -33,24 +33,30 @@ export default function Auth() {
         left: 0,
         bottom: 0,
         right: 0,
-        overflow: 'hidden'
+        overflow: 'hidden',
       }}
     >
-      <div style={{ 
-        display: 'flex', 
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: '60%' 
-      }}>
-        <h1 style={{ 
-          color: 'var(--secondary-l)',
-          fontSize: '4rem',
-          fontFamily: 'Roboto Mono',
-          fontWeight: 700,
-          marginBottom: '2rem',
-          textAlign: 'center'
-        }}>RBlocks Studio</h1>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          height: '60%',
+        }}
+      >
+        <h1
+          style={{
+            color: 'var(--secondary-l)',
+            fontSize: '4rem',
+            fontFamily: 'Roboto Mono',
+            fontWeight: 700,
+            marginBottom: '2rem',
+            textAlign: 'center',
+          }}
+        >
+          RBlocks Studio
+        </h1>
         <button
           className="base-button"
           onClick={signInWithGoogle}
@@ -67,7 +73,7 @@ export default function Auth() {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            padding: 0
+            padding: 0,
           }}
         >
           Sign in with Google

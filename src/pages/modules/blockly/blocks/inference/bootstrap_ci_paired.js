@@ -18,8 +18,7 @@ Blockly.Blocks['bootstrap_ci_paired'] = {
       .appendField('mean_boot <- do(')
       .appendField(new Blockly.FieldNumber(5000, 10, 10000), 'ITERATIONS')
       .appendField(') *');
-    this.appendDummyInput()
-      .appendField('    mean(~ pair.diff, data = resample(HELPrct))');
+    this.appendDummyInput().appendField('    mean(~ pair.diff, data = resample(HELPrct))');
     this.appendDummyInput()
       .appendField('confint(mean_boot, level = ')
       .appendField(new Blockly.FieldNumber(0.95, 0, 1, 0.01), 'CONF_LEVEL')
@@ -27,7 +26,7 @@ Blockly.Blocks['bootstrap_ci_paired'] = {
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour('230');  // Match color with other inference blocks
+    this.setColour('230'); // Match color with other inference blocks
     this.setTooltip('Bootstrap confidence interval for paired mean difference using HELPrct data');
     this.setHelpUrl('https://www.rdocumentation.org/packages/mosaic/topics/resample');
   },
@@ -64,8 +63,10 @@ Blockly.Blocks['Gbootstrap_ci_paired'] = {
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour('230');  // Match color with other inference blocks
-    this.setTooltip('Bootstrap confidence interval for paired mean difference using selected dataset');
+    this.setColour('230'); // Match color with other inference blocks
+    this.setTooltip(
+      'Bootstrap confidence interval for paired mean difference using selected dataset'
+    );
     this.setHelpUrl('https://www.rdocumentation.org/packages/mosaic/topics/resample');
 
     // Automatically update fields when dataset changes
@@ -89,7 +90,7 @@ Blockly.Blocks['Gbootstrap_ci_paired'] = {
 };
 
 // Separate generator functions for each block
-Blockly.JavaScript['bootstrap_ci_paired'] = function(block) {
+Blockly.JavaScript['bootstrap_ci_paired'] = function (block) {
   const seed = block.getFieldValue('SEED');
   const preVar = block.getFieldValue('PRE_VAR');
   const postVar = block.getFieldValue('POST_VAR');
@@ -100,11 +101,11 @@ Blockly.JavaScript['bootstrap_ci_paired'] = function(block) {
   code += `HELPrct <- mutate(HELPrct, pair.diff = ${postVar} - ${preVar})\n`;
   code += `mean_boot <- do(${iterations}) * mean(~ pair.diff, data = resample(HELPrct))\n`;
   code += `confint(mean_boot, level = ${confLevel}, method = "quantile")\n`;
-  
+
   return code;
 };
 
-Blockly.JavaScript['Gbootstrap_ci_paired'] = function(block) {
+Blockly.JavaScript['Gbootstrap_ci_paired'] = function (block) {
   const seed = block.getFieldValue('SEED');
   const dataset = block.getFieldValue('DATASET');
   const origDataset = block.getFieldValue('ORIG_DATASET');
@@ -118,10 +119,10 @@ Blockly.JavaScript['Gbootstrap_ci_paired'] = function(block) {
   code += `${dataset} <- mutate(${origDataset}, pair.diff = ${postVar} - ${preVar})\n`;
   code += `mean_boot <- do(${iterations}) * mean(~ pair.diff, data = resample(${resampleDataset}))\n`;
   code += `confint(mean_boot, level = ${confLevel}, method = "quantile")\n`;
-  
+
   return code;
 };
 
-console.log("Bootstrap CI Paired block registered:", !!Blockly.JavaScript['bootstrap_ci_paired']);
+console.log('Bootstrap CI Paired block registered:', !!Blockly.JavaScript['bootstrap_ci_paired']);
 
 export default {};

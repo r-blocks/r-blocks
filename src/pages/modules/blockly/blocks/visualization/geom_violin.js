@@ -8,15 +8,9 @@ Blockly.Blocks['geom_violin'] = {
   init: function () {
     this.appendDummyInput()
       .appendField('geom_violin(mapping = aes(x =')
-      .appendField(
-        new Blockly.FieldDropdown(categorical_vars),
-        'x_axis'
-      )
+      .appendField(new Blockly.FieldDropdown(categorical_vars), 'x_axis')
       .appendField(', y =')
-      .appendField(
-        new Blockly.FieldDropdown(quantitative_vars),
-        'y_axis'
-      )
+      .appendField(new Blockly.FieldDropdown(quantitative_vars), 'y_axis')
       .appendField('), fill =')
       .appendField(
         new Blockly.FieldDropdown([
@@ -24,12 +18,12 @@ Blockly.Blocks['geom_violin'] = {
           ['red', '"red"'],
           ['green', '"green"'],
           ['steelblue', '"steelblue"'],
-          ['orange', '"orange"']
+          ['orange', '"orange"'],
         ]),
         'fill'
       )
       .appendField(', data = HELPrct)');
-    
+
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -46,9 +40,16 @@ Blockly.JavaScript['geom_violin'] = function (block) {
   var x_axis = block.getFieldValue('x_axis');
   var y_axis = block.getFieldValue('y_axis');
   var fill = block.getFieldValue('fill');
-  
-  var code = 'geom_violin(mapping = aes(x = ' + x_axis + ', y = ' + y_axis + '), fill = ' + fill + ', data = HELPrct)\n';
-  
+
+  var code =
+    'geom_violin(mapping = aes(x = ' +
+    x_axis +
+    ', y = ' +
+    y_axis +
+    '), fill = ' +
+    fill +
+    ', data = HELPrct)\n';
+
   return code;
 };
 
@@ -65,7 +66,7 @@ Blockly.Blocks['Ggeom_violin'] = {
       .appendField('), fill =')
       .appendField(new Blockly.FieldTextInput('steelblue'), 'fill')
       .appendField(', data = HELPrct)');
-    
+
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -82,12 +83,19 @@ Blockly.JavaScript['Ggeom_violin'] = function (block) {
   var x_axis = block.getFieldValue('x_axis');
   var y_axis = block.getFieldValue('y_axis');
   var fill = block.getFieldValue('fill');
-  
+
   // Add quotes to string values if they don't have them
   fill = fill.startsWith('"') ? fill : '"' + fill + '"';
-  
-  var code = 'geom_violin(mapping = aes(x = ' + x_axis + ', y = ' + y_axis + '), fill = ' + fill + ', data = HELPrct)\n';
-  
+
+  var code =
+    'geom_violin(mapping = aes(x = ' +
+    x_axis +
+    ', y = ' +
+    y_axis +
+    '), fill = ' +
+    fill +
+    ', data = HELPrct)\n';
+
   return code;
 };
 

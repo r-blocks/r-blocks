@@ -8,15 +8,9 @@ Blockly.Blocks['geom_line'] = {
   init: function () {
     this.appendDummyInput()
       .appendField('geom_line(mapping = aes(x =')
-      .appendField(
-        new Blockly.FieldDropdown(quantitative_vars),
-        'x_axis'
-      )
+      .appendField(new Blockly.FieldDropdown(quantitative_vars), 'x_axis')
       .appendField(', y =')
-      .appendField(
-        new Blockly.FieldDropdown(quantitative_vars),
-        'y_axis'
-      )
+      .appendField(new Blockly.FieldDropdown(quantitative_vars), 'y_axis')
       .appendField('), linetype =')
       .appendField(
         new Blockly.FieldDropdown([
@@ -24,7 +18,7 @@ Blockly.Blocks['geom_line'] = {
           ['dashed', '"dashed"'],
           ['dotted', '"dotted"'],
           ['dotdash', '"dotdash"'],
-          ['longdash', '"longdash"']
+          ['longdash', '"longdash"'],
         ]),
         'line_type'
       )
@@ -35,12 +29,12 @@ Blockly.Blocks['geom_line'] = {
           ['red', '"red"'],
           ['green', '"green"'],
           ['black', '"black"'],
-          ['purple', '"purple"']
+          ['purple', '"purple"'],
         ]),
         'color'
       )
       .appendField(', data = HELPrct)');
-    
+
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -58,9 +52,18 @@ Blockly.JavaScript['geom_line'] = function (block) {
   var y_axis = block.getFieldValue('y_axis');
   var line_type = block.getFieldValue('line_type');
   var color = block.getFieldValue('color');
-  
-  var code = 'geom_line(mapping = aes(x = ' + x_axis + ', y = ' + y_axis + '), linetype = ' + line_type + ', color = ' + color + ', data = HELPrct)\n';
-  
+
+  var code =
+    'geom_line(mapping = aes(x = ' +
+    x_axis +
+    ', y = ' +
+    y_axis +
+    '), linetype = ' +
+    line_type +
+    ', color = ' +
+    color +
+    ', data = HELPrct)\n';
+
   return code;
 };
 

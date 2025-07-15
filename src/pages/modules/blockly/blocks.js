@@ -118,11 +118,11 @@ import './blocks/visualization/Ggeom_sf';
 Blockly.RBlocks = new Blockly.Generator('RBlocks');
 
 // Configure the JavaScript generator to use R-style comments
-Blockly.JavaScript.scrub_ = function(block, code, opt_thisOnly) {
+Blockly.JavaScript.scrub_ = function (block, code, opt_thisOnly) {
   if (code === '') {
-    return '';  // If no code, don't add comments either
+    return ''; // If no code, don't add comments either
   }
-  
+
   let commentCode = '';
   // Only collect comments for blocks that aren't inline.
   if (!block.outputConnection || !block.outputConnection.targetConnection) {
@@ -147,10 +147,10 @@ Blockly.JavaScript.scrub_ = function(block, code, opt_thisOnly) {
       }
     }
   }
-  
+
   const nextBlock = block.nextConnection && block.nextConnection.targetBlock();
   const nextCode = opt_thisOnly ? '' : this.blockToCode(nextBlock);
-  
+
   // Ensure we keep the actual code along with the comments
   return commentCode + code + nextCode;
 };

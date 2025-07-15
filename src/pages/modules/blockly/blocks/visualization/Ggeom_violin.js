@@ -13,7 +13,7 @@ Blockly.Blocks['Ggeom_violin'] = {
       .appendField('), fill =')
       .appendField(new Blockly.FieldTextInput('steelblue'), 'fill')
       .appendField(', data = HELPrct)');
-    
+
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -30,12 +30,19 @@ Blockly.JavaScript['Ggeom_violin'] = function (block) {
   var x_axis = block.getFieldValue('x_axis');
   var y_axis = block.getFieldValue('y_axis');
   var fill = block.getFieldValue('fill');
-  
+
   // Add quotes to string values if they don't have them
   fill = fill.startsWith('"') ? fill : '"' + fill + '"';
-  
-  var code = 'geom_violin(mapping = aes(x = ' + x_axis + ', y = ' + y_axis + '), fill = ' + fill + ', data = HELPrct)\n';
-  
+
+  var code =
+    'geom_violin(mapping = aes(x = ' +
+    x_axis +
+    ', y = ' +
+    y_axis +
+    '), fill = ' +
+    fill +
+    ', data = HELPrct)\n';
+
   return code;
 };
 

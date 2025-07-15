@@ -8,10 +8,7 @@ Blockly.Blocks['geom_density'] = {
   init: function () {
     this.appendDummyInput()
       .appendField('geom_density(mapping = aes(x =')
-      .appendField(
-        new Blockly.FieldDropdown(quantitative_vars),
-        'x_axis'
-      )
+      .appendField(new Blockly.FieldDropdown(quantitative_vars), 'x_axis')
       .appendField('), fill =')
       .appendField(
         new Blockly.FieldDropdown([
@@ -19,12 +16,12 @@ Blockly.Blocks['geom_density'] = {
           ['red', '"red"'],
           ['green', '"green"'],
           ['steelblue', '"steelblue"'],
-          ['orange', '"orange"']
+          ['orange', '"orange"'],
         ]),
         'fill'
       )
       .appendField(', alpha = 0.5, data = HELPrct)');
-    
+
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -40,9 +37,14 @@ Blockly.Blocks['geom_density'] = {
 Blockly.JavaScript['geom_density'] = function (block) {
   var x_axis = block.getFieldValue('x_axis');
   var fill = block.getFieldValue('fill');
-  
-  var code = 'geom_density(mapping = aes(x = ' + x_axis + '), fill = ' + fill + ', alpha = 0.5, data = HELPrct)\n';
-  
+
+  var code =
+    'geom_density(mapping = aes(x = ' +
+    x_axis +
+    '), fill = ' +
+    fill +
+    ', alpha = 0.5, data = HELPrct)\n';
+
   return code;
 };
 
@@ -57,7 +59,7 @@ Blockly.Blocks['Ggeom_density'] = {
       .appendField('), fill =')
       .appendField(new Blockly.FieldTextInput('steelblue'), 'fill')
       .appendField(', alpha = 0.5, data = HELPrct)');
-    
+
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -73,12 +75,17 @@ Blockly.Blocks['Ggeom_density'] = {
 Blockly.JavaScript['Ggeom_density'] = function (block) {
   var x_axis = block.getFieldValue('x_axis');
   var fill = block.getFieldValue('fill');
-  
+
   // Add quotes to string values if they don't have them
   fill = fill.startsWith('"') ? fill : '"' + fill + '"';
-  
-  var code = 'geom_density(mapping = aes(x = ' + x_axis + '), fill = ' + fill + ', alpha = 0.5, data = HELPrct)\n';
-  
+
+  var code =
+    'geom_density(mapping = aes(x = ' +
+    x_axis +
+    '), fill = ' +
+    fill +
+    ', alpha = 0.5, data = HELPrct)\n';
+
   return code;
 };
 

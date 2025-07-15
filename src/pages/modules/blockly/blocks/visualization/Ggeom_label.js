@@ -17,12 +17,14 @@ Blockly.Blocks['Ggeom_label'] = {
       .appendField(', nudge_y =')
       .appendField(new Blockly.FieldTextInput('0.2'), 'nudge_y')
       .appendField(', data = HELPrct)');
-    
+
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(120);
-    this.setTooltip('Adds text labels with background boxes to a plot using ggplot2 with custom inputs');
+    this.setTooltip(
+      'Adds text labels with background boxes to a plot using ggplot2 with custom inputs'
+    );
     this.setHelpUrl('https://ggplot2.tidyverse.org/reference/geom_text.html');
   },
 };
@@ -36,9 +38,20 @@ Blockly.JavaScript['Ggeom_label'] = function (block) {
   var label = block.getFieldValue('label');
   var nudge_x = block.getFieldValue('nudge_x');
   var nudge_y = block.getFieldValue('nudge_y');
-  
-  var code = 'geom_label(mapping = aes(x = ' + x_axis + ', y = ' + y_axis + ', label = ' + label + '), nudge_x = ' + nudge_x + ', nudge_y = ' + nudge_y + ', data = HELPrct)\n';
-  
+
+  var code =
+    'geom_label(mapping = aes(x = ' +
+    x_axis +
+    ', y = ' +
+    y_axis +
+    ', label = ' +
+    label +
+    '), nudge_x = ' +
+    nudge_x +
+    ', nudge_y = ' +
+    nudge_y +
+    ', data = HELPrct)\n';
+
   return code;
 };
 

@@ -24,7 +24,7 @@ Blockly.Blocks['bootstrap_ci_lm'] = {
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour('230');  // Match color with other inference blocks
+    this.setColour('230'); // Match color with other inference blocks
     this.setTooltip(
       'Bootstrap confidence interval for slope coefficient in SLR using HELPrct data'
     );
@@ -57,14 +57,16 @@ Blockly.Blocks['Gbootstrap_ci_lm'] = {
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour('230');  // Match color with other inference blocks
-    this.setTooltip('Bootstrap confidence interval for slope coefficient in SLR using selected dataset');
+    this.setColour('230'); // Match color with other inference blocks
+    this.setTooltip(
+      'Bootstrap confidence interval for slope coefficient in SLR using selected dataset'
+    );
     this.setHelpUrl('https://www.rdocumentation.org/packages/mosaic/topics/resample');
   },
 };
 
 // Direct generator implementations instead of shared function
-Blockly.JavaScript['bootstrap_ci_lm'] = function(block) {
+Blockly.JavaScript['bootstrap_ci_lm'] = function (block) {
   const seed = block.getFieldValue('SEED');
   const var1 = block.getFieldValue('VAR1');
   const var2 = block.getFieldValue('VAR2');
@@ -74,11 +76,11 @@ Blockly.JavaScript['bootstrap_ci_lm'] = function(block) {
   let code = `set.seed(${seed})\n`;
   code += `lm_boot <- do(${iterations}) * lm(${var1} ~ ${var2}, data = resample(HELPrct))\n`;
   code += `confint(lm_boot, level = ${confLevel}, method = "quantile")\n`;
-  
+
   return code;
 };
 
-Blockly.JavaScript['Gbootstrap_ci_lm'] = function(block) {
+Blockly.JavaScript['Gbootstrap_ci_lm'] = function (block) {
   const seed = block.getFieldValue('SEED');
   const var1 = block.getFieldValue('VAR1');
   const var2 = block.getFieldValue('VAR2');
@@ -89,10 +91,10 @@ Blockly.JavaScript['Gbootstrap_ci_lm'] = function(block) {
   let code = `set.seed(${seed})\n`;
   code += `lm_boot <- do(${iterations}) * lm(${var1} ~ ${var2}, data = resample(${dataset}))\n`;
   code += `confint(lm_boot, level = ${confLevel}, method = "quantile")\n`;
-  
+
   return code;
 };
 
-console.log("Bootstrap CI LM block registered:", !!Blockly.JavaScript['bootstrap_ci_lm']);
+console.log('Bootstrap CI LM block registered:', !!Blockly.JavaScript['bootstrap_ci_lm']);
 
 export default {};

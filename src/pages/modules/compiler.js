@@ -15,14 +15,17 @@ export default function Compiler({ workspace }) {
   };
 
   return (
-    <div className="compiler" style={{ 
-      display: 'flex', 
-      flexDirection: 'column',
-      alignItems: 'stretch',
-      height: '100%', 
-      padding: '0.5rem',
-      justifyContent: 'flex-start'
-    }}>
+    <div
+      className="compiler"
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'stretch',
+        height: '100%',
+        padding: '0.5rem',
+        justifyContent: 'flex-start',
+      }}
+    >
       <button
         onClick={handleConvert}
         className="convert-button"

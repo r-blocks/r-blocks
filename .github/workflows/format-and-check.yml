@@ -22,7 +22,7 @@ jobs:
       run: |
         rm -rf node_modules
         rm package-lock.json 
-        npm install --legacy-peer-deps
+        npm install
     
     - name: Format with prettier
       run: npm run format

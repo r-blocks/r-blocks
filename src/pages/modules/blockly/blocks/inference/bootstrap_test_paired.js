@@ -20,8 +20,7 @@ Blockly.Blocks['bootstrap_test_paired'] = {
       .appendField('sim_null <- do(')
       .appendField(new Blockly.FieldNumber(5000, 10, 10000), 'ITERATIONS')
       .appendField(') *');
-    this.appendDummyInput()
-      .appendField('    mean(~ new_diff, data = resample(HELPrct))');
+    this.appendDummyInput().appendField('    mean(~ new_diff, data = resample(HELPrct))');
     this.appendDummyInput()
       .appendField('prop(~ (')
       .appendField(
@@ -37,7 +36,7 @@ Blockly.Blocks['bootstrap_test_paired'] = {
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour('230');  // Match color with other inference blocks
+    this.setColour('230'); // Match color with other inference blocks
     this.setTooltip('Bootstrap test for paired mean difference using HELPrct data');
     this.setHelpUrl('https://www.rdocumentation.org/packages/mosaic/topics/resample');
   },
@@ -78,23 +77,20 @@ Blockly.Blocks['Gbootstrap_test_paired'] = {
       .appendField('))');
     this.appendDummyInput()
       .appendField('prop(~ (')
-      .appendField(
-        new Blockly.FieldTextInput(''),
-        'ALTERNATIVE'
-      )
+      .appendField(new Blockly.FieldTextInput(''), 'ALTERNATIVE')
       .appendField('), data = sim_null)');
 
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour('230');  // Match color with other inference blocks
+    this.setColour('230'); // Match color with other inference blocks
     this.setTooltip('Bootstrap test for paired mean difference using selected dataset');
     this.setHelpUrl('https://www.rdocumentation.org/packages/mosaic/topics/resample');
   },
 };
 
 // Separate generator functions for each block
-Blockly.JavaScript['bootstrap_test_paired'] = function(block) {
+Blockly.JavaScript['bootstrap_test_paired'] = function (block) {
   const seed = block.getFieldValue('SEED');
   const preVar = block.getFieldValue('PRE_VAR');
   const postVar = block.getFieldValue('POST_VAR');
@@ -118,11 +114,11 @@ Blockly.JavaScript['bootstrap_test_paired'] = function(block) {
       code += `prop(~ (abs(mean) >= abs(bar_d)), data = sim_null)\n`;
       break;
   }
-  
+
   return code;
 };
 
-Blockly.JavaScript['Gbootstrap_test_paired'] = function(block) {
+Blockly.JavaScript['Gbootstrap_test_paired'] = function (block) {
   const seed = block.getFieldValue('SEED');
   const dataset = block.getFieldValue('DATASET');
   const origDataset = block.getFieldValue('ORIG_DATASET');
@@ -152,10 +148,13 @@ Blockly.JavaScript['Gbootstrap_test_paired'] = function(block) {
       code += `prop(~ (abs(mean) >= abs(bar_d)), data = sim_null)\n`;
       break;
   }
-  
+
   return code;
 };
 
-console.log("Bootstrap Test Paired block registered:", !!Blockly.JavaScript['bootstrap_test_paired']);
+console.log(
+  'Bootstrap Test Paired block registered:',
+  !!Blockly.JavaScript['bootstrap_test_paired']
+);
 
 export default {};
