@@ -269,93 +269,6 @@ export default function Workspace({ initialWorkspaceXml, onWorkspaceInstance }) 
           },
         ],
       },
-      {
-        kind: 'category',
-        name: 'ggplot2',
-        colour: '#66BB6A',
-        contents: [
-          {
-            kind: 'category',
-            name: 'General Functionality',
-            colour: '#FF6B5B',
-            contents: [
-              { kind: 'block', type: 'ggplot2_lib' },
-              { kind: 'block', type: 'ggplot2_names' },
-              { kind: 'block', type: 'ggplot2_glimpse' },
-              { kind: 'block', type: 'ggplot2_head' },
-              { kind: 'block', type: 'ggplot2_tail' },
-              { kind: 'block', type: 'ggplot2_help' },
-            ],
-          },
-          {
-            kind: 'category',
-            name: 'Numerical Summaries',
-            colour: '#66BB6A',
-            contents: [
-              { kind: 'block', type: 'Gtallydata' },
-              { kind: 'block', type: 'tallydata' },
-            ],
-          },
-          {
-            kind: 'category',
-            name: 'Visualizations (using HELPrct)',
-            colour: '#43A047',
-            contents: [
-              { kind: 'block', type: 'ggplot_init' },
-              { kind: 'block', type: 'geom_point' },
-              { kind: 'block', type: 'geom_line' },
-              { kind: 'block', type: 'geom_bar' },
-              { kind: 'block', type: 'geom_col' },
-              { kind: 'block', type: 'geom_histogram' },
-              { kind: 'block', type: 'geom_density' },
-              { kind: 'block', type: 'geom_boxplot' },
-              { kind: 'block', type: 'geom_violin' },
-              { kind: 'block', type: 'geom_area' },
-              { kind: 'block', type: 'geom_text' },
-              { kind: 'block', type: 'geom_label' },
-              { kind: 'block', type: 'geom_sf' },
-              { kind: 'block', type: 'gf_bar' },
-              { kind: 'block', type: 'gf_counts' },
-              { kind: 'block', type: 'gf_boxplot' },
-              { kind: 'block', type: 'gf_histogram' },
-              { kind: 'block', type: 'gf_dens' },
-              { kind: 'block', type: 'gf_point' },
-              { kind: 'block', type: 'theme_minimal' },
-              { kind: 'block', type: 'labs' },
-              { kind: 'block', type: 'pie' },
-            ],
-          },
-          {
-            kind: 'category',
-            name: 'Visualizations',
-            colour: '#43A047',
-            contents: [
-              { kind: 'block', type: 'Gggplot_init' },
-              { kind: 'block', type: 'Ggeom_point' },
-              { kind: 'block', type: 'Ggeom_line' },
-              { kind: 'block', type: 'Ggeom_bar' },
-              { kind: 'block', type: 'Ggeom_col' },
-              { kind: 'block', type: 'Ggeom_histogram' },
-              { kind: 'block', type: 'Ggeom_density' },
-              { kind: 'block', type: 'Ggeom_boxplot' },
-              { kind: 'block', type: 'Ggeom_violin' },
-              { kind: 'block', type: 'Ggeom_area' },
-              { kind: 'block', type: 'Ggeom_text' },
-              { kind: 'block', type: 'Ggeom_label' },
-              { kind: 'block', type: 'Ggeom_sf' },
-              { kind: 'block', type: 'Ggf_bar' },
-              { kind: 'block', type: 'Ggf_counts' },
-              { kind: 'block', type: 'Ggf_boxplot' },
-              { kind: 'block', type: 'Ggf_histogram' },
-              { kind: 'block', type: 'Ggf_dens' },
-              { kind: 'block', type: 'Ggf_point' },
-              { kind: 'block', type: 'Gtheme_minimal' },
-              { kind: 'block', type: 'Glabs' },
-              { kind: 'block', type: 'Gpie' },
-            ],
-          },
-        ],
-      },
     ],
   };
 
@@ -472,9 +385,6 @@ export default function Workspace({ initialWorkspaceXml, onWorkspaceInstance }) 
                       intervals and hypothesis tests.
                     </li>
                   </ul>
-                </li>
-                <li style={{ marginBottom: '0.5rem' }}>
-                  <strong>ggplot2:</strong> Advanced data visualization blocks.
                 </li>
               </ul>
 
