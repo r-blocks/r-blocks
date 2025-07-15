@@ -13,7 +13,7 @@ Blockly.Blocks['ggplot2_tail'] = {
           ['mpg', 'mpg'],
           ['mtcars', 'mtcars'],
           ['economics', 'economics'],
-          ['midwest', 'midwest']
+          ['midwest', 'midwest'],
         ]),
         'data'
       )

@@ -24,7 +24,7 @@ Blockly.Blocks['bootstrap_ci_diffmean'] = {
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour('230');  // Match color with other inference blocks
+    this.setColour('230'); // Match color with other inference blocks
     this.setTooltip('Bootstrap confidence interval for difference in two means using HELPrct data');
     this.setHelpUrl('https://www.rdocumentation.org/packages/mosaic/topics/resample');
   },
@@ -55,14 +55,16 @@ Blockly.Blocks['Gbootstrap_ci_diffmean'] = {
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour('230');  // Match color with other inference blocks
-    this.setTooltip('Bootstrap confidence interval for difference in two means using selected dataset');
+    this.setColour('230'); // Match color with other inference blocks
+    this.setTooltip(
+      'Bootstrap confidence interval for difference in two means using selected dataset'
+    );
     this.setHelpUrl('https://www.rdocumentation.org/packages/mosaic/topics/resample');
   },
 };
 
 // Direct generator implementations instead of shared function
-Blockly.JavaScript['bootstrap_ci_diffmean'] = function(block) {
+Blockly.JavaScript['bootstrap_ci_diffmean'] = function (block) {
   const seed = block.getFieldValue('SEED');
   const variable = block.getFieldValue('VAR');
   const group = block.getFieldValue('GROUP');
@@ -72,11 +74,11 @@ Blockly.JavaScript['bootstrap_ci_diffmean'] = function(block) {
   let code = `set.seed(${seed})\n`;
   code += `mean_boot <- do(${iterations}) * diffmean(${variable} ~ ${group}, data = resample(HELPrct))\n`;
   code += `confint(mean_boot, level = ${confLevel}, method = "quantile")\n`;
-  
+
   return code;
 };
 
-Blockly.JavaScript['Gbootstrap_ci_diffmean'] = function(block) {
+Blockly.JavaScript['Gbootstrap_ci_diffmean'] = function (block) {
   const seed = block.getFieldValue('SEED');
   const variable = block.getFieldValue('VAR');
   const group = block.getFieldValue('GROUP');
@@ -87,10 +89,13 @@ Blockly.JavaScript['Gbootstrap_ci_diffmean'] = function(block) {
   let code = `set.seed(${seed})\n`;
   code += `mean_boot <- do(${iterations}) * diffmean(${variable} ~ ${group}, data = resample(${dataset}))\n`;
   code += `confint(mean_boot, level = ${confLevel}, method = "quantile")\n`;
-  
+
   return code;
 };
 
-console.log("Bootstrap CI Diff Mean block registered:", !!Blockly.JavaScript['bootstrap_ci_diffmean']);
+console.log(
+  'Bootstrap CI Diff Mean block registered:',
+  !!Blockly.JavaScript['bootstrap_ci_diffmean']
+);
 
 export default {};

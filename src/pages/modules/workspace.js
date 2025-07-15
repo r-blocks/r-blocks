@@ -233,7 +233,7 @@ export default function Workspace({ initialWorkspaceXml, onWorkspaceInstance }) 
             kind: 'category',
             name: 'Bootstrap Methods (using HELPrct)',
             colour: '#039be5',
-              contents: [
+            contents: [
               // Univariate Bootstrap Methods
               { kind: 'block', type: 'bootstrap_ci_prop' },
               { kind: 'block', type: 'bootstrap_test_prop' },
@@ -252,19 +252,19 @@ export default function Workspace({ initialWorkspaceXml, onWorkspaceInstance }) 
             kind: 'category',
             name: 'Bootstrap Methods',
             colour: '#039be5',
-              contents: [
-                // Univariate Bootstrap Methods
-                { kind: 'block', type: 'Gbootstrap_ci_prop' },
-                { kind: 'block', type: 'Gbootstrap_test_prop' },
-                { kind: 'block', type: 'Gbootstrap_ci_mean' },
-                { kind: 'block', type: 'Gbootstrap_test_mean' },
-                { kind: 'block', type: 'Gbootstrap_ci_paired' },
-                { kind: 'block', type: 'Gbootstrap_test_paired' },
-                // Bivariate Bootstrap Methods
-                { kind: 'block', type: 'Gbootstrap_ci_diffprop' },
-                { kind: 'block', type: 'Gbootstrap_ci_diffmean' },
-                { kind: 'block', type: 'Gbootstrap_ci_cor' },
-                { kind: 'block', type: 'Gbootstrap_ci_lm' },
+            contents: [
+              // Univariate Bootstrap Methods
+              { kind: 'block', type: 'Gbootstrap_ci_prop' },
+              { kind: 'block', type: 'Gbootstrap_test_prop' },
+              { kind: 'block', type: 'Gbootstrap_ci_mean' },
+              { kind: 'block', type: 'Gbootstrap_test_mean' },
+              { kind: 'block', type: 'Gbootstrap_ci_paired' },
+              { kind: 'block', type: 'Gbootstrap_test_paired' },
+              // Bivariate Bootstrap Methods
+              { kind: 'block', type: 'Gbootstrap_ci_diffprop' },
+              { kind: 'block', type: 'Gbootstrap_ci_diffmean' },
+              { kind: 'block', type: 'Gbootstrap_ci_cor' },
+              { kind: 'block', type: 'Gbootstrap_ci_lm' },
             ],
           },
         ],
@@ -365,15 +365,20 @@ export default function Workspace({ initialWorkspaceXml, onWorkspaceInstance }) 
    */
 
   return (
-    <div className="workspace-container" style={{ position: 'relative', width: '100%', height: '100%' }}>
+    <div
+      className="workspace-container"
+      style={{ position: 'relative', width: '100%', height: '100%' }}
+    >
       {/* Help Button */}
-      <div style={{
-        position: 'absolute',
-        top: '10px',
-        right: '10px',
-        zIndex: 100,
-      }}>
-        <button 
+      <div
+        style={{
+          position: 'absolute',
+          top: '10px',
+          right: '10px',
+          zIndex: 100,
+        }}
+      >
+        <button
           className="help-button"
           onClick={() => setIsHelpModalOpen(true)}
           style={{
@@ -385,13 +390,13 @@ export default function Workspace({ initialWorkspaceXml, onWorkspaceInstance }) 
             borderRadius: '4px',
             color: 'white',
             cursor: 'pointer',
-            boxShadow: '0 2px 5px rgba(0,0,0,0.2)'
+            boxShadow: '0 2px 5px rgba(0,0,0,0.2)',
           }}
         >
           <span style={{ marginRight: '5px' }}>Getting Started</span>
         </button>
       </div>
-      
+
       {/* Blockly Workspace */}
       <BlocklyWorkspace
         className="blockly"
@@ -404,57 +409,134 @@ export default function Workspace({ initialWorkspaceXml, onWorkspaceInstance }) 
       {/* Getting Started Modal */}
       {isHelpModalOpen && (
         <div className="modal-overlay">
-          <div className="modal-content" style={{ 
-            maxWidth: '700px', 
-            maxHeight: '80vh', 
-            overflow: 'auto',
-            padding: '2rem',
-            borderRadius: '8px'
-          }}>
-            <h2 style={{ 
-              fontSize: '2rem', 
-              color: 'var(--primary-h)',
-              marginTop: 0,
-              marginBottom: '1.5rem'
-            }}>Working with RBlocks</h2>
-            
-            <div style={{ textAlign: 'left', marginBottom: '1.5rem', fontSize: '1.1rem', lineHeight: '1.6' }}>
-              <h3 style={{ fontSize: '1.5rem', color: 'var(--primary-l)', marginTop: '1.5rem', marginBottom: '0.8rem' }}>Block Categories</h3>
-              <p style={{ marginBottom: '1rem' }}>The blocks are organized into several categories:</p>
+          <div
+            className="modal-content"
+            style={{
+              maxWidth: '700px',
+              maxHeight: '80vh',
+              overflow: 'auto',
+              padding: '2rem',
+              borderRadius: '8px',
+            }}
+          >
+            <h2
+              style={{
+                fontSize: '2rem',
+                color: 'var(--primary-h)',
+                marginTop: 0,
+                marginBottom: '1.5rem',
+              }}
+            >
+              Working with RBlocks
+            </h2>
+
+            <div
+              style={{
+                textAlign: 'left',
+                marginBottom: '1.5rem',
+                fontSize: '1.1rem',
+                lineHeight: '1.6',
+              }}
+            >
+              <h3
+                style={{
+                  fontSize: '1.5rem',
+                  color: 'var(--primary-l)',
+                  marginTop: '1.5rem',
+                  marginBottom: '0.8rem',
+                }}
+              >
+                Block Categories
+              </h3>
+              <p style={{ marginBottom: '1rem' }}>
+                The blocks are organized into several categories:
+              </p>
               <ul style={{ paddingLeft: '1.5rem' }}>
-                <li style={{ marginBottom: '0.5rem' }}><strong>General Functions:</strong> Basic R functions for data exploration.</li>
-                <li style={{ marginBottom: '0.5rem' }}><strong>mosaic:</strong> Functions from the mosaic package, categorized as:
+                <li style={{ marginBottom: '0.5rem' }}>
+                  <strong>General Functions:</strong> Basic R functions for data exploration.
+                </li>
+                <li style={{ marginBottom: '0.5rem' }}>
+                  <strong>mosaic:</strong> Functions from the mosaic package, categorized as:
                   <ul style={{ paddingLeft: '1.5rem', marginTop: '0.5rem' }}>
-                    <li style={{ marginBottom: '0.5rem' }}><strong>Numerical Summaries:</strong> Calculate statistics from data.</li>
-                    <li style={{ marginBottom: '0.5rem' }}><strong>Data Visualization:</strong> Create plots and charts.</li>
-                    <li style={{ marginBottom: '0.5rem' }}><strong>Statistical Inference:</strong> Tests like t-tests, ANOVA, etc.</li>
-                    <li style={{ marginBottom: '0.5rem' }}><strong>Bootstrap Methods:</strong> Resampling techniques for confidence intervals and hypothesis tests.</li>
+                    <li style={{ marginBottom: '0.5rem' }}>
+                      <strong>Numerical Summaries:</strong> Calculate statistics from data.
+                    </li>
+                    <li style={{ marginBottom: '0.5rem' }}>
+                      <strong>Data Visualization:</strong> Create plots and charts.
+                    </li>
+                    <li style={{ marginBottom: '0.5rem' }}>
+                      <strong>Statistical Inference:</strong> Tests like t-tests, ANOVA, etc.
+                    </li>
+                    <li style={{ marginBottom: '0.5rem' }}>
+                      <strong>Bootstrap Methods:</strong> Resampling techniques for confidence
+                      intervals and hypothesis tests.
+                    </li>
                   </ul>
                 </li>
-                <li style={{ marginBottom: '0.5rem' }}><strong>ggplot2:</strong> Advanced data visualization blocks.</li>
+                <li style={{ marginBottom: '0.5rem' }}>
+                  <strong>ggplot2:</strong> Advanced data visualization blocks.
+                </li>
               </ul>
-              
-              <h3 style={{ fontSize: '1.5rem', color: 'var(--primary-l)', marginTop: '1.5rem', marginBottom: '0.8rem' }}>Working with Blocks</h3>
+
+              <h3
+                style={{
+                  fontSize: '1.5rem',
+                  color: 'var(--primary-l)',
+                  marginTop: '1.5rem',
+                  marginBottom: '0.8rem',
+                }}
+              >
+                Working with Blocks
+              </h3>
               <ol style={{ paddingLeft: '1.5rem' }}>
-                <li style={{ marginBottom: '0.5rem' }}>Drag blocks from the toolbox on the left into your workspace.</li>
-                <li style={{ marginBottom: '0.5rem' }}>Blocks connect vertically - the output flows from top to bottom.</li>
-                <li style={{ marginBottom: '0.5rem' }}>HelpRCT blocks have dropdown menus for selecting variables.</li>
+                <li style={{ marginBottom: '0.5rem' }}>
+                  Drag blocks from the toolbox on the left into your workspace.
+                </li>
+                <li style={{ marginBottom: '0.5rem' }}>
+                  Blocks connect vertically - the output flows from top to bottom.
+                </li>
+                <li style={{ marginBottom: '0.5rem' }}>
+                  HelpRCT blocks have dropdown menus for selecting variables.
+                </li>
               </ol>
 
-              <h3 style={{ fontSize: '1.5rem', color: 'var(--primary-l)', marginTop: '1.5rem', marginBottom: '0.8rem' }}>Tips for Success</h3>
+              <h3
+                style={{
+                  fontSize: '1.5rem',
+                  color: 'var(--primary-l)',
+                  marginTop: '1.5rem',
+                  marginBottom: '0.8rem',
+                }}
+              >
+                Tips for Success
+              </h3>
               <ul style={{ paddingLeft: '1.5rem' }}>
-                <li style={{ marginBottom: '0.5rem' }}>Hover over blocks to see tooltips explaining their function.</li>
-                <li style={{ marginBottom: '0.5rem' }}>Check the output panel after running your code.</li>
-                <li style={{ marginBottom: '0.5rem' }}>When using paired data blocks, make sure to select appropriate variables for comparison.</li>
-                <li style={{ marginBottom: '0.5rem' }}>For bootstrap methods, 5000 iterations is typically sufficient for stable results.</li>
-                <li style={{ marginBottom: '0.5rem' }}>Save your work regularly using the Save button in the toolbar.</li>
+                <li style={{ marginBottom: '0.5rem' }}>
+                  Hover over blocks to see tooltips explaining their function.
+                </li>
+                <li style={{ marginBottom: '0.5rem' }}>
+                  Check the output panel after running your code.
+                </li>
+                <li style={{ marginBottom: '0.5rem' }}>
+                  When using paired data blocks, make sure to select appropriate variables for
+                  comparison.
+                </li>
+                <li style={{ marginBottom: '0.5rem' }}>
+                  For bootstrap methods, 5000 iterations is typically sufficient for stable results.
+                </li>
+                <li style={{ marginBottom: '0.5rem' }}>
+                  Save your work regularly using the Save button in the toolbar.
+                </li>
               </ul>
             </div>
-            
-            <div className="modal-buttons" style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '1.5rem' }}>
-              <button 
-                type="button" 
-                className="base-button" 
+
+            <div
+              className="modal-buttons"
+              style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '1.5rem' }}
+            >
+              <button
+                type="button"
+                className="base-button"
                 onClick={() => setIsHelpModalOpen(false)}
                 style={{
                   margin: '0',
@@ -466,7 +548,7 @@ export default function Workspace({ initialWorkspaceXml, onWorkspaceInstance }) 
                   borderLeft: '2px solid var(--secondary-m)',
                   display: 'flex',
                   justifyContent: 'center',
-                  alignItems: 'center'
+                  alignItems: 'center',
                 }}
               >
                 Close

@@ -39,7 +39,7 @@ Blockly.Blocks['bootstrap_test_mean'] = {
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour('230');  // Match color with other inference blocks
+    this.setColour('230'); // Match color with other inference blocks
     this.setTooltip('Bootstrap test for one mean using HELPrct data');
     this.setHelpUrl('https://www.rdocumentation.org/packages/mosaic/topics/resample');
 
@@ -91,23 +91,20 @@ Blockly.Blocks['Gbootstrap_test_mean'] = {
       .appendField('_shifted))');
     this.appendDummyInput()
       .appendField('prop(~ (')
-      .appendField(
-        new Blockly.FieldTextInput(''),
-        'ALTERNATIVE'
-      )
+      .appendField(new Blockly.FieldTextInput(''), 'ALTERNATIVE')
       .appendField('), data = sim_null)');
 
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour('230');  // Match color with other inference blocks
+    this.setColour('230'); // Match color with other inference blocks
     this.setTooltip('Bootstrap test for one mean using selected dataset');
     this.setHelpUrl('https://www.rdocumentation.org/packages/mosaic/topics/resample');
   },
 };
 
 // Separate generator functions for each block
-Blockly.JavaScript['bootstrap_test_mean'] = function(block) {
+Blockly.JavaScript['bootstrap_test_mean'] = function (block) {
   const seed = block.getFieldValue('SEED');
   const variable = block.getFieldValue('VAR');
   const var2 = block.getFieldValue('VAR2');
@@ -133,11 +130,11 @@ Blockly.JavaScript['bootstrap_test_mean'] = function(block) {
       code += `prop(~ (abs(mean) >= abs(observed_mean)), data = sim_null)\n`;
       break;
   }
-  
+
   return code;
 };
 
-Blockly.JavaScript['Gbootstrap_test_mean'] = function(block) {
+Blockly.JavaScript['Gbootstrap_test_mean'] = function (block) {
   const seed = block.getFieldValue('SEED');
   const variable = block.getFieldValue('VAR');
   const dataset = block.getFieldValue('DATASET');
@@ -167,10 +164,10 @@ Blockly.JavaScript['Gbootstrap_test_mean'] = function(block) {
       code += `prop(~ (abs(mean) >= abs(observed_mean)), data = sim_null)\n`;
       break;
   }
-  
+
   return code;
 };
 
-console.log("Bootstrap Test Mean block registered:", !!Blockly.JavaScript['bootstrap_test_mean']);
+console.log('Bootstrap Test Mean block registered:', !!Blockly.JavaScript['bootstrap_test_mean']);
 
 export default {};

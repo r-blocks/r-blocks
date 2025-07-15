@@ -24,7 +24,7 @@ Blockly.Blocks['bootstrap_ci_diffprop'] = {
             ]),
             'SUCCESS'
           );
-          this.getInput('PROP_INPUT').appendField(')'); 
+          this.getInput('PROP_INPUT').appendField(')');
         } else if (newVar === 'anysub') {
           this.getInput('PROP_INPUT').removeField('SUCCESS');
           this.getInput('PROP_INPUT').appendField(
@@ -36,7 +36,7 @@ Blockly.Blocks['bootstrap_ci_diffprop'] = {
           );
           // Set default for anysub
           this.setFieldValue('"yes"', 'SUCCESS');
-          this.getInput('PROP_INPUT').appendField(')'); 
+          this.getInput('PROP_INPUT').appendField(')');
         } else if (newVar === 'sex') {
           this.getInput('PROP_INPUT').removeField('SUCCESS');
           this.getInput('PROP_INPUT').appendField(
@@ -48,7 +48,7 @@ Blockly.Blocks['bootstrap_ci_diffprop'] = {
           );
           // Set default for sex
           this.setFieldValue('"male"', 'SUCCESS');
-          this.getInput('PROP_INPUT').appendField(')'); 
+          this.getInput('PROP_INPUT').appendField(')');
         } else if (newVar === 'homeless') {
           this.getInput('PROP_INPUT').removeField('SUCCESS');
           this.getInput('PROP_INPUT').appendField(
@@ -60,7 +60,7 @@ Blockly.Blocks['bootstrap_ci_diffprop'] = {
           );
           // Set default for homeless
           this.setFieldValue('"homeless"', 'SUCCESS');
-          this.getInput('PROP_INPUT').appendField(')'); 
+          this.getInput('PROP_INPUT').appendField(')');
         } else if (newVar === 'link') {
           this.getInput('PROP_INPUT').removeField('SUCCESS');
           this.getInput('PROP_INPUT').appendField(
@@ -72,7 +72,7 @@ Blockly.Blocks['bootstrap_ci_diffprop'] = {
           );
           // Set default for link
           this.setFieldValue('"yes"', 'SUCCESS');
-          this.getInput('PROP_INPUT').appendField(')'); 
+          this.getInput('PROP_INPUT').appendField(')');
         } else if (newVar === 'racegrp') {
           this.getInput('PROP_INPUT').removeField('SUCCESS');
           this.getInput('PROP_INPUT').appendField(
@@ -86,7 +86,7 @@ Blockly.Blocks['bootstrap_ci_diffprop'] = {
           );
           // Set default for racegrp
           this.setFieldValue('"black"', 'SUCCESS');
-          this.getInput('PROP_INPUT').appendField(')'); 
+          this.getInput('PROP_INPUT').appendField(')');
         } else if (newVar === 'satreat') {
           this.getInput('PROP_INPUT').removeField('SUCCESS');
           this.getInput('PROP_INPUT').appendField(
@@ -98,7 +98,7 @@ Blockly.Blocks['bootstrap_ci_diffprop'] = {
           );
           // Set default for satreat
           this.setFieldValue('"yes"', 'SUCCESS');
-          this.getInput('PROP_INPUT').appendField(')'); 
+          this.getInput('PROP_INPUT').appendField(')');
         } else if (newVar === 'treat') {
           this.getInput('PROP_INPUT').removeField('SUCCESS');
           this.getInput('PROP_INPUT').appendField(
@@ -110,7 +110,7 @@ Blockly.Blocks['bootstrap_ci_diffprop'] = {
           );
           // Set default for treat
           this.setFieldValue('"yes"', 'SUCCESS');
-          this.getInput('PROP_INPUT').appendField(')'); 
+          this.getInput('PROP_INPUT').appendField(')');
         } else {
           this.getInput('PROP_INPUT').removeField('SUCCESS');
           this.getInput('PROP_INPUT').appendField(
@@ -120,7 +120,7 @@ Blockly.Blocks['bootstrap_ci_diffprop'] = {
             ]),
             'SUCCESS'
           );
-          this.getInput('PROP_INPUT').appendField(')'); 
+          this.getInput('PROP_INPUT').appendField(')');
         }
       }
       return newVar;
@@ -143,7 +143,7 @@ Blockly.Blocks['bootstrap_ci_diffprop'] = {
           ['"no"', '"no"'],
         ]),
         'SUCCESS'
-      )
+      );
     this.appendDummyInput()
       .appendField('confint(prop_boot, level = ')
       .appendField(new Blockly.FieldNumber(0.95, 0, 1, 0.01), 'CONF_LEVEL')
@@ -191,13 +191,15 @@ Blockly.Blocks['Gbootstrap_ci_diffprop'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour('230'); // Updated to match other inference blocks
-    this.setTooltip('Bootstrap confidence interval for difference in two proportions using selected dataset');
+    this.setTooltip(
+      'Bootstrap confidence interval for difference in two proportions using selected dataset'
+    );
     this.setHelpUrl('https://www.rdocumentation.org/packages/mosaic/topics/resample');
   },
 };
 
 // Direct generator implementations instead of shared function
-Blockly.JavaScript['bootstrap_ci_diffprop'] = function(block) {
+Blockly.JavaScript['bootstrap_ci_diffprop'] = function (block) {
   const seed = block.getFieldValue('SEED');
   const variable = block.getFieldValue('VAR');
   const group = block.getFieldValue('GROUP');
@@ -208,11 +210,11 @@ Blockly.JavaScript['bootstrap_ci_diffprop'] = function(block) {
   let code = `set.seed(${seed})\n`;
   code += `prop_boot <- do(${iterations}) * diffprop(${variable} ~ ${group}, data = resample(HELPrct), success = ${success})\n`;
   code += `confint(prop_boot, level = ${confLevel}, method = "quantile")\n`;
-  
+
   return code;
 };
 
-Blockly.JavaScript['Gbootstrap_ci_diffprop'] = function(block) {
+Blockly.JavaScript['Gbootstrap_ci_diffprop'] = function (block) {
   const seed = block.getFieldValue('SEED');
   const variable = block.getFieldValue('VAR');
   const group = block.getFieldValue('GROUP');
@@ -224,10 +226,13 @@ Blockly.JavaScript['Gbootstrap_ci_diffprop'] = function(block) {
   let code = `set.seed(${seed})\n`;
   code += `prop_boot <- do(${iterations}) * diffprop(${variable} ~ ${group}, data = resample(${dataset}), success = ${success})\n`;
   code += `confint(prop_boot, level = ${confLevel}, method = "quantile")\n`;
-  
+
   return code;
 };
 
-console.log("Bootstrap CI Diff Prop block registered:", !!Blockly.JavaScript['bootstrap_ci_diffprop']);
+console.log(
+  'Bootstrap CI Diff Prop block registered:',
+  !!Blockly.JavaScript['bootstrap_ci_diffprop']
+);
 
 export default {};

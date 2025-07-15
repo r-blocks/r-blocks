@@ -8,15 +8,9 @@ Blockly.Blocks['geom_label'] = {
   init: function () {
     this.appendDummyInput()
       .appendField('geom_label(mapping = aes(x =')
-      .appendField(
-        new Blockly.FieldDropdown(quantitative_vars),
-        'x_axis'
-      )
+      .appendField(new Blockly.FieldDropdown(quantitative_vars), 'x_axis')
       .appendField(', y =')
-      .appendField(
-        new Blockly.FieldDropdown(quantitative_vars),
-        'y_axis'
-      )
+      .appendField(new Blockly.FieldDropdown(quantitative_vars), 'y_axis')
       .appendField(', label =')
       .appendField(
         new Blockly.FieldDropdown([
@@ -24,7 +18,7 @@ Blockly.Blocks['geom_label'] = {
           ['age', 'age'],
           ['sex', 'sex'],
           ['substance', 'substance'],
-          ['homeless', 'homeless']
+          ['homeless', 'homeless'],
         ]),
         'label'
       )
@@ -35,7 +29,7 @@ Blockly.Blocks['geom_label'] = {
           ['0.5', '0.5'],
           ['-0.2', '-0.2'],
           ['0', '0'],
-          ['1', '1']
+          ['1', '1'],
         ]),
         'nudge_x'
       )
@@ -46,12 +40,12 @@ Blockly.Blocks['geom_label'] = {
           ['0.5', '0.5'],
           ['-0.2', '-0.2'],
           ['0', '0'],
-          ['1', '1']
+          ['1', '1'],
         ]),
         'nudge_y'
       )
       .appendField(', data = HELPrct)');
-    
+
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -70,9 +64,20 @@ Blockly.JavaScript['geom_label'] = function (block) {
   var label = block.getFieldValue('label');
   var nudge_x = block.getFieldValue('nudge_x');
   var nudge_y = block.getFieldValue('nudge_y');
-  
-  var code = 'geom_label(mapping = aes(x = ' + x_axis + ', y = ' + y_axis + ', label = ' + label + '), nudge_x = ' + nudge_x + ', nudge_y = ' + nudge_y + ', data = HELPrct)\n';
-  
+
+  var code =
+    'geom_label(mapping = aes(x = ' +
+    x_axis +
+    ', y = ' +
+    y_axis +
+    ', label = ' +
+    label +
+    '), nudge_x = ' +
+    nudge_x +
+    ', nudge_y = ' +
+    nudge_y +
+    ', data = HELPrct)\n';
+
   return code;
 };
 
@@ -93,12 +98,14 @@ Blockly.Blocks['Ggeom_label'] = {
       .appendField(', nudge_y =')
       .appendField(new Blockly.FieldTextInput('0.2'), 'nudge_y')
       .appendField(', data = HELPrct)');
-    
+
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(120);
-    this.setTooltip('Adds text labels with background boxes to a plot using ggplot2 with custom inputs');
+    this.setTooltip(
+      'Adds text labels with background boxes to a plot using ggplot2 with custom inputs'
+    );
     this.setHelpUrl('https://ggplot2.tidyverse.org/reference/geom_text.html');
   },
 };
@@ -112,9 +119,20 @@ Blockly.JavaScript['Ggeom_label'] = function (block) {
   var label = block.getFieldValue('label');
   var nudge_x = block.getFieldValue('nudge_x');
   var nudge_y = block.getFieldValue('nudge_y');
-  
-  var code = 'geom_label(mapping = aes(x = ' + x_axis + ', y = ' + y_axis + ', label = ' + label + '), nudge_x = ' + nudge_x + ', nudge_y = ' + nudge_y + ', data = HELPrct)\n';
-  
+
+  var code =
+    'geom_label(mapping = aes(x = ' +
+    x_axis +
+    ', y = ' +
+    y_axis +
+    ', label = ' +
+    label +
+    '), nudge_x = ' +
+    nudge_x +
+    ', nudge_y = ' +
+    nudge_y +
+    ', data = HELPrct)\n';
+
   return code;
 };
 

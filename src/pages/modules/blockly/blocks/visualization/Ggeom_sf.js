@@ -11,7 +11,7 @@ Blockly.Blocks['Ggeom_sf'] = {
       .appendField(', color =')
       .appendField(new Blockly.FieldTextInput('black'), 'color')
       .appendField(')');
-    
+
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -27,13 +27,13 @@ Blockly.Blocks['Ggeom_sf'] = {
 Blockly.JavaScript['Ggeom_sf'] = function (block) {
   var fill = block.getFieldValue('fill');
   var color = block.getFieldValue('color');
-  
+
   // Add quotes to string values if they don't have them
   fill = fill.startsWith('"') ? fill : '"' + fill + '"';
   color = color.startsWith('"') ? color : '"' + color + '"';
-  
+
   var code = 'geom_sf(fill = ' + fill + ', color = ' + color + ')\n';
-  
+
   return code;
 };
 

@@ -1,3 +1,0 @@
-# Variable: BlocklyR
-
-> **BlocklyR**: `any`

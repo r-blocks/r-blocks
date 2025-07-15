@@ -24,7 +24,7 @@ Blockly.Blocks['bootstrap_ci_prop'] = {
             ]),
             'SUCCESS'
           );
-          this.getInput('PROP_INPUT').appendField(')'); 
+          this.getInput('PROP_INPUT').appendField(')');
         } else if (newVar === 'anysub') {
           this.getInput('PROP_INPUT').removeField('SUCCESS');
           this.getInput('PROP_INPUT').appendField(
@@ -36,7 +36,7 @@ Blockly.Blocks['bootstrap_ci_prop'] = {
           );
           // Set default for anysub
           this.setFieldValue('"yes"', 'SUCCESS');
-          this.getInput('PROP_INPUT').appendField(')'); 
+          this.getInput('PROP_INPUT').appendField(')');
         } else if (newVar === 'sex') {
           this.getInput('PROP_INPUT').removeField('SUCCESS');
           this.getInput('PROP_INPUT').appendField(
@@ -48,7 +48,7 @@ Blockly.Blocks['bootstrap_ci_prop'] = {
           );
           // Set default for sex
           this.setFieldValue('"male"', 'SUCCESS');
-          this.getInput('PROP_INPUT').appendField(')'); 
+          this.getInput('PROP_INPUT').appendField(')');
         } else if (newVar === 'homeless') {
           this.getInput('PROP_INPUT').removeField('SUCCESS');
           this.getInput('PROP_INPUT').appendField(
@@ -60,7 +60,7 @@ Blockly.Blocks['bootstrap_ci_prop'] = {
           );
           // Set default for homeless
           this.setFieldValue('"homeless"', 'SUCCESS');
-          this.getInput('PROP_INPUT').appendField(')'); 
+          this.getInput('PROP_INPUT').appendField(')');
         } else if (newVar === 'link') {
           this.getInput('PROP_INPUT').removeField('SUCCESS');
           this.getInput('PROP_INPUT').appendField(
@@ -72,7 +72,7 @@ Blockly.Blocks['bootstrap_ci_prop'] = {
           );
           // Set default for link
           this.setFieldValue('"yes"', 'SUCCESS');
-          this.getInput('PROP_INPUT').appendField(')'); 
+          this.getInput('PROP_INPUT').appendField(')');
         } else if (newVar === 'racegrp') {
           this.getInput('PROP_INPUT').removeField('SUCCESS');
           this.getInput('PROP_INPUT').appendField(
@@ -86,7 +86,7 @@ Blockly.Blocks['bootstrap_ci_prop'] = {
           );
           // Set default for racegrp
           this.setFieldValue('"black"', 'SUCCESS');
-          this.getInput('PROP_INPUT').appendField(')'); 
+          this.getInput('PROP_INPUT').appendField(')');
         } else if (newVar === 'satreat') {
           this.getInput('PROP_INPUT').removeField('SUCCESS');
           this.getInput('PROP_INPUT').appendField(
@@ -98,7 +98,7 @@ Blockly.Blocks['bootstrap_ci_prop'] = {
           );
           // Set default for satreat
           this.setFieldValue('"yes"', 'SUCCESS');
-          this.getInput('PROP_INPUT').appendField(')'); 
+          this.getInput('PROP_INPUT').appendField(')');
         } else if (newVar === 'treat') {
           this.getInput('PROP_INPUT').removeField('SUCCESS');
           this.getInput('PROP_INPUT').appendField(
@@ -110,7 +110,7 @@ Blockly.Blocks['bootstrap_ci_prop'] = {
           );
           // Set default for treat
           this.setFieldValue('"yes"', 'SUCCESS');
-          this.getInput('PROP_INPUT').appendField(')'); 
+          this.getInput('PROP_INPUT').appendField(')');
         } else {
           this.getInput('PROP_INPUT').removeField('SUCCESS');
           this.getInput('PROP_INPUT').appendField(
@@ -120,7 +120,7 @@ Blockly.Blocks['bootstrap_ci_prop'] = {
             ]),
             'SUCCESS'
           );
-          this.getInput('PROP_INPUT').appendField(')'); 
+          this.getInput('PROP_INPUT').appendField(')');
         }
       }
       return newVar;
@@ -139,7 +139,7 @@ Blockly.Blocks['bootstrap_ci_prop'] = {
           ['"heroin"', '"heroin"'],
         ]),
         'SUCCESS'
-      )
+      );
     this.appendDummyInput()
       .appendField('confint(boot, level = ')
       .appendField(new Blockly.FieldNumber(0.95, 0, 1, 0.01), 'CONF_LEVEL')
@@ -148,7 +148,7 @@ Blockly.Blocks['bootstrap_ci_prop'] = {
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour('230');  // Using the purple color as requested
+    this.setColour('230'); // Using the purple color as requested
     this.setTooltip('Bootstrap confidence interval for one proportion using HELPrct data');
     this.setHelpUrl('https://www.rdocumentation.org/packages/mosaic/topics/resample');
 
@@ -182,14 +182,14 @@ Blockly.Blocks['Gbootstrap_ci_prop'] = {
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour('230');  // Using the purple color as requested
+    this.setColour('230'); // Using the purple color as requested
     this.setTooltip('Bootstrap confidence interval for one proportion using selected dataset');
     this.setHelpUrl('https://www.rdocumentation.org/packages/mosaic/topics/resample');
   },
 };
 
 // Separate generator functions for each block
-Blockly.JavaScript['bootstrap_ci_prop'] = function(block) {
+Blockly.JavaScript['bootstrap_ci_prop'] = function (block) {
   const seed = block.getFieldValue('SEED');
   const variable = block.getFieldValue('VAR');
   const success = block.getFieldValue('SUCCESS');
@@ -200,11 +200,11 @@ Blockly.JavaScript['bootstrap_ci_prop'] = function(block) {
   code += `set.seed(${seed})\n`;
   code += `boot <- do(${iterations}) * prop(~${variable}, data = resample(HELPrct), success = ${success})\n`;
   code += `confint(boot, level = ${confLevel}, method = "quantile")\n`;
-  
+
   return code;
 };
 
-Blockly.JavaScript['Gbootstrap_ci_prop'] = function(block) {
+Blockly.JavaScript['Gbootstrap_ci_prop'] = function (block) {
   const seed = block.getFieldValue('SEED');
   const variable = block.getFieldValue('VAR');
   const dataset = block.getFieldValue('DATASET');
@@ -216,10 +216,10 @@ Blockly.JavaScript['Gbootstrap_ci_prop'] = function(block) {
   code += `set.seed(${seed})\n`;
   code += `boot <- do(${iterations}) * prop(~${variable}, data = resample(${dataset}), success = ${success})\n`;
   code += `confint(boot, level = ${confLevel}, method = "quantile")\n`;
-  
+
   return code;
 };
 
-console.log("Bootstrap CI Prop block registered:", !!Blockly.JavaScript['bootstrap_ci_prop']);
+console.log('Bootstrap CI Prop block registered:', !!Blockly.JavaScript['bootstrap_ci_prop']);
 
 export default {};

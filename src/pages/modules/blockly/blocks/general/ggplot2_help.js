@@ -13,7 +13,7 @@ Blockly.Blocks['ggplot2_help'] = {
           ['aes', 'aes'],
           ['geom_point', 'geom_point'],
           ['geom_line', 'geom_line'],
-          ['theme', 'theme']
+          ['theme', 'theme'],
         ]),
         'data'
       )

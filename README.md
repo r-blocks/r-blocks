@@ -53,7 +53,7 @@ cd r-blocks/
 
 2. Install dependencies:
 ```bash
-npm install --legacy-peer-deps
+npm install
 ```
 
 ### Development

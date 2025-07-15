@@ -13,7 +13,7 @@ Blockly.Blocks['geom_sf'] = {
           ['red', '"red"'],
           ['green', '"green"'],
           ['steelblue', '"steelblue"'],
-          ['orange', '"orange"']
+          ['orange', '"orange"'],
         ]),
         'fill'
       )
@@ -24,12 +24,12 @@ Blockly.Blocks['geom_sf'] = {
           ['white', '"white"'],
           ['gray', '"gray"'],
           ['darkgray', '"darkgray"'],
-          ['transparent', '"transparent"']
+          ['transparent', '"transparent"'],
         ]),
         'color'
       )
       .appendField(')');
-    
+
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -45,9 +45,9 @@ Blockly.Blocks['geom_sf'] = {
 Blockly.JavaScript['geom_sf'] = function (block) {
   var fill = block.getFieldValue('fill');
   var color = block.getFieldValue('color');
-  
+
   var code = 'geom_sf(fill = ' + fill + ', color = ' + color + ')\n';
-  
+
   return code;
 };
 
@@ -62,7 +62,7 @@ Blockly.Blocks['Ggeom_sf'] = {
       .appendField(', color =')
       .appendField(new Blockly.FieldTextInput('black'), 'color')
       .appendField(')');
-    
+
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -78,13 +78,13 @@ Blockly.Blocks['Ggeom_sf'] = {
 Blockly.JavaScript['Ggeom_sf'] = function (block) {
   var fill = block.getFieldValue('fill');
   var color = block.getFieldValue('color');
-  
+
   // Add quotes to string values if they don't have them
   fill = fill.startsWith('"') ? fill : '"' + fill + '"';
   color = color.startsWith('"') ? color : '"' + color + '"';
-  
+
   var code = 'geom_sf(fill = ' + fill + ', color = ' + color + ')\n';
-  
+
   return code;
 };
 

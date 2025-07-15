@@ -13,7 +13,7 @@ Blockly.Blocks['Ggeom_area'] = {
       .appendField('), fill =')
       .appendField(new Blockly.FieldTextInput('steelblue'), 'fill')
       .appendField(', alpha = 0.6, data = HELPrct)');
-    
+
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -30,12 +30,19 @@ Blockly.JavaScript['Ggeom_area'] = function (block) {
   var x_axis = block.getFieldValue('x_axis');
   var y_axis = block.getFieldValue('y_axis');
   var fill = block.getFieldValue('fill');
-  
+
   // Add quotes to string values if they don't have them
   fill = fill.startsWith('"') ? fill : '"' + fill + '"';
-  
-  var code = 'geom_area(mapping = aes(x = ' + x_axis + ', y = ' + y_axis + '), fill = ' + fill + ', alpha = 0.6, data = HELPrct)\n';
-  
+
+  var code =
+    'geom_area(mapping = aes(x = ' +
+    x_axis +
+    ', y = ' +
+    y_axis +
+    '), fill = ' +
+    fill +
+    ', alpha = 0.6, data = HELPrct)\n';
+
   return code;
 };
 

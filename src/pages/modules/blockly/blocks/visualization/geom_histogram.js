@@ -8,10 +8,7 @@ Blockly.Blocks['geom_histogram'] = {
   init: function () {
     this.appendDummyInput()
       .appendField('geom_histogram(mapping = aes(x =')
-      .appendField(
-        new Blockly.FieldDropdown(quantitative_vars),
-        'x_axis'
-      )
+      .appendField(new Blockly.FieldDropdown(quantitative_vars), 'x_axis')
       .appendField('), binwidth =')
       .appendField(
         new Blockly.FieldDropdown([
@@ -19,7 +16,7 @@ Blockly.Blocks['geom_histogram'] = {
           ['10', '10'],
           ['20', '20'],
           ['30', '30'],
-          ['1', '1']
+          ['1', '1'],
         ]),
         'binwidth'
       )
@@ -30,12 +27,12 @@ Blockly.Blocks['geom_histogram'] = {
           ['red', '"red"'],
           ['green', '"green"'],
           ['steelblue', '"steelblue"'],
-          ['orange', '"orange"']
+          ['orange', '"orange"'],
         ]),
         'fill'
       )
       .appendField(', data = HELPrct)');
-    
+
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -52,9 +49,16 @@ Blockly.JavaScript['geom_histogram'] = function (block) {
   var x_axis = block.getFieldValue('x_axis');
   var binwidth = block.getFieldValue('binwidth');
   var fill = block.getFieldValue('fill');
-  
-  var code = 'geom_histogram(mapping = aes(x = ' + x_axis + '), binwidth = ' + binwidth + ', fill = ' + fill + ', data = HELPrct)\n';
-  
+
+  var code =
+    'geom_histogram(mapping = aes(x = ' +
+    x_axis +
+    '), binwidth = ' +
+    binwidth +
+    ', fill = ' +
+    fill +
+    ', data = HELPrct)\n';
+
   return code;
 };
 
@@ -71,7 +75,7 @@ Blockly.Blocks['Ggeom_histogram'] = {
       .appendField(', fill =')
       .appendField(new Blockly.FieldTextInput('steelblue'), 'fill')
       .appendField(', data = HELPrct)');
-    
+
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -88,12 +92,19 @@ Blockly.JavaScript['Ggeom_histogram'] = function (block) {
   var x_axis = block.getFieldValue('x_axis');
   var binwidth = block.getFieldValue('binwidth');
   var fill = block.getFieldValue('fill');
-  
+
   // Add quotes to string values if they don't have them
   fill = fill.startsWith('"') ? fill : '"' + fill + '"';
-  
-  var code = 'geom_histogram(mapping = aes(x = ' + x_axis + '), binwidth = ' + binwidth + ', fill = ' + fill + ', data = HELPrct)\n';
-  
+
+  var code =
+    'geom_histogram(mapping = aes(x = ' +
+    x_axis +
+    '), binwidth = ' +
+    binwidth +
+    ', fill = ' +
+    fill +
+    ', data = HELPrct)\n';
+
   return code;
 };
 

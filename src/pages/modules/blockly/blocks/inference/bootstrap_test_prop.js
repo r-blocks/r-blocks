@@ -24,7 +24,7 @@ Blockly.Blocks['bootstrap_test_prop'] = {
             ]),
             'SUCCESS'
           );
-          this.getInput('PROP_INPUT').appendField(')'); 
+          this.getInput('PROP_INPUT').appendField(')');
         } else if (newVar === 'anysub') {
           this.getInput('PROP_INPUT').removeField('SUCCESS');
           this.getInput('PROP_INPUT').appendField(
@@ -36,7 +36,7 @@ Blockly.Blocks['bootstrap_test_prop'] = {
           );
           // Set default for anysub
           this.setFieldValue('"yes"', 'SUCCESS');
-          this.getInput('PROP_INPUT').appendField(')'); 
+          this.getInput('PROP_INPUT').appendField(')');
         } else if (newVar === 'sex') {
           this.getInput('PROP_INPUT').removeField('SUCCESS');
           this.getInput('PROP_INPUT').appendField(
@@ -48,7 +48,7 @@ Blockly.Blocks['bootstrap_test_prop'] = {
           );
           // Set default for sex
           this.setFieldValue('"male"', 'SUCCESS');
-          this.getInput('PROP_INPUT').appendField(')'); 
+          this.getInput('PROP_INPUT').appendField(')');
         } else if (newVar === 'homeless') {
           this.getInput('PROP_INPUT').removeField('SUCCESS');
           this.getInput('PROP_INPUT').appendField(
@@ -60,7 +60,7 @@ Blockly.Blocks['bootstrap_test_prop'] = {
           );
           // Set default for homeless
           this.setFieldValue('"homeless"', 'SUCCESS');
-          this.getInput('PROP_INPUT').appendField(')'); 
+          this.getInput('PROP_INPUT').appendField(')');
         } else if (newVar === 'link') {
           this.getInput('PROP_INPUT').removeField('SUCCESS');
           this.getInput('PROP_INPUT').appendField(
@@ -72,7 +72,7 @@ Blockly.Blocks['bootstrap_test_prop'] = {
           );
           // Set default for link
           this.setFieldValue('"yes"', 'SUCCESS');
-          this.getInput('PROP_INPUT').appendField(')'); 
+          this.getInput('PROP_INPUT').appendField(')');
         } else if (newVar === 'racegrp') {
           this.getInput('PROP_INPUT').removeField('SUCCESS');
           this.getInput('PROP_INPUT').appendField(
@@ -86,7 +86,7 @@ Blockly.Blocks['bootstrap_test_prop'] = {
           );
           // Set default for racegrp
           this.setFieldValue('"black"', 'SUCCESS');
-          this.getInput('PROP_INPUT').appendField(')'); 
+          this.getInput('PROP_INPUT').appendField(')');
         } else if (newVar === 'satreat') {
           this.getInput('PROP_INPUT').removeField('SUCCESS');
           this.getInput('PROP_INPUT').appendField(
@@ -98,7 +98,7 @@ Blockly.Blocks['bootstrap_test_prop'] = {
           );
           // Set default for satreat
           this.setFieldValue('"yes"', 'SUCCESS');
-          this.getInput('PROP_INPUT').appendField(')'); 
+          this.getInput('PROP_INPUT').appendField(')');
         } else if (newVar === 'treat') {
           this.getInput('PROP_INPUT').removeField('SUCCESS');
           this.getInput('PROP_INPUT').appendField(
@@ -110,7 +110,7 @@ Blockly.Blocks['bootstrap_test_prop'] = {
           );
           // Set default for treat
           this.setFieldValue('"yes"', 'SUCCESS');
-          this.getInput('PROP_INPUT').appendField(')'); 
+          this.getInput('PROP_INPUT').appendField(')');
         } else {
           this.getInput('PROP_INPUT').removeField('SUCCESS');
           this.getInput('PROP_INPUT').appendField(
@@ -120,7 +120,7 @@ Blockly.Blocks['bootstrap_test_prop'] = {
             ]),
             'SUCCESS'
           );
-          this.getInput('PROP_INPUT').appendField(')'); 
+          this.getInput('PROP_INPUT').appendField(')');
         }
       }
       return newVar;
@@ -164,7 +164,7 @@ Blockly.Blocks['bootstrap_test_prop'] = {
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour('230');  // Match color with other inference blocks
+    this.setColour('230'); // Match color with other inference blocks
     this.setTooltip('Bootstrap test for one proportion using HELPrct data');
     this.setHelpUrl('https://www.rdocumentation.org/packages/mosaic/topics/rflip');
 
@@ -198,23 +198,20 @@ Blockly.Blocks['Gbootstrap_test_prop'] = {
       .appendField(')');
     this.appendDummyInput()
       .appendField('prop(~(')
-      .appendField(
-        new Blockly.FieldTextInput(''),
-        'ALTERNATIVE'
-      )
+      .appendField(new Blockly.FieldTextInput(''), 'ALTERNATIVE')
       .appendField('), data=sim_null)');
 
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour('230');  // Match color with other inference blocks
+    this.setColour('230'); // Match color with other inference blocks
     this.setTooltip('Bootstrap test for one proportion using selected dataset');
     this.setHelpUrl('https://www.rdocumentation.org/packages/mosaic/topics/rflip');
   },
 };
 
 // Separate generator functions for each block
-Blockly.JavaScript['bootstrap_test_prop'] = function(block) {
+Blockly.JavaScript['bootstrap_test_prop'] = function (block) {
   const seed = block.getFieldValue('SEED');
   const variable = block.getFieldValue('VAR');
   const success = block.getFieldValue('SUCCESS');
@@ -242,7 +239,7 @@ Blockly.JavaScript['bootstrap_test_prop'] = function(block) {
   return code;
 };
 
-Blockly.JavaScript['Gbootstrap_test_prop'] = function(block) {
+Blockly.JavaScript['Gbootstrap_test_prop'] = function (block) {
   const seed = block.getFieldValue('SEED');
   const variable = block.getFieldValue('VAR');
   const dataset = block.getFieldValue('DATASET');
@@ -271,6 +268,6 @@ Blockly.JavaScript['Gbootstrap_test_prop'] = function(block) {
   return code;
 };
 
-console.log("Bootstrap Test Prop block registered:", !!Blockly.JavaScript['bootstrap_test_prop']);
+console.log('Bootstrap Test Prop block registered:', !!Blockly.JavaScript['bootstrap_test_prop']);
 
 export default {};

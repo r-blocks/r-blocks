@@ -24,7 +24,7 @@ Blockly.Blocks['bootstrap_ci_cor'] = {
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour('230');  // Match color with other inference blocks
+    this.setColour('230'); // Match color with other inference blocks
     this.setTooltip('Bootstrap confidence interval for correlation using HELPrct data');
     this.setHelpUrl('https://www.rdocumentation.org/packages/mosaic/topics/resample');
   },
@@ -55,14 +55,14 @@ Blockly.Blocks['Gbootstrap_ci_cor'] = {
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour('230');  // Match color
+    this.setColour('230'); // Match color
     this.setTooltip('Bootstrap confidence interval for correlation using selected dataset');
     this.setHelpUrl('https://www.rdocumentation.org/packages/mosaic/topics/resample');
   },
 };
 
-// Generator implementations 
-Blockly.JavaScript['bootstrap_ci_cor'] = function(block) {
+// Generator implementations
+Blockly.JavaScript['bootstrap_ci_cor'] = function (block) {
   const seed = block.getFieldValue('SEED');
   const var1 = block.getFieldValue('VAR1');
   const var2 = block.getFieldValue('VAR2');
@@ -72,11 +72,11 @@ Blockly.JavaScript['bootstrap_ci_cor'] = function(block) {
   let code = `set.seed(${seed})\n`;
   code += `cor_boot <- do(${iterations}) * cor(${var1} ~ ${var2}, data = resample(HELPrct))\n`;
   code += `confint(cor_boot, level = ${confLevel}, method = "quantile")\n`;
-  
+
   return code;
 };
 
-Blockly.JavaScript['Gbootstrap_ci_cor'] = function(block) {
+Blockly.JavaScript['Gbootstrap_ci_cor'] = function (block) {
   const seed = block.getFieldValue('SEED');
   const var1 = block.getFieldValue('VAR1');
   const var2 = block.getFieldValue('VAR2');
@@ -87,10 +87,10 @@ Blockly.JavaScript['Gbootstrap_ci_cor'] = function(block) {
   let code = `set.seed(${seed})\n`;
   code += `cor_boot <- do(${iterations}) * cor(${var1} ~ ${var2}, data = resample(${dataset}))\n`;
   code += `confint(cor_boot, level = ${confLevel}, method = "quantile")\n`;
-  
+
   return code;
 };
 
-console.log("Bootstrap CI Correlation block registered:", !!Blockly.JavaScript['bootstrap_ci_cor']);
+console.log('Bootstrap CI Correlation block registered:', !!Blockly.JavaScript['bootstrap_ci_cor']);
 
 export default {};
